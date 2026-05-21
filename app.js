@@ -47,15 +47,25 @@ let currentUser = null;
 
 /* ── Build user object from Supabase Auth + Profile ─── */
 function buildUserFromSupabase(sbUser, profile) {
-  const firstName = profile.first_name || '';
-  const lastName  = profile.last_name  || '';
-  return {
+  // OAuth providers (Google/Facebook) store name & avatar in user_metadata
+  const meta      = sbUser.user_metadata || {};
+  const fullName  = meta.full_name || meta.name || '';
+  const metaParts = fullName.split(' ');
+
+  const firstName = profile.first_name || meta.given_name  || metaParts[0] || '';
+  const lastName  = profile.last_name  || meta.family_name || metaParts.slice(1).join(' ') || '';
+
+  // Use Google/Facebook avatar if available, else DiceBear
+  const avatar = meta.avatar_url || meta.picture ||
+    `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(profile.avatar_seed || 'Malee')}&backgroundColor=ffb347`;
+
+  const user = {
     id:          sbUser.id,
     name:        (`${firstName} ${lastName}`).trim() || sbUser.email.split('@')[0],
     firstName,
     lastName,
     email:       sbUser.email,
-    avatar:      `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(profile.avatar_seed || 'Malee')}&backgroundColor=ffb347`,
+    avatar,
     avatarSeed:  profile.avatar_seed || 'Malee',
     role:        profile.role   || 'user',
     phone:       profile.phone  || '',
@@ -65,6 +75,16 @@ function buildUserFromSupabase(sbUser, profile) {
     orders:      [],
     pets:        [],
   };
+
+  // Auto-save profile to Supabase if name came from OAuth (profile was empty)
+  if (!profile.first_name && firstName && typeof DB !== 'undefined') {
+    DB.upsertProfile(sbUser.id, {
+      first_name: firstName,
+      last_name:  lastName,
+    }).catch(() => {});
+  }
+
+  return user;
 }
 
 const WORKFLOW_STEPS = [
