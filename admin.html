@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard — Ruby Pet Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar__logo">
+    <span>🐾</span>
+    <span>Ruby <span>Admin</span></span>
+  </div>
+
+  <nav class="sidebar__nav">
+    <div class="sidebar__nav-label">MAIN</div>
+    <a href="#" class="sidebar__link active" data-page="dashboard">
+      <span class="sidebar__icon">📊</span> Dashboard
+    </a>
+    <a href="#" class="sidebar__link" data-page="orders">
+      <span class="sidebar__icon">📦</span> จัดการออเดอร์
+      <span class="sidebar__badge">12</span>
+    </a>
+    <a href="#" class="sidebar__link" data-page="products">
+      <span class="sidebar__icon">🛍️</span> จัดการสินค้า
+    </a>
+    <a href="#" class="sidebar__link" data-page="users">
+      <span class="sidebar__icon">👥</span> จัดการผู้ใช้
+    </a>
+
+    <div class="sidebar__nav-label" style="margin-top:24px">REPORT</div>
+    <a href="#" class="sidebar__link" data-page="analytics">
+      <span class="sidebar__icon">📈</span> ยอดขาย & Analytics
+    </a>
+
+    <div style="margin-top:auto;padding-top:32px;border-top:1px solid rgba(255,255,255,.1);margin-top:auto">
+      <a href="index.html" class="sidebar__link">
+        <span class="sidebar__icon">🏠</span> กลับหน้าร้าน
+      </a>
+    </div>
+  </nav>
+
+  <div class="sidebar__user">
+    <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=RubyAdmin&backgroundColor=ff7043" alt="admin" />
+    <div>
+      <strong>แอดมิน Ruby</strong>
+      <small>Super Admin</small>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="admin-main">
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="topbar__left">
+      <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+      <div class="topbar__breadcrumb" id="breadcrumb">📊 Dashboard</div>
+    </div>
+    <div class="topbar__right">
+      <div class="topbar__search">
+        <span>🔍</span>
+        <input type="text" placeholder="ค้นหา..." />
+      </div>
+      <button class="topbar__notif" id="notifBtn">
+        🔔 <span class="notif-badge">3</span>
+      </button>
+      <div class="topbar__admin-info">
+        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=RubyAdmin&backgroundColor=ff7043" alt="admin" class="topbar__avatar" />
+        <span>แอดมิน</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== PAGE: DASHBOARD ===== -->
+  <div class="page active" id="page-dashboard">
+    <div class="page-header">
+      <h1>Dashboard 📊</h1>
+      <p>ภาพรวมธุรกิจวันนี้ — 20 พ.ค. 2026</p>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-card--orange">
+        <div class="kpi-card__icon">💰</div>
+        <div class="kpi-card__body">
+          <div class="kpi-card__label">ยอดขายวันนี้</div>
+          <div class="kpi-card__value">฿ 48,250</div>
+          <div class="kpi-card__change kpi-card__change--up">▲ +12.5% จากเมื่อวาน</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-card--green">
+        <div class="kpi-card__icon">📦</div>
+        <div class="kpi-card__body">
+          <div class="kpi-card__label">ออเดอร์วันนี้</div>
+          <div class="kpi-card__value">38</div>
+          <div class="kpi-card__change kpi-card__change--up">▲ +8 จากเมื่อวาน</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-card--blue">
+        <div class="kpi-card__icon">👥</div>
+        <div class="kpi-card__body">
+          <div class="kpi-card__label">ลูกค้าใหม่</div>
+          <div class="kpi-card__value">14</div>
+          <div class="kpi-card__change kpi-card__change--up">▲ +3 จากเมื่อวาน</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-card--purple">
+        <div class="kpi-card__icon">⭐</div>
+        <div class="kpi-card__body">
+          <div class="kpi-card__label">คะแนนรีวิว</div>
+          <div class="kpi-card__value">4.9 / 5</div>
+          <div class="kpi-card__change kpi-card__change--up">▲ 248 รีวิวใหม่เดือนนี้</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-row">
+      <!-- Sales Chart -->
+      <div class="card chart-card">
+        <div class="card__header">
+          <h3>ยอดขาย 7 วันล่าสุด</h3>
+          <select class="select-sm">
+            <option>7 วัน</option>
+            <option>30 วัน</option>
+            <option>3 เดือน</option>
+          </select>
+        </div>
+        <div class="bar-chart" id="salesChart">
+          <!-- generated by JS -->
+        </div>
+      </div>
+
+      <!-- Order Status Donut -->
+      <div class="card donut-card">
+        <div class="card__header">
+          <h3>สถานะออเดอร์</h3>
+        </div>
+        <div class="donut-wrap">
+          <svg viewBox="0 0 120 120" class="donut-svg" id="donutSvg">
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#F0F0F0" stroke-width="18"/>
+          </svg>
+          <div class="donut-center" id="donutCenter">
+            <strong>38</strong>
+            <small>ออเดอร์</small>
+          </div>
+        </div>
+        <div class="donut-legend" id="donutLegend"></div>
+      </div>
+    </div>
+
+    <!-- Recent Orders + Top Products -->
+    <div class="bottom-row">
+      <!-- Recent Orders -->
+      <div class="card">
+        <div class="card__header">
+          <h3>ออเดอร์ล่าสุด</h3>
+          <a href="#" class="link-sm" data-goto="orders">ดูทั้งหมด →</a>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ออเดอร์</th>
+                <th>ลูกค้า</th>
+                <th>สินค้า</th>
+                <th>ยอด</th>
+                <th>สถานะ</th>
+              </tr>
+            </thead>
+            <tbody id="recentOrdersTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Top Products -->
+      <div class="card">
+        <div class="card__header">
+          <h3>สินค้าขายดี</h3>
+        </div>
+        <div class="top-products" id="topProducts"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE: ORDERS ===== -->
+  <div class="page" id="page-orders">
+    <div class="page-header">
+      <h1>📦 จัดการออเดอร์</h1>
+      <p>อัปเดตสถานะและติดตามออเดอร์ทุกรายการ</p>
+    </div>
+
+    <!-- Order Workflow Pipeline -->
+    <div class="card pipeline-card">
+      <h3 style="margin-bottom:20px">Order Workflow Pipeline</h3>
+      <div class="pipeline">
+        <div class="pipeline-col" data-status="pending">
+          <div class="pipeline-col__header pipeline-col__header--pending">
+            <span>⏳ รอชำระเงิน</span>
+            <span class="pipeline-count" id="count-pending">0</span>
+          </div>
+          <div class="pipeline-items" id="pipeline-pending"></div>
+        </div>
+        <div class="pipeline-col" data-status="paid">
+          <div class="pipeline-col__header pipeline-col__header--paid">
+            <span>💳 ชำระแล้ว</span>
+            <span class="pipeline-count" id="count-paid">0</span>
+          </div>
+          <div class="pipeline-items" id="pipeline-paid"></div>
+        </div>
+        <div class="pipeline-col" data-status="preparing">
+          <div class="pipeline-col__header pipeline-col__header--preparing">
+            <span>📦 กำลังเตรียม</span>
+            <span class="pipeline-count" id="count-preparing">0</span>
+          </div>
+          <div class="pipeline-items" id="pipeline-preparing"></div>
+        </div>
+        <div class="pipeline-col" data-status="shipped">
+          <div class="pipeline-col__header pipeline-col__header--shipped">
+            <span>🚚 จัดส่งแล้ว</span>
+            <span class="pipeline-count" id="count-shipped">0</span>
+          </div>
+          <div class="pipeline-items" id="pipeline-shipped"></div>
+        </div>
+        <div class="pipeline-col" data-status="delivered">
+          <div class="pipeline-col__header pipeline-col__header--delivered">
+            <span>✅ สำเร็จ</span>
+            <span class="pipeline-count" id="count-delivered">0</span>
+          </div>
+          <div class="pipeline-items" id="pipeline-delivered"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="card">
+      <div class="card__header">
+        <h3>รายการออเดอร์ทั้งหมด</h3>
+        <div style="display:flex;gap:12px;align-items:center">
+          <select class="select-sm" id="orderStatusFilter">
+            <option value="all">ทุกสถานะ</option>
+            <option value="pending">รอชำระ</option>
+            <option value="paid">ชำระแล้ว</option>
+            <option value="preparing">กำลังเตรียม</option>
+            <option value="shipped">จัดส่งแล้ว</option>
+            <option value="delivered">สำเร็จ</option>
+            <option value="cancelled">ยกเลิก</option>
+          </select>
+          <button class="btn-admin-primary" id="exportBtn">📥 Export</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ออเดอร์ #</th>
+              <th>ลูกค้า</th>
+              <th>สินค้า</th>
+              <th>ยอดรวม</th>
+              <th>วันที่</th>
+              <th>สถานะ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE: PRODUCTS ===== -->
+  <div class="page" id="page-products">
+    <div class="page-header">
+      <h1>🛍️ จัดการสินค้า</h1>
+      <button class="btn-admin-primary" id="addProductBtn">+ เพิ่มสินค้าใหม่</button>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <input type="text" class="search-admin" placeholder="🔍 ค้นหาสินค้า..." id="productSearch"/>
+          <select class="select-sm" id="productCatFilter">
+            <option value="all">ทุกหมวด</option>
+            <option value="dog">น้องหมา</option>
+            <option value="cat">น้องแมว</option>
+            <option value="food">อาหาร</option>
+            <option value="toy">ของเล่น</option>
+          </select>
+        </div>
+        <div class="product-stats" id="productStats"></div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>สินค้า</th>
+              <th>หมวดหมู่</th>
+              <th>ราคา</th>
+              <th>สต็อก</th>
+              <th>ยอดขาย</th>
+              <th>สถานะ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE: USERS ===== -->
+  <div class="page" id="page-users">
+    <div class="page-header">
+      <h1>👥 จัดการผู้ใช้</h1>
+      <p>ดูและจัดการสมาชิกทั้งหมด</p>
+    </div>
+
+    <!-- User Stats -->
+    <div class="user-stats-grid" id="userStatsGrid"></div>
+
+    <div class="card">
+      <div class="card__header">
+        <h3>รายชื่อสมาชิก</h3>
+        <div style="display:flex;gap:12px">
+          <input type="text" class="search-admin" placeholder="🔍 ค้นหาสมาชิก..." id="userSearch"/>
+          <select class="select-sm" id="userRoleFilter">
+            <option value="all">ทุก Role</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>สมาชิก</th>
+              <th>อีเมล</th>
+              <th>Role</th>
+              <th>สมัครเมื่อ</th>
+              <th>ออเดอร์</th>
+              <th>ยอดรวม</th>
+              <th>สถานะ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE: ANALYTICS ===== -->
+  <div class="page" id="page-analytics">
+    <div class="page-header">
+      <h1>📈 ยอดขาย & Analytics</h1>
+      <p>ข้อมูลเชิงลึกสำหรับการตัดสินใจ</p>
+    </div>
+
+    <div class="analytics-kpi" id="analyticsKpi"></div>
+
+    <div class="charts-row">
+      <div class="card chart-card" style="flex:2">
+        <div class="card__header">
+          <h3>ยอดขายรายเดือน 2026</h3>
+        </div>
+        <div class="bar-chart" id="monthlyChart"></div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="card__header"><h3>ช่องทางการขาย</h3></div>
+        <div class="channel-list" id="channelList"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header"><h3>สินค้าขายดีประจำเดือน</h3></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>อันดับ</th><th>สินค้า</th><th>หมวด</th><th>จำนวนขาย</th><th>ยอดเงิน</th><th>Growth</th></tr>
+          </thead>
+          <tbody id="topSalesTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end admin-main -->
+
+<!-- ===== MODAL: ORDER DETAIL ===== -->
+<div class="modal-overlay" id="orderDetailOverlay">
+  <div class="modal admin-modal" id="orderDetailModal">
+    <div class="admin-modal__header">
+      <h3 id="orderDetailTitle">ออเดอร์</h3>
+      <button class="modal-close" id="orderDetailClose">✕</button>
+    </div>
+    <div class="admin-modal__body" id="orderDetailBody"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: PRODUCT FORM ===== -->
+<div class="modal-overlay" id="productFormOverlay">
+  <div class="modal admin-modal" id="productFormModal">
+    <div class="admin-modal__header">
+      <h3 id="productFormTitle">เพิ่มสินค้า</h3>
+      <button class="modal-close" id="productFormClose">✕</button>
+    </div>
+    <div class="admin-modal__body">
+      <form id="productForm" class="admin-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>ชื่อสินค้า *</label>
+            <input type="text" id="pName" placeholder="ชื่อสินค้า"/>
+          </div>
+          <div class="form-group">
+            <label>แบรนด์</label>
+            <input type="text" id="pBrand" placeholder="แบรนด์"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>หมวดหมู่ *</label>
+            <select id="pCategory">
+              <option value="dog-food">หมา — อาหาร</option>
+              <option value="dog-toy">หมา — ของเล่น</option>
+              <option value="cat-food">แมว — อาหาร</option>
+              <option value="cat-toy">แมว — ของเล่น</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>ราคา (฿) *</label>
+            <input type="number" id="pPrice" placeholder="0"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>ราคาลด (฿)</label>
+            <input type="number" id="pSalePrice" placeholder="0 = ไม่ลด"/>
+          </div>
+          <div class="form-group">
+            <label>สต็อก</label>
+            <input type="number" id="pStock" placeholder="0"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>URL รูปภาพ</label>
+          <input type="url" id="pImage" placeholder="https://..."/>
+        </div>
+        <div class="form-group">
+          <label>คำอธิบาย</label>
+          <textarea id="pDesc" rows="3" placeholder="รายละเอียดสินค้า..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Badge</label>
+          <select id="pBadge">
+            <option value="">ไม่มี</option>
+            <option value="hot">🔥 ขายดี</option>
+            <option value="new">🌟 ใหม่</option>
+            <option value="sale">💥 ลดราคา</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px">
+          <button type="button" class="btn-admin-outline" id="productFormCancel">ยกเลิก</button>
+          <button type="submit" class="btn-admin-primary">💾 บันทึก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast" id="adminToast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

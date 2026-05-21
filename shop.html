@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ร้านค้า — Ruby Pet Shop</title>
+  <meta name="description" content="เลือกซื้ออาหารและของเล่นสัตว์เลี้ยงคุณภาพดี ราคาถูก ส่งเร็ว — Ruby Pet Shop"/>
+  <meta property="og:type"        content="website"/>
+  <meta property="og:site_name"   content="Ruby Pet Shop"/>
+  <meta property="og:title"       content="ร้านค้า — Ruby Pet Shop"/>
+  <meta property="og:description" content="เลือกซื้ออาหารและของเล่นสัตว์เลี้ยงคุณภาพดี ราคาถูก ส่งเร็ว"/>
+  <meta property="og:image"       content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="shop.css"/>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__icon">🐾</span>
+      <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+    </a>
+    <nav class="nav__links">
+      <a href="shop.html" class="active">ร้านค้า</a>
+      <a href="index.html#bestsellers">สินค้าขายดี</a>
+      <a href="index.html#blog">Pet Care Tips</a>
+      <a href="index.html#contact">ติดต่อเรา</a>
+    </nav>
+    <div class="navbar__actions">
+      <button class="btn-icon cart-btn" id="cartBtn" aria-label="ตะกร้า">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
+      <a href="profile.html" class="btn btn-outline" style="padding:10px 20px;font-size:14px">👤 โปรไฟล์</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO STRIP ===== -->
+<div class="shop-hero">
+  <div class="container shop-hero__inner">
+    <div>
+      <h1 class="shop-hero__title">🛍️ ร้านค้าทั้งหมด</h1>
+      <p class="shop-hero__sub">สินค้าคุณภาพดีสำหรับน้องสัตว์เลี้ยงทุกชนิด</p>
+    </div>
+    <!-- Search bar -->
+    <div class="shop-hero__search">
+      <span class="shop-hero__search-icon">🔍</span>
+      <input
+        type="text"
+        id="shopSearchInput"
+        placeholder="ค้นหาสินค้า เช่น Royal Canin..."
+        autocomplete="off"
+        class="shop-hero__search-input"
+      />
+      <button class="shop-hero__search-clear" id="shopSearchClear" style="display:none">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">หน้าแรก</a>
+      <span>›</span>
+      <span id="shopBreadcrumb">ร้านค้า</span>
+    </nav>
+  </div>
+</div>
+
+<!-- ===== MAIN LAYOUT ===== -->
+<main class="shop-main">
+  <div class="container shop-layout">
+
+    <!-- ── SIDEBAR FILTER ─────────────────── -->
+    <aside class="shop-sidebar" id="shopSidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">🔧 กรองสินค้า</span>
+        <button class="sidebar-reset" id="resetFilters">ล้างทั้งหมด</button>
+      </div>
+
+      <!-- Category -->
+      <div class="filter-section">
+        <div class="filter-section__label">หมวดหมู่</div>
+        <div class="filter-cats">
+          <button class="filter-cat active" data-cat="all">🐾 ทั้งหมด <span id="cat-count-all" class="filter-cat__count"></span></button>
+          <button class="filter-cat" data-cat="dog">🐶 น้องหมา <span id="cat-count-dog" class="filter-cat__count"></span></button>
+          <button class="filter-cat" data-cat="cat">🐱 น้องแมว <span id="cat-count-cat" class="filter-cat__count"></span></button>
+          <button class="filter-cat" data-cat="food">🍖 อาหาร <span id="cat-count-food" class="filter-cat__count"></span></button>
+          <button class="filter-cat" data-cat="toy">🎾 ของเล่น <span id="cat-count-toy" class="filter-cat__count"></span></button>
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-section">
+        <div class="filter-section__label">ช่วงราคา (฿)</div>
+        <div class="price-range-wrap">
+          <div class="price-range-display">
+            <span id="priceMin">0</span> — <span id="priceMax">2,000</span>
+          </div>
+          <input type="range" id="priceSlider" min="0" max="2000" step="50" value="2000" class="shop-range"/>
+        </div>
+      </div>
+
+      <!-- Brand -->
+      <div class="filter-section">
+        <div class="filter-section__label">แบรนด์</div>
+        <div class="filter-checks" id="brandChecks"></div>
+      </div>
+
+      <!-- Rating -->
+      <div class="filter-section">
+        <div class="filter-section__label">คะแนนรีวิว</div>
+        <div class="filter-ratings">
+          <button class="filter-rating active" data-min="0">ทั้งหมด</button>
+          <button class="filter-rating" data-min="4.5">★ 4.5+</button>
+          <button class="filter-rating" data-min="4.0">★ 4.0+</button>
+          <button class="filter-rating" data-min="3.5">★ 3.5+</button>
+        </div>
+      </div>
+
+      <!-- Stock -->
+      <div class="filter-section">
+        <div class="filter-section__label">ความพร้อมส่ง</div>
+        <label class="filter-check-label">
+          <input type="checkbox" id="inStockOnly"/>
+          <span>มีสินค้าพร้อมส่งเท่านั้น</span>
+        </label>
+      </div>
+    </aside>
+
+    <!-- ── PRODUCTS AREA ───────────────────── -->
+    <div class="shop-products-area">
+
+      <!-- Toolbar -->
+      <div class="shop-toolbar">
+        <div class="shop-toolbar__left">
+          <button class="filter-toggle-btn" id="filterToggleBtn">🔧 กรอง</button>
+          <span class="shop-result-count" id="shopResultCount">สินค้าทั้งหมด 0 รายการ</span>
+        </div>
+        <div class="shop-toolbar__right">
+          <!-- Sort -->
+          <select class="shop-sort" id="shopSort">
+            <option value="popular">🔥 ขายดีที่สุด</option>
+            <option value="rating">⭐ รีวิวดีที่สุด</option>
+            <option value="price-asc">💰 ราคา: ต่ำ → สูง</option>
+            <option value="price-desc">💰 ราคา: สูง → ต่ำ</option>
+            <option value="newest">🌟 ใหม่ล่าสุด</option>
+            <option value="name">🔤 ชื่อ A-Z</option>
+          </select>
+          <!-- View toggle -->
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewGrid" title="Grid view">⊞</button>
+            <button class="view-btn" id="viewList" title="List view">☰</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active filters chips -->
+      <div class="active-filters" id="activeFilters"></div>
+
+      <!-- Grid -->
+      <div class="shop-grid" id="shopGrid"></div>
+
+      <!-- Empty state -->
+      <div class="shop-empty" id="shopEmpty" style="display:none">
+        <div class="shop-empty__icon">🔍</div>
+        <h3>ไม่พบสินค้าที่ค้นหา</h3>
+        <p>ลองเปลี่ยนคำค้นหาหรือล้างตัวกรอง</p>
+        <button class="btn btn-primary" id="emptyReset">ล้างตัวกรอง</button>
+      </div>
+
+      <!-- Pagination -->
+      <div class="shop-pagination" id="shopPagination"></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer__header">
+    <h3>🛒 ตะกร้าสินค้า</h3>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-drawer__body" id="cartBody"></div>
+  <div class="cart-drawer__footer" id="cartFooter"></div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- LINE FLOAT -->
+<a href="#" class="line-float" aria-label="Line OA">
+  <span>💬</span>
+  <span class="line-float__label">Line OA</span>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="shop.js"></script>
+<script src="chat-widget.js"></script>
+<script src="compare-widget.js"></script>
+</body>
+</html>

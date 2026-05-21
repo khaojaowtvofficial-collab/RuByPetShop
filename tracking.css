@@ -1,0 +1,485 @@
+/* =============================================
+   tracking.css — Ruby Pet Shop Order Tracking
+   ============================================= */
+
+/* ===== NAVBAR ===== */
+.trk-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+}
+
+.trk-nav-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.trk-nav-back {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--orange);
+  text-decoration: none;
+}
+.trk-nav-back:hover { text-decoration: underline; }
+
+/* ===== HERO ===== */
+.trk-hero {
+  background: linear-gradient(135deg, var(--orange) 0%, #FF8A65 100%);
+  padding: 36px 0 32px;
+  color: white;
+}
+
+.trk-hero__inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.trk-hero__icon {
+  font-size: 52px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.2));
+}
+
+.trk-hero__title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.trk-hero__sub {
+  font-size: 15px;
+  opacity: .88;
+}
+
+/* ===== MAIN ===== */
+.trk-main {
+  padding: 36px 0 80px;
+  min-height: 60vh;
+  background: var(--cream);
+}
+
+/* ===== SEARCH CARD ===== */
+.trk-search-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 28px;
+}
+
+.trk-search-label {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.trk-search-row {
+  display: flex;
+  gap: 12px;
+}
+
+.trk-input {
+  flex: 1;
+  padding: 14px 18px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: .5px;
+  transition: border-color var(--transition);
+}
+.trk-input:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+.trk-input::placeholder { font-weight: 400; letter-spacing: 0; }
+
+.trk-search-btn {
+  padding: 14px 28px;
+  font-size: 15px;
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+}
+
+.trk-hints {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.trk-hint-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.trk-demo-btn {
+  padding: 5px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: white;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Nunito', sans-serif;
+  color: var(--orange);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.trk-demo-btn:hover {
+  background: var(--orange);
+  color: white;
+  border-color: var(--orange);
+}
+
+/* ===== ORDER HEADER ===== */
+.trk-order-header {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.trk-order-id {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: .5px;
+}
+
+.trk-order-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.trk-status-chip {
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.trk-status-chip.pending   { background: #FFF8E1; color: #F57F17; }
+.trk-status-chip.paid      { background: #E3F2FD; color: #1565C0; }
+.trk-status-chip.preparing { background: #F3E5F5; color: #6A1B9A; }
+.trk-status-chip.shipped   { background: #E8F5E9; color: #2E7D32; }
+.trk-status-chip.delivered { background: #E8F5E9; color: #1B5E20; border: 1.5px solid #4CAF82; }
+.trk-status-chip.cancelled { background: #FFEBEE; color: #B71C1C; }
+
+/* ===== CARDS ===== */
+.trk-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.trk-card__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ===== TIMELINE ===== */
+.trk-timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.trk-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.trk-step__dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  position: relative;
+  z-index: 1;
+  transition: all .3s;
+  flex-shrink: 0;
+}
+
+.trk-step.done .trk-step__dot {
+  background: var(--green);
+  color: white;
+  box-shadow: 0 4px 12px rgba(76,175,130,.35);
+}
+
+.trk-step.active .trk-step__dot {
+  background: var(--orange);
+  color: white;
+  box-shadow: 0 4px 14px rgba(255,112,67,.4);
+  animation: trkPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes trkPulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(255,112,67,.4); }
+  50%       { box-shadow: 0 4px 22px rgba(255,112,67,.7); transform: scale(1.08); }
+}
+
+.trk-step__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 10px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.trk-step.done .trk-step__label,
+.trk-step.active .trk-step__label {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.trk-step__date {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  text-align: center;
+}
+
+/* Connector line between steps */
+.trk-step-line {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  align-self: center;
+  margin-top: -22px;   /* offset to dot center */
+  min-width: 20px;
+  border-radius: 2px;
+  transition: background .4s;
+}
+.trk-step-line.done { background: var(--green); }
+.trk-step-line.active { background: linear-gradient(90deg, var(--green), var(--orange)); }
+
+/* ===== CARRIER CARD ===== */
+.trk-carrier {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.trk-carrier__logo {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.trk-carrier__info { flex: 1; }
+
+.trk-carrier__name {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.trk-carrier__tracking {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: .5px;
+}
+
+.trk-carrier__track-btn {
+  padding: 10px 20px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background var(--transition);
+}
+.trk-carrier__track-btn:hover { background: var(--orange-d); }
+
+/* ===== ITEMS ===== */
+.trk-item-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.trk-item-row:last-child { border-bottom: none; }
+
+.trk-item-row__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.trk-item-row__name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.trk-total-row {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 2px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.trk-total-row__val {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--orange);
+}
+
+/* ===== ACTIONS ===== */
+.trk-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* ===== NOT FOUND ===== */
+.trk-not-found {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 48px 32px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.trk-not-found__icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.trk-not-found h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.trk-not-found p {
+  color: var(--text-m);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.trk-not-found__tips {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.tip-item {
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-m);
+}
+
+/* ===== LOADING ===== */
+.trk-loading {
+  text-align: center;
+  padding: 48px;
+}
+
+.trk-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--border);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.trk-loading p {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .trk-hero__icon { font-size: 36px; }
+  .trk-hero__title { font-size: 22px; }
+  .trk-search-row { flex-direction: column; }
+  .trk-search-btn { width: 100%; }
+  .trk-search-card { padding: 20px; }
+  .trk-card { padding: 18px 16px; }
+  .trk-order-header { padding: 18px; }
+  .trk-order-id { font-size: 17px; }
+  .trk-step__dot { width: 36px; height: 36px; font-size: 14px; }
+  .trk-step__label { font-size: 10px; }
+  .trk-actions { flex-direction: column; }
+  .trk-nav-title { display: none; }
+}

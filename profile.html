@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>โปรไฟล์ — Ruby Pet Shop</title>
+  <meta name="description" content="จัดการโปรไฟล์ คำสั่งซื้อ และรายการโปรดของคุณที่ Ruby Pet Shop"/>
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website"/>
+  <meta property="og:site_name"   content="Ruby Pet Shop"/>
+  <meta property="og:title"       content="โปรไฟล์ — Ruby Pet Shop"/>
+  <meta property="og:description" content="จัดการโปรไฟล์ คำสั่งซื้อ และรายการโปรดของคุณที่ Ruby Pet Shop"/>
+  <meta property="og:image"       content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80"/>
+  <meta name="twitter:card"        content="summary"/>
+  <meta name="twitter:title"       content="โปรไฟล์ — Ruby Pet Shop"/>
+  <meta name="twitter:description" content="จัดการโปรไฟล์ คำสั่งซื้อ และรายการโปรดของคุณที่ Ruby Pet Shop"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="profile.css"/>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__icon">🐾</span>
+      <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+    </a>
+    <nav class="nav__links">
+      <a href="shop.html">🛍️ ร้านค้า</a>
+      <a href="index.html#categories">หมวดหมู่</a>
+      <a href="index.html#bestsellers">สินค้าขายดี</a>
+      <a href="index.html#blog">Pet Care Tips</a>
+      <a href="index.html#contact">ติดต่อเรา</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="index.html" class="btn btn-outline" style="padding:10px 20px;font-size:14px">← กลับหน้าร้าน</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PROFILE HERO ===== -->
+<div class="profile-hero">
+  <div class="container">
+    <div class="profile-hero__inner">
+
+      <!-- Avatar -->
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" id="profileAvatar">
+          <img id="profileAvatarImg" src="" alt="avatar"/>
+          <button class="avatar-change-btn" id="avatarChangeBtn" title="เปลี่ยนรูป">📷</button>
+        </div>
+        <!-- Avatar picker dropdown -->
+        <div class="avatar-picker" id="avatarPicker">
+          <div class="avatar-picker__label">เลือกอวตาร</div>
+          <div class="avatar-picker__grid">
+            <button data-seed="Malee" class="av-opt">🐶</button>
+            <button data-seed="Tom" class="av-opt">🐱</button>
+            <button data-seed="Joy" class="av-opt">🐰</button>
+            <button data-seed="Nid" class="av-opt">🦊</button>
+            <button data-seed="Bom" class="av-opt">🐸</button>
+            <button data-seed="Min" class="av-opt">🐼</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="profile-hero__info">
+        <div class="profile-hero__name" id="profileHeroName">กำลังโหลด...</div>
+        <div class="profile-hero__email" id="profileHeroEmail"></div>
+        <div class="profile-hero__badges" id="profileHeroBadges"></div>
+      </div>
+
+      <!-- Points card -->
+      <div class="profile-points-card">
+        <div class="profile-points-card__label">Ruby Points</div>
+        <div class="profile-points-card__value" id="profilePoints">0</div>
+        <div class="profile-points-card__sub">สะสมจากการช้อป</div>
+        <div class="profile-points-card__bar">
+          <div class="profile-points-card__fill" id="pointsBarFill"></div>
+        </div>
+        <div class="profile-points-card__next" id="pointsNext">อีก 0 แต้ม → ระดับถัดไป</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== PROFILE TABS ===== -->
+<div class="profile-tabs-wrap">
+  <div class="container">
+    <div class="profile-tabs">
+      <button class="profile-tab active" data-tab="info">👤 ข้อมูลส่วนตัว</button>
+      <button class="profile-tab" data-tab="orders">📦 คำสั่งซื้อ</button>
+      <button class="profile-tab" data-tab="wishlist">❤️ รายการโปรด</button>
+      <button class="profile-tab" data-tab="loyalty">🏆 สะสมแต้ม</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PROFILE CONTENT ===== -->
+<main class="profile-main">
+  <div class="container">
+
+    <!-- TAB: ข้อมูลส่วนตัว -->
+    <div class="profile-panel active" id="panel-info">
+      <div class="profile-grid">
+
+        <div class="pro-card">
+          <div class="pro-card__header">
+            <h3>✏️ แก้ไขข้อมูล</h3>
+            <span class="pro-card__badge" id="savedBadge" style="display:none">✅ บันทึกแล้ว</span>
+          </div>
+          <form id="profileForm" class="pro-form">
+            <div class="pro-form-row">
+              <div class="pro-field">
+                <label>ชื่อ <span class="req">*</span></label>
+                <input type="text" id="pf-firstName" placeholder="ชื่อ"/>
+                <span class="field-err" id="err-pf-firstName"></span>
+              </div>
+              <div class="pro-field">
+                <label>นามสกุล</label>
+                <input type="text" id="pf-lastName" placeholder="นามสกุล"/>
+              </div>
+            </div>
+            <div class="pro-field">
+              <label>อีเมล <span class="req">*</span></label>
+              <input type="email" id="pf-email" placeholder="your@email.com"/>
+              <span class="field-err" id="err-pf-email"></span>
+            </div>
+            <div class="pro-field">
+              <label>เบอร์โทรศัพท์</label>
+              <div class="phone-wrap-modal">
+                <span class="phone-prefix-modal">🇹🇭 +66</span>
+                <input type="tel" id="pf-phone" placeholder="8X-XXX-XXXX" maxlength="10"/>
+              </div>
+            </div>
+            <div class="pro-field">
+              <label>วันเกิด</label>
+              <input type="date" id="pf-dob"/>
+            </div>
+            <div class="pro-field">
+              <label>เพศ</label>
+              <select id="pf-gender">
+                <option value="">ไม่ระบุ</option>
+                <option value="male">ชาย</option>
+                <option value="female">หญิง</option>
+                <option value="other">อื่นๆ</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg save-profile-btn">
+              💾 บันทึกข้อมูล
+            </button>
+          </form>
+        </div>
+
+        <div class="pro-right-col">
+
+          <!-- Pet info -->
+          <div class="pro-card">
+            <div class="pro-card__header"><h3>🐾 ข้อมูลน้องสัตว์เลี้ยง</h3></div>
+            <div class="pet-list" id="petList"></div>
+            <button class="btn-add-pet" id="addPetBtn">+ เพิ่มน้องสัตว์เลี้ยง</button>
+
+            <!-- Add pet form (hidden) -->
+            <div class="add-pet-form" id="addPetForm" style="display:none">
+              <div class="pro-form-row">
+                <div class="pro-field">
+                  <label>ชื่อน้อง</label>
+                  <input type="text" id="petName" placeholder="เช่น น้องโกลด์"/>
+                </div>
+                <div class="pro-field">
+                  <label>ประเภท</label>
+                  <select id="petType">
+                    <option value="dog">🐶 หมา</option>
+                    <option value="cat">🐱 แมว</option>
+                    <option value="other">🐾 อื่นๆ</option>
+                  </select>
+                </div>
+              </div>
+              <div class="pro-form-row">
+                <div class="pro-field">
+                  <label>สายพันธุ์</label>
+                  <input type="text" id="petBreed" placeholder="เช่น โกลเด้น รีทรีฟเวอร์"/>
+                </div>
+                <div class="pro-field">
+                  <label>อายุ (ปี)</label>
+                  <input type="number" id="petAge" placeholder="2" min="0" max="30"/>
+                </div>
+              </div>
+              <div class="add-pet-actions">
+                <button class="btn btn-primary" id="savePetBtn">บันทึก</button>
+                <button class="btn btn-outline" id="cancelPetBtn">ยกเลิก</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security -->
+          <div class="pro-card">
+            <div class="pro-card__header"><h3>🔒 ความปลอดภัย</h3></div>
+            <div class="security-rows">
+              <div class="security-row">
+                <div>
+                  <div class="security-row__label">รหัสผ่าน</div>
+                  <div class="security-row__sub">อัปเดตล่าสุด: ไม่ทราบ</div>
+                </div>
+                <button class="btn-sec-action" id="changePasswordBtn">เปลี่ยน</button>
+              </div>
+              <div class="security-row">
+                <div>
+                  <div class="security-row__label">อีเมล 2FA</div>
+                  <div class="security-row__sub">ยังไม่ได้เปิดใช้งาน</div>
+                </div>
+                <button class="btn-sec-action" id="enable2FABtn">เปิดใช้</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: คำสั่งซื้อ -->
+    <div class="profile-panel" id="panel-orders">
+      <div class="pro-card">
+        <div class="pro-card__header">
+          <h3>📦 ประวัติคำสั่งซื้อ</h3>
+          <span class="order-count-badge" id="orderCountBadge"></span>
+        </div>
+        <div class="orders-list" id="profileOrdersList"></div>
+      </div>
+    </div>
+
+    <!-- TAB: สะสมแต้ม & Loyalty -->
+    <div class="profile-panel" id="panel-loyalty">
+
+      <!-- Tier Hero Card -->
+      <div class="loyalty-hero" id="loyaltyHero"></div>
+
+      <!-- Tier Ladder -->
+      <div class="pro-card" style="margin-bottom:24px">
+        <div class="pro-card__header"><h3>🪜 ระดับสมาชิก</h3></div>
+        <div class="tier-ladder" id="tierLadder"></div>
+      </div>
+
+      <!-- Benefits per tier -->
+      <div class="pro-card" style="margin-bottom:24px">
+        <div class="pro-card__header"><h3>🎁 สิทธิประโยชน์ตามระดับ</h3></div>
+        <div class="tier-benefits" id="tierBenefits"></div>
+      </div>
+
+      <!-- Points History -->
+      <div class="pro-card">
+        <div class="pro-card__header">
+          <h3>📋 ประวัติแต้ม</h3>
+          <span class="order-count-badge" id="pointsHistoryBadge"></span>
+        </div>
+        <div class="points-history-list" id="pointsHistoryList"></div>
+      </div>
+
+    </div>
+
+    <!-- TAB: รายการโปรด -->
+    <div class="profile-panel" id="panel-wishlist">
+      <div class="pro-card">
+        <div class="pro-card__header">
+          <h3>❤️ รายการโปรด</h3>
+          <span class="order-count-badge" id="wishlistCountBadge"></span>
+        </div>
+        <div class="profile-wishlist-grid" id="profileWishlistGrid"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- LINE FLOAT -->
+<a href="#" class="line-float" aria-label="Line OA">
+  <span>💬</span>
+  <span class="line-float__label">Line OA</span>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="profile.js"></script>
+  <script src="chat-widget.js"></script>
+</body>
+</html>

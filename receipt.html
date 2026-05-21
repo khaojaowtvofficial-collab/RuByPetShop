@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ใบเสร็จ — Ruby Pet Shop</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── Page base ──────────────────────────── */
+    body {
+      min-height: 100vh;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navbar (minimal) ───────────────────── */
+    .rcpt-nav {
+      background: white;
+      padding: 14px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      position: sticky; top: 0; z-index: 10;
+    }
+    .rcpt-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .rcpt-nav-actions { display: flex; gap: 10px; align-items: center; }
+
+    /* ── Main ───────────────────────────────── */
+    .rcpt-main {
+      flex: 1;
+      padding: 32px 0 64px;
+    }
+
+    /* ── Receipt Card ───────────────────────── */
+    .receipt-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 40px rgba(0,0,0,.08);
+      max-width: 680px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    /* ── Header band ────────────────────────── */
+    .rcpt-header {
+      background: linear-gradient(135deg, var(--orange) 0%, #FF8A65 100%);
+      padding: 32px 40px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    .rcpt-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 24px;
+      background: white;
+      border-radius: 24px 24px 0 0;
+    }
+    .rcpt-header__logo {
+      font-family: 'Nunito', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .rcpt-header__check {
+      font-size: 56px;
+      margin-bottom: 12px;
+      animation: checkPop .6s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes checkPop {
+      from { transform: scale(0) rotate(-20deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0);      opacity: 1; }
+    }
+    .rcpt-header__title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .rcpt-header__sub { font-size: 14px; opacity: .85; }
+
+    /* ── Body ───────────────────────────────── */
+    .rcpt-body { padding: 32px 40px; }
+
+    /* ── Order meta row ─────────────────────── */
+    .rcpt-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .rcpt-meta-item {
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+    .rcpt-meta-item label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .rcpt-meta-item span {
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+    }
+    .rcpt-meta-item--status span { color: var(--orange); }
+
+    /* ── Section title ──────────────────────── */
+    .rcpt-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Items table ────────────────────────── */
+    .rcpt-items { margin-bottom: 24px; }
+    .rcpt-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rcpt-item:last-child { border-bottom: none; }
+    .rcpt-item__img {
+      width: 56px; height: 56px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    .rcpt-item__info { flex: 1; min-width: 0; }
+    .rcpt-item__name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .rcpt-item__meta { font-size: 12px; color: var(--text-m); }
+    .rcpt-item__price {
+      font-size: 15px;
+      font-weight: 900;
+      font-family: 'Nunito', sans-serif;
+      color: var(--orange);
+      white-space: nowrap;
+    }
+
+    /* ── Summary totals ─────────────────────── */
+    .rcpt-summary { margin-bottom: 24px; }
+    .rcpt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 0;
+      font-size: 14px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .rcpt-row:last-child { border-bottom: none; }
+    .rcpt-row.total-row {
+      border-top: 2px solid var(--text);
+      border-bottom: none;
+      margin-top: 8px;
+      padding-top: 14px;
+    }
+    .rcpt-row.total-row .rcpt-label {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 17px;
+    }
+    .rcpt-row.total-row .rcpt-val {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: var(--orange);
+    }
+    .rcpt-label { color: var(--text-m); font-weight: 600; }
+    .rcpt-val { font-family: 'Nunito',sans-serif; font-weight: 700; }
+    .rcpt-val--discount { color: #4CAF82; }
+
+    /* ── Shipping info ───────────────────────── */
+    .rcpt-shipping {
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    .rcpt-shipping strong { display: block; margin-bottom: 4px; font-size: 15px; }
+    .rcpt-shipping p { color: var(--text-m); line-height: 1.7; }
+
+    /* ── Footer ─────────────────────────────── */
+    .rcpt-footer {
+      border-top: 2px dashed var(--border);
+      padding: 24px 0 0;
+      text-align: center;
+    }
+    .rcpt-footer__msg {
+      font-size: 14px;
+      color: var(--text-m);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .rcpt-footer__thanks {
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+    .rcpt-barcode {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      font-family: monospace;
+    }
+
+    /* ── Actions (NOT printed) ──────────────── */
+    .rcpt-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    /* ── Loading / Not found ────────────────── */
+    .rcpt-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-m);
+    }
+    .rcpt-state__icon { font-size: 56px; margin-bottom: 16px; }
+    .rcpt-state h3 { font-size: 20px; margin-bottom: 8px; color: var(--text); }
+
+    /* ═══════════════════════════════════════════
+       PRINT STYLES
+    ═══════════════════════════════════════════ */
+    @media print {
+      body         { background: white; }
+      .rcpt-nav,
+      .rcpt-actions,
+      .line-float  { display: none !important; }
+      .receipt-card {
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 100%;
+      }
+      .rcpt-main { padding: 0; }
+      .rcpt-header::after { display: none; }
+      .rcpt-header { border-radius: 0; padding-bottom: 40px; }
+      @page { margin: 8mm; }
+    }
+
+    /* ── Responsive ─────────────────────────── */
+    @media (max-width: 600px) {
+      .rcpt-body { padding: 24px 20px; }
+      .rcpt-meta-grid { grid-template-columns: 1fr; }
+      .rcpt-header { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ────────────────────────────── -->
+<nav class="rcpt-nav">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <span class="logo__icon">🐾</span>
+      <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+    </a>
+    <div class="rcpt-nav-actions">
+      <button class="btn btn-outline" id="printBtn" style="padding:9px 18px;font-size:14px">🖨️ พิมพ์</button>
+      <a href="index.html" class="btn btn-primary" style="padding:9px 18px;font-size:14px">🛍️ ช้อปต่อ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Main ─────────────────────────────── -->
+<main class="rcpt-main">
+  <div class="container">
+    <div id="receiptWrap">
+
+      <!-- Loading state -->
+      <div class="rcpt-state" id="rcptLoading">
+        <div class="rcpt-state__icon">⏳</div>
+        <h3>กำลังโหลดใบเสร็จ...</h3>
+      </div>
+
+      <!-- Not found -->
+      <div class="rcpt-state" id="rcptNotFound" style="display:none">
+        <div class="rcpt-state__icon">🔍</div>
+        <h3>ไม่พบข้อมูลคำสั่งซื้อ</h3>
+        <p>กรุณาตรวจสอบหมายเลขคำสั่งซื้อหรือเข้าสู่ระบบก่อนค่ะ</p>
+        <a href="profile.html" class="btn btn-primary" style="margin-top:16px;display:inline-block">📦 ดูคำสั่งซื้อ</a>
+      </div>
+
+      <!-- Receipt card (filled by JS) -->
+      <div class="receipt-card" id="receiptCard" style="display:none">
+
+        <!-- Header -->
+        <div class="rcpt-header">
+          <div class="rcpt-header__logo">🐾 Ruby Pet Shop</div>
+          <div class="rcpt-header__check">✅</div>
+          <div class="rcpt-header__title">ขอบคุณที่ช้อปกับเราค่ะ!</div>
+          <div class="rcpt-header__sub">ใบเสร็จอิเล็กทรอนิกส์ · Electronic Receipt</div>
+        </div>
+
+        <!-- Body -->
+        <div class="rcpt-body">
+
+          <!-- Meta -->
+          <div class="rcpt-meta-grid" id="rcptMeta"></div>
+
+          <!-- Items -->
+          <div class="rcpt-items">
+            <div class="rcpt-section-title">รายการสินค้า</div>
+            <div id="rcptItems"></div>
+          </div>
+
+          <!-- Summary -->
+          <div class="rcpt-summary">
+            <div class="rcpt-section-title">สรุปยอดชำระ</div>
+            <div id="rcptSummary"></div>
+          </div>
+
+          <!-- Shipping -->
+          <div id="rcptShippingWrap"></div>
+
+          <!-- Footer -->
+          <div class="rcpt-footer">
+            <div class="rcpt-footer__thanks">🐾 ขอบคุณที่ไว้วางใจ Ruby Pet Shop ค่ะ!</div>
+            <div class="rcpt-footer__msg">
+              หากมีปัญหาเกี่ยวกับสินค้าหรือการจัดส่ง<br/>
+              ติดต่อเราได้ที่ Line OA: <strong>@rubypetshop</strong> หรือโทร <strong>02-XXX-XXXX</strong>
+            </div>
+            <div class="rcpt-barcode" id="rcptBarcode"></div>
+          </div>
+
+          <!-- Actions (hidden on print) -->
+          <div class="rcpt-actions">
+            <button class="btn btn-outline btn-lg" id="rcptPrint">🖨️ พิมพ์ใบเสร็จ</button>
+            <a href="tracking.html" id="rcptTrack" class="btn btn-primary btn-lg">📦 ติดตามพัสดุ</a>
+            <a href="index.html" class="btn btn-outline btn-lg">🛍️ ช้อปต่อ</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- LINE FLOAT (hidden on print) -->
+<a href="#" class="line-float" aria-label="Line OA">
+  <span>💬</span>
+  <span class="line-float__label">Line OA</span>
+</a>
+
+<script>
+(function () {
+  /* ── Helpers ─────────────────────────── */
+  const STATUS_LABELS = {
+    pending:   '⏳ รอดำเนินการ',
+    paid:      '✅ ชำระเงินแล้ว',
+    preparing: '📦 กำลังจัดเตรียม',
+    shipped:   '🚚 จัดส่งแล้ว',
+    delivered: '🎉 ได้รับสินค้าแล้ว',
+  };
+  const PAYMENT_LABELS = {
+    credit_card: '💳 บัตรเครดิต/เดบิต',
+    promptpay:   '📱 PromptPay',
+    truewallet:  '💚 TrueMoney Wallet',
+    cod:         '💵 ชำระเงินปลายทาง',
+  };
+
+  /* ── Find order ──────────────────────── */
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('id');
+
+  let order = null;
+
+  /* Try user's localStorage orders */
+  if (orderId) {
+    try {
+      const user = JSON.parse(localStorage.getItem('ruby_user') || 'null');
+      if (user && Array.isArray(user.orders)) {
+        order = user.orders.find(o => o.id === orderId);
+      }
+    } catch { }
+  }
+
+  /* Demo orders fallback */
+  if (!order && orderId) {
+    const DEMO = {
+      'ORD-2026-001': {
+        id: 'ORD-2026-001',
+        date: '2026-05-20T10:30:00',
+        status: 'delivered',
+        total: 1589,
+        shipping: 'Flash Express',
+        tracking: 'FLASH123456TH',
+        address: 'คุณมาลี สุขใจ\n123 ซอยลาดพร้าว 41\nกรุงเทพฯ 10310',
+        payment: 'promptpay',
+        discount: 0,
+        pointsUsed: 0,
+        shippingFee: 0,
+        items: [
+          { name:'Royal Canin Adult 15kg', qty:1, price:1290, img:'https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=100&q=80' },
+          { name:'Pedigree Dentastix 7ชิ้น', qty:2, price:149, img:'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=100&q=80' },
+        ],
+      },
+      'ORD-2026-002': {
+        id: 'ORD-2026-002',
+        date: '2026-05-20T14:15:00',
+        status: 'shipped',
+        total: 299,
+        shipping: 'Kerry Express',
+        tracking: 'KERRY789012TH',
+        address: 'คุณต้น วิชัย\n45/2 ถ.รัชดาภิเษก\nกรุงเทพฯ 10400',
+        payment: 'credit_card',
+        discount: 0,
+        pointsUsed: 0,
+        shippingFee: 0,
+        items: [
+          { name:'Whiskas ปลาแซลมอน 1.2kg', qty:1, price:299, img:'https://images.unsplash.com/photo-1548366086-7f1b76106622?w=100&q=80' },
+        ],
+      },
+    };
+    order = DEMO[orderId] || null;
+  }
+
+  /* If still not found, try latest order in localStorage */
+  if (!order && !orderId) {
+    try {
+      const user = JSON.parse(localStorage.getItem('ruby_user') || 'null');
+      if (user && Array.isArray(user.orders) && user.orders.length > 0) {
+        order = user.orders[user.orders.length - 1];
+      }
+    } catch { }
+  }
+
+  /* ── Show states ──────────────────────── */
+  document.getElementById('rcptLoading').style.display = 'none';
+
+  if (!order) {
+    document.getElementById('rcptNotFound').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('receiptCard').style.display = 'block';
+  document.title = `ใบเสร็จ ${order.id} — Ruby Pet Shop`;
+
+  /* ── Meta grid ──────────────────────── */
+  const dateStr = order.date
+    ? new Date(order.date).toLocaleString('th-TH', { dateStyle:'medium', timeStyle:'short' })
+    : 'ไม่ระบุ';
+
+  document.getElementById('rcptMeta').innerHTML = `
+    <div class="rcpt-meta-item">
+      <label>หมายเลขคำสั่งซื้อ</label>
+      <span>${order.id}</span>
+    </div>
+    <div class="rcpt-meta-item">
+      <label>วันที่สั่งซื้อ</label>
+      <span>${dateStr}</span>
+    </div>
+    <div class="rcpt-meta-item rcpt-meta-item--status">
+      <label>สถานะ</label>
+      <span>${STATUS_LABELS[order.status] || order.status}</span>
+    </div>
+    <div class="rcpt-meta-item">
+      <label>ช่องทางชำระเงิน</label>
+      <span>${PAYMENT_LABELS[order.payment] || order.payment || '—'}</span>
+    </div>`;
+
+  /* ── Items ───────────────────────────── */
+  const items = Array.isArray(order.items) ? order.items : [];
+  document.getElementById('rcptItems').innerHTML = items.length
+    ? items.map(it => `
+        <div class="rcpt-item">
+          <img src="${it.img || it.image || ''}" alt="${it.name || ''}" class="rcpt-item__img"
+               onerror="this.src='https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100&q=80'"/>
+          <div class="rcpt-item__info">
+            <div class="rcpt-item__name">${it.name || ''}</div>
+            <div class="rcpt-item__meta">฿${(it.price || 0).toLocaleString()} × ${it.qty || 1} ชิ้น</div>
+          </div>
+          <div class="rcpt-item__price">฿${((it.price || 0) * (it.qty || 1)).toLocaleString()}</div>
+        </div>`).join('')
+    : '<p style="color:var(--text-m);padding:12px 0">ไม่มีรายการสินค้า</p>';
+
+  /* ── Summary ─────────────────────────── */
+  const subtotal    = items.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
+  const discount    = order.discount    || 0;
+  const pointsDisc  = order.pointsUsed  ? Math.floor(order.pointsUsed / 10) : 0;
+  const shippingFee = order.shippingFee || 0;
+  const codFee      = order.payment === 'cod' ? 30 : 0;
+  const total       = order.total || subtotal - discount - pointsDisc + shippingFee + codFee;
+
+  let summaryHtml = `
+    <div class="rcpt-row">
+      <span class="rcpt-label">ราคาสินค้ารวม</span>
+      <span class="rcpt-val">฿${subtotal.toLocaleString()}</span>
+    </div>`;
+  if (discount > 0) summaryHtml += `
+    <div class="rcpt-row">
+      <span class="rcpt-label">ส่วนลดโค้ด</span>
+      <span class="rcpt-val rcpt-val--discount">-฿${discount.toLocaleString()}</span>
+    </div>`;
+  if (pointsDisc > 0) summaryHtml += `
+    <div class="rcpt-row">
+      <span class="rcpt-label">Ruby Points (${order.pointsUsed} แต้ม)</span>
+      <span class="rcpt-val rcpt-val--discount">-฿${pointsDisc.toLocaleString()}</span>
+    </div>`;
+  summaryHtml += `
+    <div class="rcpt-row">
+      <span class="rcpt-label">ค่าจัดส่ง</span>
+      <span class="rcpt-val">${shippingFee > 0 ? `฿${shippingFee.toLocaleString()}` : '🚚 ฟรี'}</span>
+    </div>`;
+  if (codFee > 0) summaryHtml += `
+    <div class="rcpt-row">
+      <span class="rcpt-label">ค่าบริการเก็บเงินปลายทาง</span>
+      <span class="rcpt-val">฿${codFee.toLocaleString()}</span>
+    </div>`;
+  summaryHtml += `
+    <div class="rcpt-row total-row">
+      <span class="rcpt-label">ยอดชำระทั้งหมด</span>
+      <span class="rcpt-val">฿${total.toLocaleString()}</span>
+    </div>`;
+  document.getElementById('rcptSummary').innerHTML = summaryHtml;
+
+  /* ── Shipping info ───────────────────── */
+  if (order.address || order.shipping) {
+    document.getElementById('rcptShippingWrap').innerHTML = `
+      <div class="rcpt-section-title">ที่อยู่จัดส่ง</div>
+      <div class="rcpt-shipping">
+        ${order.address ? `<strong>📍 ที่อยู่</strong><p>${order.address.replace(/\n/g,'<br/>')}</p>` : ''}
+        ${order.shipping ? `<strong style="margin-top:10px;display:block">🚚 ขนส่ง: ${order.shipping}</strong>` : ''}
+        ${order.tracking ? `<p style="font-family:'Nunito',sans-serif;font-weight:700;color:var(--orange)">Tracking: ${order.tracking}</p>` : ''}
+      </div>`;
+  }
+
+  /* ── Barcode (order ID styled) ────────── */
+  document.getElementById('rcptBarcode').textContent = `| | | ${order.id} | | |`;
+
+  /* ── Track button ────────────────────── */
+  const trackBtn = document.getElementById('rcptTrack');
+  if (trackBtn && order.id) {
+    trackBtn.href = `tracking.html?id=${encodeURIComponent(order.id)}`;
+  }
+
+  /* ── Print buttons ───────────────────── */
+  document.getElementById('printBtn')?.addEventListener('click', () => window.print());
+  document.getElementById('rcptPrint')?.addEventListener('click', () => window.print());
+})();
+</script>
+
+<script src="chat-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ชำระเงิน — Ruby Pet Shop</title>
+  <meta name="description" content="ชำระเงินและติดตามคำสั่งซื้อของคุณที่ Ruby Pet Shop ส่งเร็ว ปลอดภัย"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta property="og:type"        content="website"/>
+  <meta property="og:site_name"   content="Ruby Pet Shop"/>
+  <meta property="og:title"       content="ชำระเงิน — Ruby Pet Shop"/>
+  <meta property="og:description" content="ชำระเงินและติดตามคำสั่งซื้อของคุณที่ Ruby Pet Shop"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="checkout.css"/>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar co-navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__icon">🐾</span>
+      <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+    </a>
+    <div class="co-nav-center">
+      <span class="co-nav-secure">🔒 ชำระเงินปลอดภัย SSL 256-bit</span>
+    </div>
+    <a href="index.html" class="co-nav-back">← กลับช้อปต่อ</a>
+  </div>
+</header>
+
+<!-- ===== STEP INDICATOR ===== -->
+<div class="step-bar-wrap">
+  <div class="container">
+    <div class="step-bar">
+
+      <div class="step-item active" id="step-ind-1">
+        <div class="step-circle">
+          <span class="step-num">1</span>
+          <span class="step-check">✓</span>
+        </div>
+        <span class="step-label">ที่อยู่จัดส่ง</span>
+      </div>
+
+      <div class="step-line" id="line-1-2"></div>
+
+      <div class="step-item" id="step-ind-2">
+        <div class="step-circle">
+          <span class="step-num">2</span>
+          <span class="step-check">✓</span>
+        </div>
+        <span class="step-label">ชำระเงิน</span>
+      </div>
+
+      <div class="step-line" id="line-2-3"></div>
+
+      <div class="step-item" id="step-ind-3">
+        <div class="step-circle">
+          <span class="step-num">3</span>
+          <span class="step-check">✓</span>
+        </div>
+        <span class="step-label">ยืนยันคำสั่งซื้อ</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHECKOUT BODY ===== -->
+<main class="checkout-main">
+  <div class="container checkout-layout">
+
+    <!-- LEFT: FORM AREA -->
+    <div class="checkout-form-area">
+
+      <!-- ===== STEP 1: ที่อยู่จัดส่ง ===== -->
+      <div class="checkout-step active" id="step-1">
+        <div class="co-card">
+          <div class="co-card__header">
+            <h2>📍 ที่อยู่จัดส่ง</h2>
+          </div>
+          <div class="co-card__body">
+
+            <!-- Saved Addresses (if logged in) -->
+            <div class="saved-addresses" id="savedAddresses" style="display:none">
+              <div class="saved-addr-label">ที่อยู่ที่บันทึกไว้</div>
+              <div class="saved-addr-list" id="savedAddrList"></div>
+              <button class="btn-add-addr" id="addNewAddrBtn">+ เพิ่มที่อยู่ใหม่</button>
+            </div>
+
+            <form id="shippingForm" class="co-form">
+              <div class="co-form-row">
+                <div class="co-field">
+                  <label>ชื่อ <span class="req">*</span></label>
+                  <input type="text" id="firstName" placeholder="ชื่อ" required/>
+                  <span class="field-err" id="err-firstName"></span>
+                </div>
+                <div class="co-field">
+                  <label>นามสกุล <span class="req">*</span></label>
+                  <input type="text" id="lastName" placeholder="นามสกุล" required/>
+                  <span class="field-err" id="err-lastName"></span>
+                </div>
+              </div>
+
+              <div class="co-field">
+                <label>เบอร์โทรศัพท์ <span class="req">*</span></label>
+                <div class="phone-wrap">
+                  <span class="phone-prefix">🇹🇭 +66</span>
+                  <input type="tel" id="phone" placeholder="08X-XXX-XXXX" maxlength="12" required/>
+                </div>
+                <span class="field-err" id="err-phone"></span>
+              </div>
+
+              <div class="co-field">
+                <label>อีเมล <span class="req">*</span></label>
+                <input type="email" id="email" placeholder="your@email.com" required/>
+                <span class="field-err" id="err-email"></span>
+              </div>
+
+              <div class="co-field">
+                <label>บ้านเลขที่ / ซอย / ถนน <span class="req">*</span></label>
+                <input type="text" id="address" placeholder="เช่น 123/4 ซ.สุขุมวิท 11 ถ.สุขุมวิท" required/>
+                <span class="field-err" id="err-address"></span>
+              </div>
+
+              <div class="co-form-row">
+                <div class="co-field">
+                  <label>จังหวัด <span class="req">*</span></label>
+                  <select id="province" required>
+                    <option value="">เลือกจังหวัด</option>
+                    <option>กรุงเทพมหานคร</option>
+                    <option>เชียงใหม่</option>
+                    <option>ชลบุรี</option>
+                    <option>ภูเก็ต</option>
+                    <option>ขอนแก่น</option>
+                    <option>นนทบุรี</option>
+                    <option>ปทุมธานี</option>
+                    <option>สมุทรปราการ</option>
+                    <option>นครราชสีมา</option>
+                    <option>อื่นๆ</option>
+                  </select>
+                  <span class="field-err" id="err-province"></span>
+                </div>
+                <div class="co-field">
+                  <label>รหัสไปรษณีย์ <span class="req">*</span></label>
+                  <input type="text" id="zipcode" placeholder="10110" maxlength="5" required/>
+                  <span class="field-err" id="err-zipcode"></span>
+                </div>
+              </div>
+
+              <div class="co-field">
+                <label>หมายเหตุ (ไม่บังคับ)</label>
+                <textarea id="note" rows="2" placeholder="เช่น บ้านสีชมพู ติดต่อก่อนส่ง"></textarea>
+              </div>
+
+              <!-- Delivery Options -->
+              <div class="delivery-options">
+                <div class="delivery-options__label">🚚 เลือกวิธีจัดส่ง</div>
+                <div class="delivery-opts-list">
+
+                  <label class="delivery-opt active" id="opt-flash">
+                    <input type="radio" name="delivery" value="flash" checked/>
+                    <div class="delivery-opt__icon">⚡</div>
+                    <div class="delivery-opt__info">
+                      <strong>Flash Express</strong>
+                      <span>ได้รับภายใน 1–2 วัน</span>
+                    </div>
+                    <div class="delivery-opt__price">฿ 50</div>
+                  </label>
+
+                  <label class="delivery-opt" id="opt-kerry">
+                    <input type="radio" name="delivery" value="kerry"/>
+                    <div class="delivery-opt__icon">📦</div>
+                    <div class="delivery-opt__info">
+                      <strong>Kerry Express</strong>
+                      <span>ได้รับภายใน 2–3 วัน</span>
+                    </div>
+                    <div class="delivery-opt__price">฿ 40</div>
+                  </label>
+
+                  <label class="delivery-opt" id="opt-free">
+                    <input type="radio" name="delivery" value="free" id="freeShipping" disabled/>
+                    <div class="delivery-opt__icon">🎁</div>
+                    <div class="delivery-opt__info">
+                      <strong>ส่งฟรี</strong>
+                      <span id="freeShippingLabel">ซื้อครบ ฿500 ขึ้นไป</span>
+                    </div>
+                    <div class="delivery-opt__price" id="freeShippingPrice">฿ 0</div>
+                  </label>
+
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-lg co-next-btn">
+                ถัดไป: เลือกวิธีชำระเงิน →
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 2: ชำระเงิน ===== -->
+      <div class="checkout-step" id="step-2">
+        <div class="co-card">
+          <div class="co-card__header">
+            <h2>💳 เลือกวิธีชำระเงิน</h2>
+            <button class="co-back-btn" data-goto="1">← แก้ไขที่อยู่</button>
+          </div>
+          <div class="co-card__body">
+
+            <!-- Shipping summary -->
+            <div class="shipping-summary" id="shippingSummary"></div>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+
+              <!-- Credit / Debit Card -->
+              <div class="pay-method" id="pm-card">
+                <label class="pay-method__header">
+                  <input type="radio" name="payment" value="card" checked/>
+                  <div class="pay-method__icons">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" height="20"/>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MC" height="20"/>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/200px-American_Express_logo_%282018%29.svg.png" alt="Amex" height="20"/>
+                  </div>
+                  <strong>บัตรเครดิต / เดบิต</strong>
+                  <span class="pay-tag">ผ่อน 0% 3 เดือน</span>
+                </label>
+                <div class="pay-method__body" id="card-form-wrap">
+                  <div class="card-form">
+                    <div class="co-field">
+                      <label>หมายเลขบัตร</label>
+                      <div class="card-input-wrap">
+                        <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19"/>
+                        <span class="card-type-icon" id="cardTypeIcon">💳</span>
+                      </div>
+                    </div>
+                    <div class="co-form-row">
+                      <div class="co-field">
+                        <label>วันหมดอายุ</label>
+                        <input type="text" id="cardExpiry" placeholder="MM / YY" maxlength="7"/>
+                      </div>
+                      <div class="co-field">
+                        <label>CVV <span class="cvv-help" title="เลข 3 หลักหลังบัตร">?</span></label>
+                        <input type="password" id="cardCvv" placeholder="•••" maxlength="4"/>
+                      </div>
+                    </div>
+                    <div class="co-field">
+                      <label>ชื่อบนบัตร</label>
+                      <input type="text" id="cardName" placeholder="FIRSTNAME LASTNAME"/>
+                    </div>
+                    <div class="installment-options" id="installmentOpts">
+                      <div class="installment-label">ผ่อนชำระ 0%</div>
+                      <div class="installment-opts">
+                        <label class="inst-opt"><input type="radio" name="install" value="full" checked/> ชำระเต็มจำนวน</label>
+                        <label class="inst-opt"><input type="radio" name="install" value="3"/> 3 เดือน</label>
+                        <label class="inst-opt"><input type="radio" name="install" value="6"/> 6 เดือน</label>
+                        <label class="inst-opt"><input type="radio" name="install" value="10"/> 10 เดือน</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PromptPay -->
+              <div class="pay-method" id="pm-promptpay">
+                <label class="pay-method__header">
+                  <input type="radio" name="payment" value="promptpay"/>
+                  <span class="pay-icon">📱</span>
+                  <strong>PromptPay QR Code</strong>
+                  <span class="pay-tag pay-tag--green">ลด 2%</span>
+                </label>
+                <div class="pay-method__body hidden" id="promptpay-wrap">
+                  <div class="qr-placeholder">
+                    <div class="qr-box" id="qrBox">
+                      <div class="qr-loading">กำลังสร้าง QR Code...</div>
+                    </div>
+                    <p class="qr-note">สแกน QR ด้วย Mobile Banking หรือ Wallet App<br/>QR หมดอายุใน <strong id="qrTimer">10:00</strong></p>
+                    <div class="qr-banks">
+                      <span title="SCB">🏦</span><span title="Kbank">🏦</span>
+                      <span title="Bangkok Bank">🏦</span><span title="KTB">🏦</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TrueWallet -->
+              <div class="pay-method" id="pm-truewallet">
+                <label class="pay-method__header">
+                  <input type="radio" name="payment" value="truewallet"/>
+                  <span class="pay-icon">💜</span>
+                  <strong>True Money Wallet</strong>
+                  <span class="pay-tag">สะดวก ไม่ต้องมีบัตร</span>
+                </label>
+                <div class="pay-method__body hidden" id="truewallet-wrap">
+                  <div class="co-field">
+                    <label>เบอร์ True Money Wallet</label>
+                    <input type="tel" placeholder="08X-XXX-XXXX" maxlength="10"/>
+                  </div>
+                  <p class="pay-note">ระบบจะส่ง OTP ไปยังเบอร์ที่ลงทะเบียน True Money</p>
+                </div>
+              </div>
+
+              <!-- COD -->
+              <div class="pay-method" id="pm-cod">
+                <label class="pay-method__header">
+                  <input type="radio" name="payment" value="cod"/>
+                  <span class="pay-icon">💵</span>
+                  <strong>เก็บเงินปลายทาง (COD)</strong>
+                  <span class="pay-tag pay-tag--gray">+฿ 20</span>
+                </label>
+                <div class="pay-method__body hidden" id="cod-wrap">
+                  <div class="cod-note">
+                    <p>📋 กรุณาเตรียมเงินสดให้พอดีหรือใกล้เคียง</p>
+                    <p>📦 ตรวจสอบสินค้าก่อนชำระเงินได้เลย</p>
+                    <p>⚠️ ค่าบริการ COD เพิ่ม ฿20 จากยอดสั่งซื้อ</p>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- end payment-methods -->
+
+            <!-- Ruby Points Redemption -->
+            <div class="points-section" id="pointsSection" style="display:none">
+              <div class="points-section__header">
+                <div class="points-section__title">
+                  🌟 Ruby Points ของคุณ
+                </div>
+                <div class="points-balance" id="pointsBalanceDisplay">
+                  <span class="pts-num" id="ptsNum">0</span> แต้ม
+                  <span class="pts-val" id="ptsVal"></span>
+                </div>
+              </div>
+
+              <div class="points-toggle-row">
+                <label class="points-toggle-label">
+                  <input type="checkbox" id="usePointsToggle"/>
+                  <span class="points-toggle-track"><span class="points-toggle-thumb"></span></span>
+                  <span>ใช้ Ruby Points แลกส่วนลด</span>
+                </label>
+              </div>
+
+              <div class="points-redeem-body" id="pointsRedeemBody" style="display:none">
+                <div class="points-slider-row">
+                  <input type="range" id="pointsSlider" min="0" step="100" value="0" class="points-slider"/>
+                  <div class="points-slider-labels">
+                    <span>0 แต้ม</span>
+                    <span id="pointsSliderMax">0 แต้ม</span>
+                  </div>
+                </div>
+                <div class="points-input-row">
+                  <input type="number" id="pointsInput" placeholder="0" min="0" step="100" class="points-input"/>
+                  <span class="points-unit">แต้ม</span>
+                  <button type="button" class="btn-use-all-pts" id="useAllPtsBtn">ใช้ทั้งหมด</button>
+                </div>
+                <div class="points-discount-preview" id="pointsDiscountPreview"></div>
+              </div>
+            </div>
+
+            <!-- Guest notice (not logged in) -->
+            <div class="points-guest-notice" id="pointsGuestNotice" style="display:none">
+              <span>🌟</span>
+              <span><a href="#" class="text-orange" id="pointsLoginLink">เข้าสู่ระบบ</a> เพื่อใช้ Ruby Points แลกส่วนลด</span>
+            </div>
+
+            <!-- Coupon -->
+            <div class="coupon-section">
+              <div class="coupon-label">🎫 คูปองส่วนลด</div>
+              <div class="coupon-input-row">
+                <input type="text" id="couponInput" placeholder="กรอกรหัสคูปอง" class="coupon-input"/>
+                <button class="btn-apply-coupon" id="applyCouponBtn">ใช้คูปอง</button>
+              </div>
+              <div class="coupon-result" id="couponResult"></div>
+              <div class="coupon-hints">
+                <span class="coupon-hint" data-code="RUBY10">RUBY10</span>
+                <span class="coupon-hint" data-code="NEWMEMBER">NEWMEMBER</span>
+                <span class="coupon-hint" data-code="FREESHIP">FREESHIP</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg co-next-btn" id="goToStep3Btn">
+              ถัดไป: ตรวจสอบคำสั่งซื้อ →
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3: ยืนยัน ===== -->
+      <div class="checkout-step" id="step-3">
+        <div class="co-card">
+          <div class="co-card__header">
+            <h2>✅ ยืนยันคำสั่งซื้อ</h2>
+            <button class="co-back-btn" data-goto="2">← แก้ไขการชำระเงิน</button>
+          </div>
+          <div class="co-card__body">
+
+            <div class="confirm-sections" id="confirmSections"></div>
+
+            <!-- Items in Order -->
+            <div class="confirm-block">
+              <div class="confirm-block__title">🛍️ รายการสินค้า</div>
+              <div id="confirmItems"></div>
+            </div>
+
+            <!-- Terms -->
+            <div class="co-terms">
+              <label class="checkbox-label">
+                <input type="checkbox" id="agreeTerms"/>
+                <span>ฉันยอมรับ <a href="#" class="text-orange">ข้อกำหนดและเงื่อนไข</a> และ <a href="#" class="text-orange">นโยบายความเป็นส่วนตัว</a></span>
+              </label>
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg co-confirm-btn" id="confirmOrderBtn" disabled>
+              🔒 ยืนยันและชำระเงิน
+            </button>
+            <p class="co-secure-note">🔒 ข้อมูลของคุณถูกเข้ารหัสด้วย SSL 256-bit ปลอดภัย 100%</p>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end checkout-form-area -->
+
+    <!-- RIGHT: ORDER SUMMARY -->
+    <aside class="order-summary" id="orderSummary">
+      <div class="co-card">
+        <div class="co-card__header">
+          <h3>🛒 สรุปคำสั่งซื้อ</h3>
+          <span class="summary-item-count" id="summaryItemCount"></span>
+        </div>
+        <div class="co-card__body">
+
+          <div class="summary-items" id="summaryItems"></div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-rows" id="summaryRows"></div>
+
+          <div class="summary-total" id="summaryTotal"></div>
+
+          <div class="summary-points">
+            🌟 คุณจะได้รับ <strong id="earnPoints">0</strong> Ruby Points จากคำสั่งซื้อนี้
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="summary-trust">
+        <div class="trust-row"><span>🔒</span> ชำระเงินปลอดภัย</div>
+        <div class="trust-row"><span>↩️</span> คืนสินค้าได้ 7 วัน</div>
+        <div class="trust-row"><span>📦</span> แพ็คอย่างดี</div>
+        <div class="trust-row"><span>💬</span> Line OA พร้อมช่วย</div>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<!-- ===== ORDER SUCCESS OVERLAY ===== -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-modal">
+
+    <div class="success-animation">
+      <div class="success-circle">
+        <span class="success-check">✓</span>
+      </div>
+    </div>
+
+    <h2>สั่งซื้อสำเร็จแล้ว! 🎉</h2>
+    <p>ขอบคุณที่ไว้วางใจ Ruby Pet Shop นะคะ</p>
+
+    <div class="success-order-id">
+      หมายเลขคำสั่งซื้อ: <strong id="successOrderId"></strong>
+    </div>
+
+    <div class="success-info-grid" id="successInfoGrid"></div>
+
+    <div class="success-timeline">
+      <div class="suc-step done">
+        <div class="suc-dot">✓</div>
+        <div class="suc-label">รับออเดอร์แล้ว</div>
+      </div>
+      <div class="suc-line"></div>
+      <div class="suc-step active">
+        <div class="suc-dot">📦</div>
+        <div class="suc-label">กำลังจัดเตรียม</div>
+      </div>
+      <div class="suc-line"></div>
+      <div class="suc-step">
+        <div class="suc-dot">🚚</div>
+        <div class="suc-label">จัดส่ง</div>
+      </div>
+      <div class="suc-line"></div>
+      <div class="suc-step">
+        <div class="suc-dot">🏠</div>
+        <div class="suc-label">ได้รับแล้ว</div>
+      </div>
+    </div>
+
+    <p class="success-email-note" id="successEmailNote"></p>
+
+    <div class="success-actions">
+      <a href="index.html" class="btn btn-primary btn-lg">🛍️ ช้อปต่อ</a>
+      <button class="btn btn-outline btn-lg" id="trackOrderBtn">📦 ติดตามพัสดุ</button>
+      <a href="receipt.html" class="btn btn-outline btn-lg" id="receiptLink">🧾 ดูใบเสร็จ</a>
+    </div>
+
+    <div class="success-share">
+      <p>แชร์ความสุขให้เพื่อน 🐾</p>
+      <div class="success-share-btns">
+        <button class="share-social-btn share-fb">📘 Facebook</button>
+        <button class="share-social-btn share-line">💬 Line</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="checkout.js"></script>
+  <script src="chat-widget.js"></script>
+</body>
+</html>

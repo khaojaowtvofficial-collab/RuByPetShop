@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ติดตามพัสดุ — Ruby Pet Shop</title>
+  <meta name="description" content="ติดตามสถานะคำสั่งซื้อและพัสดุจาก Ruby Pet Shop"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="tracking.css"/>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar trk-navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__icon">🐾</span>
+      <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+    </a>
+    <span class="trk-nav-title">📦 ติดตามพัสดุ</span>
+    <a href="index.html" class="trk-nav-back">← กลับหน้าร้าน</a>
+  </div>
+</header>
+
+<!-- ===== HERO STRIP ===== -->
+<div class="trk-hero">
+  <div class="container trk-hero__inner">
+    <div class="trk-hero__icon">📦</div>
+    <div>
+      <h1 class="trk-hero__title">ติดตามพัสดุของคุณ</h1>
+      <p class="trk-hero__sub">กรอกหมายเลขคำสั่งซื้อเพื่อดูสถานะแบบ real-time</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SEARCH SECTION ===== -->
+<main class="trk-main">
+  <div class="container">
+
+    <div class="trk-search-card">
+      <label class="trk-search-label">หมายเลขคำสั่งซื้อ</label>
+      <div class="trk-search-row">
+        <input
+          type="text"
+          id="trkInput"
+          class="trk-input"
+          placeholder="เช่น ORD-2026-001"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="btn btn-primary trk-search-btn" id="trkSearchBtn">
+          🔍 ค้นหา
+        </button>
+      </div>
+      <div class="trk-hints">
+        <span class="trk-hint-label">ทดลองค้นหา:</span>
+        <button class="trk-demo-btn" data-id="ORD-2026-001">ORD-2026-001</button>
+        <button class="trk-demo-btn" data-id="ORD-2026-002">ORD-2026-002</button>
+        <button class="trk-demo-btn" data-id="ORD-2026-003">ORD-2026-003</button>
+      </div>
+    </div>
+
+    <!-- ===== RESULT AREA ===== -->
+    <div id="trkResult" style="display:none">
+
+      <!-- Order Header -->
+      <div class="trk-order-header">
+        <div class="trk-order-header__left">
+          <div class="trk-order-id" id="resOrderId"></div>
+          <div class="trk-order-meta" id="resOrderMeta"></div>
+        </div>
+        <div class="trk-status-chip" id="resStatusChip"></div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="trk-card">
+        <div class="trk-card__title">📍 สถานะการจัดส่ง</div>
+        <div class="trk-timeline" id="resTimeline"></div>
+      </div>
+
+      <!-- Carrier Card -->
+      <div class="trk-card" id="resCarrierCard" style="display:none">
+        <div class="trk-card__title">🚚 ข้อมูลพัสดุ</div>
+        <div class="trk-carrier" id="resCarrier"></div>
+      </div>
+
+      <!-- Items Card -->
+      <div class="trk-card">
+        <div class="trk-card__title">🛍️ รายการสินค้า</div>
+        <div class="trk-items" id="resItems"></div>
+        <div class="trk-total-row" id="resTotal"></div>
+      </div>
+
+      <!-- Actions -->
+      <div class="trk-actions">
+        <a href="index.html" class="btn btn-primary btn-lg">🛍️ ช้อปต่อ</a>
+        <button class="btn btn-outline btn-lg" id="trkShareBtn">📤 แชร์สถานะ</button>
+      </div>
+
+    </div><!-- end trkResult -->
+
+    <!-- ===== NOT FOUND ===== -->
+    <div id="trkNotFound" style="display:none">
+      <div class="trk-not-found">
+        <div class="trk-not-found__icon">🔍</div>
+        <h2>ไม่พบคำสั่งซื้อ</h2>
+        <p>ไม่พบหมายเลข <strong id="trkNotFoundId"></strong> ในระบบ<br/>กรุณาตรวจสอบหมายเลขและลองใหม่</p>
+        <div class="trk-not-found__tips">
+          <div class="tip-item">📧 เช็คอีเมลยืนยันคำสั่งซื้อ</div>
+          <div class="tip-item">📱 ติดต่อ Line OA: @rubypetshop</div>
+          <div class="tip-item">📞 โทร 02-XXX-XXXX (8:00–22:00)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== LOADING ===== -->
+    <div id="trkLoading" style="display:none">
+      <div class="trk-loading">
+        <div class="trk-spinner"></div>
+        <p>กำลังค้นหาข้อมูล...</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- LINE FLOAT -->
+<a href="#" class="line-float" aria-label="Line OA">
+  <span>💬</span>
+  <span class="line-float__label">Line OA</span>
+</a>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="tracking.js"></script>
+  <script src="chat-widget.js"></script>
+</body>
+</html>

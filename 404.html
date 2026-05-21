@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 — ไม่พบหน้านี้ · Ruby Pet Shop</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── Page base ─────────────────────────── */
+    body {
+      min-height: 100vh;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── Navbar (minimal) ──────────────────── */
+    .e404-nav {
+      background: white;
+      padding: 14px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      position: sticky; top: 0; z-index: 10;
+    }
+    .e404-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ── Main ──────────────────────────────── */
+    .e404-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px 80px;
+    }
+
+    .e404-inner {
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+    }
+
+    /* ── Floating paw prints ───────────────── */
+    .paw-field {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .paw {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0;
+      animation: pawFloat linear infinite;
+      user-select: none;
+    }
+
+    @keyframes pawFloat {
+      0%   { opacity: 0;   transform: translateY(0)   rotate(var(--r)); }
+      10%  { opacity: .18; }
+      90%  { opacity: .10; }
+      100% { opacity: 0;   transform: translateY(-100vh) rotate(calc(var(--r) + 40deg)); }
+    }
+
+    /* ── 404 number ────────────────────────── */
+    .e404-number {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(96px, 20vw, 160px);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--orange) 0%, #FF8A65 60%, #FFB300 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      letter-spacing: -4px;
+      margin-bottom: -12px;
+    }
+
+    /* ── Pet illustration ──────────────────── */
+    .e404-pet {
+      font-size: 80px;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      animation: petWiggle 3s ease-in-out infinite;
+      filter: drop-shadow(0 8px 16px rgba(255,112,67,.2));
+    }
+
+    @keyframes petWiggle {
+      0%,100% { transform: rotate(-5deg) scale(1); }
+      25%      { transform: rotate(5deg)  scale(1.05); }
+      50%      { transform: rotate(-3deg) scale(.98); }
+      75%      { transform: rotate(4deg)  scale(1.03); }
+    }
+
+    /* ── Copy ──────────────────────────────── */
+    .e404-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 900;
+      color: var(--text);
+      margin: 16px 0 10px;
+      position: relative; z-index: 1;
+    }
+
+    .e404-sub {
+      font-size: 16px;
+      color: var(--text-m);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Search box ────────────────────────── */
+    .e404-search {
+      display: flex;
+      gap: 8px;
+      max-width: 420px;
+      margin: 0 auto 32px;
+      position: relative; z-index: 1;
+    }
+
+    .e404-search-input {
+      flex: 1;
+      padding: 13px 18px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-size: 15px;
+      font-family: 'Sarabun', sans-serif;
+      color: var(--text);
+      outline: none;
+      background: white;
+      transition: border-color var(--transition);
+    }
+    .e404-search-input:focus { border-color: var(--orange); }
+
+    .e404-search-btn {
+      padding: 13px 22px;
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Sarabun', sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--transition);
+    }
+    .e404-search-btn:hover { background: var(--orange-d); }
+
+    /* ── Quick links ───────────────────────── */
+    .e404-links-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 12px;
+      position: relative; z-index: 1;
+    }
+
+    .e404-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      position: relative; z-index: 1;
+      margin-bottom: 40px;
+    }
+
+    .e404-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 20px;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Sarabun', sans-serif;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .e404-link:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,112,67,.15);
+    }
+
+    /* ── Fun fact ──────────────────────────── */
+    .e404-fact {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--text-m);
+      line-height: 1.7;
+      border-left: 4px solid var(--orange);
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: left;
+      position: relative; z-index: 1;
+      box-shadow: var(--shadow-sm);
+    }
+    .e404-fact strong { color: var(--orange); }
+
+    /* ── Responsive ────────────────────────── */
+    @media (max-width: 480px) {
+      .e404-pet    { font-size: 60px; }
+      .e404-search { flex-direction: column; }
+      .e404-link   { flex: 1 1 calc(50% - 5px); justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Paw field (generated by JS) ──────── -->
+<div class="paw-field" id="pawField"></div>
+
+<!-- ── Navbar ───────────────────────────── -->
+<nav class="e404-nav">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <span class="logo__icon">🐾</span>
+      <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+    </a>
+    <a href="index.html" class="btn btn-outline" style="padding:9px 20px;font-size:14px">← กลับหน้าแรก</a>
+  </div>
+</nav>
+
+<!-- ── Main content ──────────────────────── -->
+<main class="e404-main">
+  <div class="e404-inner">
+
+    <div class="e404-number">404</div>
+
+    <div class="e404-pet" id="petEmoji">🐶</div>
+
+    <h1 class="e404-title">โอ๊ะ! หน้านี้หายไปไหนแล้ว</h1>
+    <p class="e404-sub">
+      อาจถูกน้องหมาคาบไปแล้ว หรือลิงก์นี้ย้ายที่อยู่ไปแล้วค่ะ<br/>
+      ลองค้นหาสินค้า หรือกลับไปหน้าที่ต้องการด้านล่าง
+    </p>
+
+    <!-- Search -->
+    <div class="e404-search">
+      <input
+        type="text"
+        id="e404SearchInput"
+        class="e404-search-input"
+        placeholder="ค้นหาสินค้า เช่น Royal Canin..."
+        autocomplete="off"
+      />
+      <button class="e404-search-btn" id="e404SearchBtn">🔍 ค้นหา</button>
+    </div>
+
+    <!-- Quick links -->
+    <div class="e404-links-label">ไปที่หน้าเหล่านี้แทนค่ะ</div>
+    <div class="e404-links">
+      <a href="index.html" class="e404-link">🏠 หน้าแรก</a>
+      <a href="index.html#bestsellers" class="e404-link">🔥 สินค้าขายดี</a>
+      <a href="tracking.html" class="e404-link">📦 ติดตามพัสดุ</a>
+      <a href="profile.html" class="e404-link">👤 โปรไฟล์</a>
+      <a href="index.html#contact" class="e404-link">💬 ติดต่อเรา</a>
+      <a href="index.html#categories" class="e404-link">📂 หมวดหมู่</a>
+    </div>
+
+    <!-- Fun fact -->
+    <div class="e404-fact" id="e404Fact"></div>
+
+  </div>
+</main>
+
+<script src="chat-widget.js"></script>
+<script>
+(function () {
+  /* Rotating pet emoji */
+  const pets = ['🐶','🐱','🐾','🦴','🐕','🐈','🐩','🐈‍⬛'];
+  const petEl = document.getElementById('petEmoji');
+  let petIdx  = 0;
+  setInterval(() => {
+    petIdx = (petIdx + 1) % pets.length;
+    petEl.style.transform = 'scale(0)';
+    setTimeout(() => {
+      petEl.textContent = pets[petIdx];
+      petEl.style.transform = '';
+    }, 200);
+  }, 2500);
+
+  /* Floating paw prints */
+  const field = document.getElementById('pawField');
+  const paws  = ['🐾','🐾','🦶','🐾'];
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('span');
+    el.className = 'paw';
+    el.textContent = paws[i % paws.length];
+    const left = Math.random() * 100;
+    const delay = Math.random() * 14;
+    const dur   = 10 + Math.random() * 10;
+    const rot   = (Math.random() - 0.5) * 60;
+    el.style.cssText = `left:${left}%;bottom:-40px;animation-duration:${dur}s;animation-delay:${delay}s;--r:${rot}deg;font-size:${14+Math.random()*16}px`;
+    field.appendChild(el);
+  }
+
+  /* Search — redirect to index with query */
+  function doSearch() {
+    const q = document.getElementById('e404SearchInput').value.trim();
+    if (!q) return;
+    // Open index.html and trigger search via hash
+    window.location.href = `index.html#search:${encodeURIComponent(q)}`;
+  }
+  document.getElementById('e404SearchBtn').addEventListener('click', doSearch);
+  document.getElementById('e404SearchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doSearch();
+  });
+
+  /* Fun pet facts */
+  const facts = [
+    '🐾 <strong>รู้ไหมคะ?</strong> น้องหมาสามารถได้กลิ่นได้ดีกว่ามนุษย์ถึง 100,000 เท่าเลยค่ะ!',
+    '🐱 <strong>รู้ไหมคะ?</strong> แมวนอนเฉลี่ย 12–16 ชั่วโมงต่อวัน ช่างน่าอิจฉาจริงๆ!',
+    '🦴 <strong>รู้ไหมคะ?</strong> สุนัขมีฟันน้ำนม 28 ซี่ และฟันถาวร 42 ซี่ ต้องแปรงให้บ่อยๆ นะคะ',
+    '🐾 <strong>รู้ไหมคะ?</strong> แมวมีกระดูกมากกว่ามนุษย์ถึง 30 ชิ้น จึงยืดหยุ่นได้มากค่ะ',
+    '🐶 <strong>รู้ไหมคะ?</strong> หมาทุกตัวมีลายจมูกเป็นเอกลักษณ์เฉพาะตัว เหมือนลายนิ้วมือเราเลย!',
+  ];
+  const factEl = document.getElementById('e404Fact');
+  factEl.innerHTML = facts[Math.floor(Math.random() * facts.length)];
+})();
+</script>
+
+</body>
+</html>

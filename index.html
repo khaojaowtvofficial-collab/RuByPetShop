@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruby Pet Shop — อาหารและของเล่นสำหรับน้องหมาแมว</title>
+  <meta name="description" content="Ruby Pet Shop ร้านอาหารและของเล่นหมาแมวคุณภาพดี ส่งเร็ว ราคาถูก" />
+  <!-- Open Graph / Social -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="Ruby Pet Shop" />
+  <meta property="og:url"         content="https://rubypetshop.com/" />
+  <meta property="og:title"       content="Ruby Pet Shop — อาหารและของเล่นสำหรับน้องหมาแมว" />
+  <meta property="og:description" content="คัดสรรอาหารคุณภาพ ของเล่นปลอดภัย ส่งเร็วถึงบ้าน ราคาเป็นมิตร ตรวจสอบได้ทุกชิ้น 🐶🐱" />
+  <meta property="og:image"       content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Ruby Pet Shop — อาหารและของเล่นสำหรับน้องหมาแมว" />
+  <meta name="twitter:description" content="คัดสรรอาหารคุณภาพ ของเล่นปลอดภัย ส่งเร็วถึงบ้าน ราคาเป็นมิตร 🐶🐱" />
+  <meta name="twitter:image"       content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+
+      <a href="#" class="logo">
+        <span class="logo__icon">🐾</span>
+        <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="shop.html">🛍️ ร้านค้า</a>
+        <a href="#categories">หมวดหมู่</a>
+        <a href="#bestsellers">สินค้าขายดี</a>
+        <a href="#blog">Pet Care Tips</a>
+        <a href="#contact">ติดต่อเรา</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="btn-icon" id="searchToggle" aria-label="ค้นหา">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="btn-icon cart-btn" id="wishlistNavBtn" aria-label="รายการโปรด">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="cart-badge" id="wishlistCount" style="display:none">0</span>
+        </button>
+        <button class="btn-icon cart-btn" id="cartBtn" aria-label="ตะกร้า">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartCount">3</span>
+        </button>
+
+        <!-- AUTH AREA -->
+        <div class="auth-area" id="authArea">
+          <!-- Guest: Login Button -->
+          <button class="btn btn-primary" id="loginBtn" style="padding:10px 20px;font-size:14px">
+            เข้าสู่ระบบ
+          </button>
+          <!-- LoggedIn: User Avatar Dropdown (hidden by default) -->
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-avatar-btn" id="userAvatarBtn">
+              <img src="" alt="avatar" class="user-avatar" id="userAvatar" />
+              <span class="user-name" id="userName"></span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="user-dropdown" id="userDropdown">
+              <div class="user-dropdown__header" id="dropdownHeader"></div>
+              <hr class="user-dropdown__divider"/>
+              <a href="#" class="user-dropdown__item" id="myOrdersLink">
+                📦 <span>คำสั่งซื้อของฉัน</span>
+              </a>
+              <a href="#" class="user-dropdown__item" id="wishlistLink">
+                ❤️ <span>รายการโปรด</span>
+              </a>
+              <a href="profile.html" class="user-dropdown__item">
+                👤 <span>แก้ไขโปรไฟล์</span>
+              </a>
+              <a href="admin.html" class="user-dropdown__item user-dropdown__item--admin" id="adminLink" style="display:none">
+                ⚙️ <span>Admin Dashboard</span>
+              </a>
+              <hr class="user-dropdown__divider"/>
+              <button class="user-dropdown__item user-dropdown__item--logout" id="logoutBtn">
+                🚪 <span>ออกจากระบบ</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="เมนู">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar">
+      <div class="container">
+        <div class="search-bar__inner">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="ค้นหาอาหาร ของเล่น ยี่ห้อ หรือหมวดหมู่..." class="search-input" id="searchInput" autocomplete="off" spellcheck="false"/>
+          <button class="search-clear" id="searchClear" style="display:none">✕</button>
+          <button class="search-close" id="searchClose">ปิด</button>
+        </div>
+
+        <!-- Search Results Panel -->
+        <div class="search-results" id="searchResults">
+
+          <!-- Default panel (no query) -->
+          <div class="search-panel search-panel--default" id="searchPanelDefault">
+            <div class="search-section">
+              <div class="search-section__label">
+                <span>🕐 ค้นหาล่าสุด</span>
+                <button class="search-clear-history" id="clearHistory">ล้างทั้งหมด</button>
+              </div>
+              <div class="search-recent-list" id="searchRecentList">
+                <span class="search-no-history">ยังไม่มีประวัติการค้นหา</span>
+              </div>
+            </div>
+            <div class="search-section">
+              <div class="search-section__label">🔥 ยอดนิยม</div>
+              <div class="search-trending">
+                <span class="search-tag" data-query="Royal Canin">Royal Canin</span>
+                <span class="search-tag" data-query="อาหารแมว">อาหารแมว</span>
+                <span class="search-tag" data-query="ของเล่นหมา">ของเล่นหมา</span>
+                <span class="search-tag" data-query="Whiskas">Whiskas</span>
+                <span class="search-tag" data-query="Kong">Kong</span>
+                <span class="search-tag" data-query="ขนมสุนัข">ขนมสุนัข</span>
+              </div>
+            </div>
+            <div class="search-section">
+              <div class="search-section__label">📂 หมวดหมู่</div>
+              <div class="search-categories">
+                <button class="search-cat-chip" data-cat="dog-food">🐶 อาหารหมา</button>
+                <button class="search-cat-chip" data-cat="cat-food">🐱 อาหารแมว</button>
+                <button class="search-cat-chip" data-cat="dog-toy">🦴 ของเล่นหมา</button>
+                <button class="search-cat-chip" data-cat="cat-toy">🧶 ของเล่นแมว</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live results panel -->
+          <div class="search-panel search-panel--results" id="searchPanelResults" style="display:none">
+            <div class="search-result-header" id="searchResultHeader"></div>
+            <div class="search-result-list" id="searchResultList"></div>
+            <div class="search-result-footer" id="searchResultFooter"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero__inner">
+
+      <div class="hero__content">
+        <span class="hero__tag">🐾 ร้านสัตว์เลี้ยงที่รักน้องเหมือนคุณ</span>
+        <h1 class="hero__title">
+          อาหารดี ของเล่นโดน<br/>
+          <span class="text-orange">เพื่อเพื่อนซน</span>ที่รัก
+        </h1>
+        <p class="hero__desc">
+          คัดสรรอาหารคุณภาพ ของเล่นปลอดภัย ส่งเร็วถึงบ้าน<br/>
+          เพราะน้องสมควรได้ดีที่สุด 🐶🐱
+        </p>
+        <div class="hero__ctas">
+          <a href="#bestsellers" class="btn btn-primary btn-lg">
+            ช้อปเลย &nbsp;→
+          </a>
+          <a href="#categories" class="btn btn-outline btn-lg">
+            ดูหมวดหมู่
+          </a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <strong>12,000+</strong>
+            <span>ลูกค้าที่รัก</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <strong>500+</strong>
+            <span>สินค้าคัดสรร</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <strong>4.9 ★</strong>
+            <span>คะแนนเฉลี่ย</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__blob"></div>
+        <div class="hero__img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80"
+            alt="น้องหมาน่ารัก"
+            class="hero__img"
+          />
+          <!-- Floating Cards -->
+          <div class="float-card float-card--top">
+            <span class="float-card__icon">⚡</span>
+            <div>
+              <strong>ส่งเร็ว</strong>
+              <small>ภายใน 1-2 วัน</small>
+            </div>
+          </div>
+          <div class="float-card float-card--bottom">
+            <span class="float-card__icon">✅</span>
+            <div>
+              <strong>ของแท้ 100%</strong>
+              <small>รับประกันทุกชิ้น</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST BANNER ===== -->
+  <section class="trust-banner">
+    <div class="container trust-banner__grid">
+      <div class="trust-item">
+        <span class="trust-item__icon">🚀</span>
+        <div>
+          <strong>ส่งเร็วทุกวัน</strong>
+          <p>Flash / Kerry / J&T</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">🛡️</span>
+        <div>
+          <strong>ของแท้ 100%</strong>
+          <p>รับประกันทุกชิ้น</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">↩️</span>
+        <div>
+          <strong>คืนง่าย 7 วัน</strong>
+          <p>ไม่ถามเยอะ</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">💬</span>
+        <div>
+          <strong>Line OA พร้อมตอบ</strong>
+          <p>ทุกวัน 8:00–22:00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FLASH SALE BANNER ===== -->
+  <section class="flash-sale" id="flashSale">
+    <div class="container">
+      <div class="flash-sale__inner">
+
+        <!-- Left: label + countdown -->
+        <div class="flash-sale__left">
+          <div class="flash-sale__tag">⚡ Flash Sale</div>
+          <div class="flash-sale__title">ลดพิเศษวันนี้เท่านั้น!</div>
+          <div class="flash-sale__timer-wrap">
+            <span class="flash-sale__timer-label">สิ้นสุดใน</span>
+            <div class="flash-sale__digits">
+              <div class="flash-digit" id="fsHours">00</div>
+              <span class="flash-sep">:</span>
+              <div class="flash-digit" id="fsMinutes">00</div>
+              <span class="flash-sep">:</span>
+              <div class="flash-digit" id="fsSeconds">00</div>
+            </div>
+            <div class="flash-sale__digit-labels">
+              <span>ชั่วโมง</span><span></span><span>นาที</span><span></span><span>วินาที</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: flash deal cards -->
+        <div class="flash-sale__deals">
+
+          <div class="flash-deal">
+            <a href="product.html?id=P001">
+              <img src="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=200&q=80" alt="Royal Canin"/>
+            </a>
+            <div class="flash-deal__info">
+              <div class="flash-deal__name">Royal Canin 15kg</div>
+              <div class="flash-deal__prices">
+                <span class="flash-deal__new">฿ 990</span>
+                <span class="flash-deal__old">฿ 1,290</span>
+              </div>
+              <div class="flash-deal__bar-wrap">
+                <div class="flash-deal__bar" style="width:72%"></div>
+              </div>
+              <div class="flash-deal__sold">เหลือเพียง 13 ชิ้น</div>
+            </div>
+          </div>
+
+          <div class="flash-deal">
+            <a href="product.html?id=P004">
+              <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=200&q=80" alt="Kong"/>
+            </a>
+            <div class="flash-deal__info">
+              <div class="flash-deal__name">Kong Classic Toy</div>
+              <div class="flash-deal__prices">
+                <span class="flash-deal__new">฿ 159</span>
+                <span class="flash-deal__old">฿ 220</span>
+              </div>
+              <div class="flash-deal__bar-wrap">
+                <div class="flash-deal__bar" style="width:88%"></div>
+              </div>
+              <div class="flash-deal__sold">เหลือเพียง 6 ชิ้น</div>
+            </div>
+          </div>
+
+          <div class="flash-deal">
+            <a href="product.html?id=P006">
+              <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=200&q=80" alt="Whiskas"/>
+            </a>
+            <div class="flash-deal__info">
+              <div class="flash-deal__name">Whiskas Pouch 24 ซอง</div>
+              <div class="flash-deal__prices">
+                <span class="flash-deal__new">฿ 199</span>
+                <span class="flash-deal__old">฿ 280</span>
+              </div>
+              <div class="flash-deal__bar-wrap">
+                <div class="flash-deal__bar" style="width:55%"></div>
+              </div>
+              <div class="flash-deal__sold">เหลือเพียง 22 ชิ้น</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">เลือกช้อปตามหมวดหมู่</h2>
+        <p class="section__sub">ครบทุกอย่างสำหรับน้อง ในที่เดียว</p>
+      </div>
+
+      <div class="categories__grid">
+
+        <a href="#bestsellers" class="cat-card cat-card--dog footer-cat-link" data-filter="dog">
+          <div class="cat-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=400&q=80" alt="หมา" />
+          </div>
+          <div class="cat-card__body">
+            <span class="cat-card__emoji">🐶</span>
+            <h3>น้องหมา</h3>
+            <p>128 สินค้า</p>
+          </div>
+        </a>
+
+        <a href="#bestsellers" class="cat-card cat-card--cat footer-cat-link" data-filter="cat">
+          <div class="cat-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&q=80" alt="แมว" />
+          </div>
+          <div class="cat-card__body">
+            <span class="cat-card__emoji">🐱</span>
+            <h3>น้องแมว</h3>
+            <p>96 สินค้า</p>
+          </div>
+        </a>
+
+        <a href="#bestsellers" class="cat-card cat-card--food footer-cat-link" data-filter="food">
+          <div class="cat-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&q=80" alt="อาหาร" />
+          </div>
+          <div class="cat-card__body">
+            <span class="cat-card__emoji">🍖</span>
+            <h3>อาหาร & ขนม</h3>
+            <p>215 สินค้า</p>
+          </div>
+        </a>
+
+        <a href="#bestsellers" class="cat-card cat-card--toy footer-cat-link" data-filter="toy">
+          <div class="cat-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&q=80" alt="ของเล่น" />
+          </div>
+          <div class="cat-card__body">
+            <span class="cat-card__emoji">🎾</span>
+            <h3>ของเล่น</h3>
+            <p>89 สินค้า</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BEST SELLERS ===== -->
+  <section class="section section--gray" id="bestsellers">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">สินค้าขายดี 🔥</h2>
+        <p class="section__sub">คนซื้อเยอะ น้องชอบแน่นอน</p>
+        <div class="product-filters">
+          <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+          <button class="filter-btn" data-filter="dog">หมา</button>
+          <button class="filter-btn" data-filter="cat">แมว</button>
+          <button class="filter-btn" data-filter="food">อาหาร</button>
+          <button class="filter-btn" data-filter="toy">ของเล่น</button>
+        </div>
+      </div>
+
+      <div class="products__grid" id="productsGrid">
+
+        <!-- Product 1 -->
+        <div class="product-card" data-category="dog food"
+          data-qv-id="P001" data-qv-name="Royal Canin Adult 15kg อาหารสุนัขพันธุ์ใหญ่"
+          data-qv-brand="Royal Canin" data-qv-price="1290" data-qv-original="1590"
+          data-qv-img="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=700&q=80"
+          data-qv-rating="4.9" data-qv-count="248"
+          data-qv-desc="สูตรเฉพาะสำหรับสุนัขพันธุ์ใหญ่ อายุ 15 เดือนขึ้นไป บำรุงข้อต่อ กระดูก และกล้ามเนื้อ">
+          <div class="product-card__img-wrap">
+            <a href="product.html?id=P001"><img src="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=400&q=80" alt="Royal Canin" /></a>
+            <span class="badge badge--hot">ขายดี</span>
+            <button class="btn-wishlist" data-pid="P001" data-name="Royal Canin Adult 15kg" data-price="1290" data-img="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">Royal Canin</span>
+            <h3 class="product-card__name"><a href="product.html?id=P001" style="color:inherit">อาหารสุนัขพันธุ์ใหญ่ Adult 15kg</a></h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(248)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 1,290</span>
+              <span class="price-original">฿ 1,590</span>
+              <span class="badge badge--sale">-19%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P001" data-name="Royal Canin Adult 15kg" data-price="1290" data-img="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card" data-category="cat food"
+          data-qv-id="P002" data-qv-name="Whiskas อาหารแมวรสปลาแซลมอน 1.2kg"
+          data-qv-brand="Whiskas" data-qv-price="299" data-qv-original=""
+          data-qv-img="https://images.unsplash.com/photo-1548366086-7f1b76106622?w=700&q=80"
+          data-qv-rating="4.8" data-qv-count="187"
+          data-qv-desc="อาหารแมวโต รสปลาแซลมอนสดใหม่ อุดมด้วยโปรตีนและโอเมก้า 3 บำรุงขนและผิวหนัง">
+          <div class="product-card__img-wrap">
+            <a href="product.html?id=P002"><img src="https://images.unsplash.com/photo-1548366086-7f1b76106622?w=400&q=80" alt="Whiskas" /></a>
+            <span class="badge badge--new">ใหม่</span>
+            <button class="btn-wishlist" data-pid="P002" data-name="Whiskas ปลาแซลมอน 1.2kg" data-price="299" data-img="https://images.unsplash.com/photo-1548366086-7f1b76106622?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">Whiskas</span>
+            <h3 class="product-card__name"><a href="product.html?id=P002" style="color:inherit">อาหารแมวรสปลาแซลมอน 1.2kg</a></h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(187)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 299</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P002" data-name="Whiskas ปลาแซลมอน 1.2kg" data-price="299" data-img="https://images.unsplash.com/photo-1548366086-7f1b76106622?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card" data-category="dog toy"
+          data-qv-id="P003" data-qv-name="Kong Classic ของเล่นยางกรอก ขนาด M"
+          data-qv-brand="Kong" data-qv-price="490" data-qv-original="590"
+          data-qv-img="https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=700&q=80"
+          data-qv-rating="4.7" data-qv-count="92"
+          data-qv-desc="ของเล่นยางธรรมชาติทนทาน ใส่ขนมได้ กระตุ้นสมองน้องหมา เหมาะกับสุนัขขนาดกลาง">
+          <div class="product-card__img-wrap">
+            <a href="product.html?id=P003"><img src="https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=400&q=80" alt="ของเล่นหมา" /></a>
+            <span class="badge badge--hot">ขายดี</span>
+            <button class="btn-wishlist" data-pid="P003" data-name="Kong Classic M" data-price="490" data-img="https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">Kong</span>
+            <h3 class="product-card__name"><a href="product.html?id=P003" style="color:inherit">ของเล่นยางกรอก Classic Kong ขนาด M</a></h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(92)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 490</span>
+              <span class="price-original">฿ 590</span>
+              <span class="badge badge--sale">-17%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P003" data-name="Kong Classic M" data-price="490" data-img="https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card" data-category="cat toy"
+          data-qv-id="P004" data-qv-name="ของเล่นไม้ตกปลาแมวพร้อมขนนก"
+          data-qv-brand="PetDreamHouse" data-qv-price="189" data-qv-original=""
+          data-qv-img="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=700&q=80"
+          data-qv-rating="4.9" data-qv-count="321"
+          data-qv-desc="ไม้ตกปลาที่แมวต้านทานไม่ได้! ขนนกธรรมชาติ ด้ามยาว 60 ซม. กระตุ้นสัญชาตญาณนักล่า">
+          <div class="product-card__img-wrap">
+            <a href="product.html?id=P004"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&q=80" alt="ของเล่นแมว" /></a>
+            <button class="btn-wishlist" data-pid="P004" data-name="ไม้ตกปลาแมวขนนก" data-price="189" data-img="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">PetDreamHouse</span>
+            <h3 class="product-card__name"><a href="product.html?id=P004" style="color:inherit">ของเล่นไม้ตกปลาแมวพร้อมขนนก</a></h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(321)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 189</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P004" data-name="ไม้ตกปลาแมวขนนก" data-price="189" data-img="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card" data-category="dog food"
+          data-qv-id="P005" data-qv-name="Pedigree Dentastix ขนมกัดฟัน 7 ชิ้น"
+          data-qv-brand="Pedigree" data-qv-price="149" data-qv-original=""
+          data-qv-img="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=700&q=80"
+          data-qv-rating="4.5" data-qv-count="156"
+          data-qv-desc="ขนมแท่งลดหินปูนและกลิ่นปาก สูตร X-shape ขัดฟันได้ทุกซี่ สำหรับสุนัขขนาดกลาง-ใหญ่">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=400&q=80" alt="ขนมหมา" />
+            <span class="badge badge--new">ใหม่</span>
+            <button class="btn-wishlist" data-pid="P005" data-name="Dentastix 7 ชิ้น" data-price="149" data-img="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">Pedigree</span>
+            <h3 class="product-card__name">ขนมหมากัดสะอาดฟัน Dentastix 7 ชิ้น</h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(156)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 149</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P005" data-name="Dentastix 7 ชิ้น" data-price="149" data-img="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card" data-category="cat food"
+          data-qv-id="P006" data-qv-name="Sheba อาหารแมวเปียก แพ็ค 12 ถุง"
+          data-qv-brand="Sheba" data-qv-price="259" data-qv-original="320"
+          data-qv-img="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=700&q=80"
+          data-qv-rating="4.9" data-qv-count="409"
+          data-qv-desc="อาหารเปียกสูตรพรีเมียม เนื้อปลาทูน่าและปูอัด ไม่มีสีสังเคราะห์ เหมาะสำหรับแมวทุกสายพันธุ์">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&q=80" alt="อาหารแมวเปียก" />
+            <span class="badge badge--hot">ขายดี</span>
+            <button class="btn-wishlist" data-pid="P006" data-name="Sheba แพ็ค 12" data-price="259" data-img="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">Sheba</span>
+            <h3 class="product-card__name">อาหารแมวเปียก Sheba แพ็ค 12 ถุง</h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(409)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 259</span>
+              <span class="price-original">฿ 320</span>
+              <span class="badge badge--sale">-19%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P006" data-name="Sheba แพ็ค 12" data-price="259" data-img="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product-card" data-category="dog toy"
+          data-qv-id="P007" data-qv-name="Chuckit! Ultra Ball ลูกบอลเทนนิส 2 ลูก"
+          data-qv-brand="Chuckit!" data-qv-price="350" data-qv-original=""
+          data-qv-img="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=700&q=80"
+          data-qv-rating="4.6" data-qv-count="74"
+          data-qv-desc="ลูกบอลยางพิเศษทนกว่าลูกเทนนิสทั่วไป 2.5 เท่า ลอยน้ำได้ เหมาะสำหรับ fetch ในสวนหรือสระ">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80" alt="ลูกบอลหมา" />
+            <button class="btn-wishlist" data-pid="P007" data-name="Chuckit Ultra Ball 2 ลูก" data-price="350" data-img="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">Chuckit!</span>
+            <h3 class="product-card__name">ลูกบอลเทนนิสหมาพิเศษ Ultra Ball 2 ลูก</h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(74)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 350</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P007" data-name="Chuckit Ultra Ball 2 ลูก" data-price="350" data-img="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product-card" data-category="cat toy"
+          data-qv-id="P008" data-qv-name="CatLife บ้านแมวกระดาษลับเล็บพร้อมลูกบอล"
+          data-qv-brand="CatLife" data-qv-price="599" data-qv-original="750"
+          data-qv-img="https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=700&q=80"
+          data-qv-rating="4.9" data-qv-count="203"
+          data-qv-desc="บ้านกระดาษ Corrugated ลับเล็บได้ มาพร้อมลูกบอลแคทนิป ออกแบบเพื่อแมวโดยเฉพาะ ทำความสะอาดง่าย">
+          <div class="product-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=400&q=80" alt="บ้านแมว" />
+            <span class="badge badge--new">ใหม่</span>
+            <button class="btn-wishlist" data-pid="P008" data-name="บ้านแมวลับเล็บ" data-price="599" data-img="https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=400&q=80" aria-label="บันทึก">♡</button>
+            <button class="btn-quickview" aria-label="ดูเร็ว">👁</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand">CatLife</span>
+            <h3 class="product-card__name">บ้านแมวกระดาษลับเล็บพร้อมลูกบอล</h3>
+            <div class="product-card__rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(203)</span>
+            </div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 599</span>
+              <span class="price-original">฿ 750</span>
+              <span class="badge badge--sale">-20%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="P008" data-name="บ้านแมวลับเล็บ" data-price="599" data-img="https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section__footer">
+        <a href="#" class="btn btn-outline btn-lg">ดูสินค้าทั้งหมด →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROMO BANNER ===== -->
+  <section class="promo-banner">
+    <div class="container promo-banner__inner">
+      <div class="promo-banner__content">
+        <span class="promo-banner__tag">🎉 โปรโมชั่นพิเศษ</span>
+        <h2>สมาชิก Ruby Club<br/><span>ลดทันที 15%</span> ทุกออเดอร์</h2>
+        <p>สมัครฟรี! ไม่มีค่าใช้จ่าย รับส่วนลดทุกครั้งที่ช้อป</p>
+        <a href="#" class="btn btn-white btn-lg" id="promoRegisterBtn">สมัครเลย ฟรี!</a>
+      </div>
+      <div class="promo-banner__img">
+        <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&q=80" alt="หมาแมว" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">น้องและเจ้าของบอกว่า... 💬</h2>
+        <p class="section__sub">รีวิวจริงจากลูกค้าที่รัก</p>
+      </div>
+
+      <div class="reviews__grid">
+
+        <div class="review-card">
+          <div class="review-card__header">
+            <div class="reviewer-avatar">🐶</div>
+            <div>
+              <strong>คุณมาลี + น้องโกลด์</strong>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-card__text">
+            "น้องโกลด์ชอบ Royal Canin มากเลยค่ะ กินหมดทุกมื้อ ส่งเร็วมาก
+            สั่งตอนเช้าได้ของตอนเย็นเลย แพ็คมาดีไม่บุบเลย จะซื้อซ้ำแน่นอน!"
+          </p>
+          <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=200&q=80" alt="น้องโกลด์" class="review-card__pet-img" />
+        </div>
+
+        <div class="review-card">
+          <div class="review-card__header">
+            <div class="reviewer-avatar">🐱</div>
+            <div>
+              <strong>คุณต้น + น้องมะม่วง</strong>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-card__text">
+            "ไม้ตกปลาตัวนี้น้องมะม่วงเล่นทุกวันเลยครับ คุ้มมากๆ
+            ราคาถูก คุณภาพดี ร้านนี้ดีทั้งสินค้าและบริการ Line ตอบเร็วมาก"
+          </p>
+          <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=200&q=80" alt="น้องมะม่วง" class="review-card__pet-img" />
+        </div>
+
+        <div class="review-card">
+          <div class="review-card__header">
+            <div class="reviewer-avatar">🐕</div>
+            <div>
+              <strong>คุณนิด + น้องลัคกี้</strong>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-card__text">
+            "สั่งขนม Dentastix ให้น้องลัคกี้ เขากัดทุกวันเลยค่ะ ฟันสะอาดขึ้นเห็นได้ชัด
+            Ruby Pet เชื่อถือได้มาก ซื้อมาหลายครั้งแล้ว ไม่เคยผิดหวัง!"
+          </p>
+          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&q=80" alt="น้องลัคกี้" class="review-card__pet-img" />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RECENTLY VIEWED (home) ===== -->
+  <section class="section rv-home-section" id="recentlyViewedHome" style="display:none">
+    <div class="container">
+      <div class="section__header" style="margin-bottom:20px">
+        <h2 class="section__title">🕐 เพิ่งดูล่าสุด</h2>
+        <p class="section__sub">สินค้าที่คุณเคยดูไป</p>
+      </div>
+      <div class="rv-strip" id="rvHomeStrip"></div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG ===== -->
+  <section class="section section--gray" id="blog">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Pet Care Tips 📖</h2>
+        <p class="section__sub">ความรู้ดีๆ เพื่อน้องที่รัก</p>
+      </div>
+
+      <div class="blog__grid">
+
+        <a href="#" class="blog-card">
+          <div class="blog-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80" alt="อาหารหมา" />
+            <span class="blog-card__tag">🐶 น้องหมา</span>
+          </div>
+          <div class="blog-card__body">
+            <h3>อาหารหมา 5 ยี่ห้อที่สัตวแพทย์แนะนำปี 2026</h3>
+            <p>เลือกอาหารหมายังไงให้ถูกหลักโภชนาการ น้องแข็งแรง ขนสวย...</p>
+            <span class="blog-card__date">15 พ.ค. 2026</span>
+          </div>
+        </a>
+
+        <a href="#" class="blog-card">
+          <div class="blog-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80" alt="แมว" />
+            <span class="blog-card__tag">🐱 น้องแมว</span>
+          </div>
+          <div class="blog-card__body">
+            <h3>ทำไมแมวถึงไม่กินอาหาร? วิธีแก้ที่ได้ผลจริง</h3>
+            <p>หลายคนเจอปัญหาแมวเบื่ออาหาร มาดูสาเหตุและวิธีจัดการ...</p>
+            <span class="blog-card__date">10 พ.ค. 2026</span>
+          </div>
+        </a>
+
+        <a href="#" class="blog-card">
+          <div class="blog-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=500&q=80" alt="ของเล่น" />
+            <span class="blog-card__tag">🎾 ของเล่น</span>
+          </div>
+          <div class="blog-card__body">
+            <h3>ของเล่นแบบไหนดีที่สุดสำหรับหมาแต่ละสายพันธุ์?</h3>
+            <p>ของเล่นที่ดีช่วยให้น้องออกกำลัง ไม่เบื่อ และไม่ทำลายของในบ้าน...</p>
+            <span class="blog-card__date">5 พ.ค. 2026</span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="section__footer">
+        <a href="#" class="btn btn-outline btn-lg">อ่านบทความทั้งหมด →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contact">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <div class="logo" style="color:white">
+          <span class="logo__icon">🐾</span>
+          <span class="logo__text">Ruby<span style="color:#FF7043"> Pet</span></span>
+        </div>
+        <p>ร้านอาหารและของเล่นสัตว์เลี้ยง<br/>คุณภาพดี ราคาเป็นมิตร ส่งเร็ว</p>
+        <div class="footer__socials">
+          <a href="#" class="social-btn" aria-label="Facebook">📘</a>
+          <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn" aria-label="TikTok">🎵</a>
+          <a href="#" class="social-btn social-btn--line" aria-label="Line">💬</a>
+        </div>
+      </div>
+
+      <div class="footer__links">
+        <h4>สินค้า</h4>
+        <ul>
+          <li><a href="#bestsellers" class="footer-cat-link" data-filter="dog">อาหารหมา</a></li>
+          <li><a href="#bestsellers" class="footer-cat-link" data-filter="cat">อาหารแมว</a></li>
+          <li><a href="#bestsellers" class="footer-cat-link" data-filter="toy">ของเล่นหมา</a></li>
+          <li><a href="#bestsellers" class="footer-cat-link" data-filter="toy">ของเล่นแมว</a></li>
+          <li><a href="#bestsellers" class="footer-cat-link" data-filter="food">ขนมสัตว์เลี้ยง</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__links">
+        <h4>ข้อมูล</h4>
+        <ul>
+          <li><a href="#">เกี่ยวกับเรา</a></li>
+          <li><a href="#">นโยบายการคืนสินค้า</a></li>
+          <li><a href="#">วิธีสั่งซื้อ</a></li>
+          <li><a href="#">ติดตามออเดอร์</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__newsletter">
+        <h4>รับข่าวสารและโปรโมชั่น</h4>
+        <p>ไม่พลาดทุกดีล สมัครรับ newsletter เลย</p>
+        <div class="newsletter-form">
+          <input type="email" id="newsletterEmail" placeholder="อีเมลของคุณ" />
+          <button class="btn btn-primary" id="newsletterBtn">สมัคร</button>
+        </div>
+        <div class="footer__payment">
+          <span>💳</span><span>📱</span><span>🏦</span><span>💵</span>
+          <small>บัตรเครดิต | PromptPay | โอน | COD</small>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container">
+        <p>© 2026 Ruby Pet Shop — Made with ❤️ for น้องทุกตัว</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== LINE FLOAT BUTTON ===== -->
+  <a href="#" class="line-float" aria-label="ติดต่อ Line OA">
+    <span>💬</span>
+    <span class="line-float__label">Line OA</span>
+  </a>
+
+  <!-- ===== WISHLIST SIDEBAR ===== -->
+  <div class="cart-overlay" id="wishlistOverlay"></div>
+  <aside class="cart-sidebar wishlist-sidebar" id="wishlistSidebar">
+    <div class="cart-sidebar__header">
+      <h3>❤️ รายการโปรด</h3>
+      <button class="cart-close" id="wishlistClose">✕</button>
+    </div>
+    <div class="cart-sidebar__body" id="wishlistItems"></div>
+    <div class="cart-sidebar__footer" id="wishlistFooter">
+      <button class="btn btn-primary btn-block btn-lg" id="wishlistAddAllBtn">🛒 เพิ่มทั้งหมดลงตะกร้า</button>
+      <p class="cart-note">❤️ บันทึกสินค้าที่ชอบไว้ดูทีหลัง</p>
+    </div>
+  </aside>
+
+  <!-- ===== CART SIDEBAR ===== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar__header">
+      <h3>🛒 ตะกร้าสินค้า</h3>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-sidebar__body" id="cartItems">
+      <!-- items injected by JS -->
+    </div>
+    <div class="cart-sidebar__footer">
+      <div class="cart-total">
+        <span>รวมทั้งหมด</span>
+        <strong id="cartTotal">฿ 0</strong>
+      </div>
+      <button class="btn btn-primary btn-block btn-lg" id="checkoutBtn">ดำเนินการสั่งซื้อ →</button>
+      <p class="cart-note">🚀 ส่งฟรีเมื่อซื้อครบ ฿ 500</p>
+    </div>
+  </aside>
+
+  <!-- ===== QUICK VIEW MODAL ===== -->
+  <div class="qv-overlay" id="qvOverlay">
+    <div class="qv-modal" id="qvModal" role="dialog" aria-label="ดูสินค้าเร็ว">
+      <button class="qv-close" id="qvClose" aria-label="ปิด">✕</button>
+      <div class="qv-inner">
+        <!-- Image side -->
+        <div class="qv-img-side">
+          <img id="qvImg" src="" alt="" class="qv-img"/>
+          <div class="qv-badges" id="qvBadges"></div>
+        </div>
+        <!-- Info side -->
+        <div class="qv-info-side">
+          <div class="qv-brand" id="qvBrand"></div>
+          <h2 class="qv-name" id="qvName"></h2>
+          <div class="qv-rating-row">
+            <span class="stars qv-stars" id="qvStars"></span>
+            <span class="qv-rating-val" id="qvRatingVal"></span>
+            <span class="qv-rating-count" id="qvRatingCount"></span>
+          </div>
+          <div class="qv-price-row">
+            <span class="price qv-price" id="qvPrice"></span>
+            <span class="price-original qv-original" id="qvOriginal" style="display:none"></span>
+            <span class="badge badge--sale qv-sale-badge" id="qvSaleBadge" style="display:none"></span>
+          </div>
+          <p class="qv-desc" id="qvDesc"></p>
+          <div class="qv-qty-row">
+            <button class="qty-btn" id="qvMinus">−</button>
+            <span class="qty-display" id="qvQty">1</span>
+            <button class="qty-btn" id="qvPlus">+</button>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg qv-add-cart-btn" id="qvAddCart">
+            🛒 หยิบใส่ตะกร้า
+          </button>
+          <a href="#" class="qv-full-link" id="qvFullLink">ดูรายละเอียดเพิ่มเติม →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ===== LOGIN MODAL ===== -->
+  <div class="modal-overlay" id="loginOverlay">
+    <div class="modal login-modal" id="loginModal">
+      <button class="modal-close" id="loginModalClose">✕</button>
+
+      <!-- ===== MODAL TABS ===== -->
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login">เข้าสู่ระบบ</button>
+        <button class="modal-tab" data-tab="register">สมัครสมาชิก</button>
+        <div class="modal-tab-slider" id="modalTabSlider"></div>
+      </div>
+
+      <!-- ===== LOGIN PANEL ===== -->
+      <div class="modal-panel active" id="panelLogin">
+
+        <div class="login-modal__header">
+          <div class="login-modal__logo">🐾</div>
+          <h2>ยินดีต้อนรับสู่<br/><span>Ruby Pet Shop</span></h2>
+          <p>เข้าสู่ระบบเพื่อช้อปได้สะดวกยิ่งขึ้น</p>
+        </div>
+
+        <!-- Social Login -->
+        <div class="social-login">
+          <button class="social-login-btn social-login-btn--google" id="googleLoginBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            เข้าสู่ระบบด้วย Google
+          </button>
+          <button class="social-login-btn social-login-btn--facebook" id="facebookLoginBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            เข้าสู่ระบบด้วย Facebook
+          </button>
+        </div>
+
+        <div class="login-divider"><span>หรือเข้าสู่ระบบด้วยอีเมล</span></div>
+
+        <!-- Email Login Form -->
+        <form class="email-login-form" id="emailLoginForm" novalidate>
+          <div class="form-group">
+            <label>อีเมล</label>
+            <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email"/>
+            <span class="field-err" id="err-loginEmail"></span>
+          </div>
+          <div class="form-group">
+            <label>รหัสผ่าน</label>
+            <div class="password-wrap">
+              <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"/>
+              <button type="button" class="toggle-password" id="togglePwd">👁</button>
+            </div>
+            <span class="field-err" id="err-loginPassword"></span>
+          </div>
+          <div class="login-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="rememberMe"/>
+              <span>จดจำฉัน</span>
+            </label>
+            <a href="#" class="forgot-link" id="forgotLink">ลืมรหัสผ่าน?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginSubmitBtn">เข้าสู่ระบบ</button>
+        </form>
+
+        <p class="login-register-link">
+          ยังไม่มีบัญชี? <a href="#" id="goRegister">สมัครสมาชิกฟรี →</a>
+        </p>
+
+        <!-- Demo accounts hint -->
+        <div class="demo-accounts">
+          <p>🧪 Demo — คลิกเพื่อ login ทดสอบ:</p>
+          <div class="demo-accounts__btns">
+            <button class="demo-btn" data-role="user">👤 User ทั่วไป</button>
+            <button class="demo-btn" data-role="admin">⚙️ Admin</button>
+          </div>
+        </div>
+
+      </div><!-- end panelLogin -->
+
+      <!-- ===== REGISTER PANEL ===== -->
+      <div class="modal-panel" id="panelRegister">
+
+        <div class="login-modal__header register-header">
+          <div class="login-modal__logo">🎁</div>
+          <h2>สมัครสมาชิกฟรี<br/><span>Ruby Pet Shop</span></h2>
+          <p class="register-perk">รับส่วนลด <strong>10%</strong> สำหรับออเดอร์แรกทันที!</p>
+        </div>
+
+        <form id="registerForm" novalidate>
+
+          <div class="reg-row">
+            <div class="form-group">
+              <label>ชื่อ <span class="req">*</span></label>
+              <input type="text" id="regFirstName" placeholder="ชื่อ" autocomplete="given-name"/>
+              <span class="field-err" id="err-regFirstName"></span>
+            </div>
+            <div class="form-group">
+              <label>นามสกุล <span class="req">*</span></label>
+              <input type="text" id="regLastName" placeholder="นามสกุล" autocomplete="family-name"/>
+              <span class="field-err" id="err-regLastName"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>อีเมล <span class="req">*</span></label>
+            <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email"/>
+            <span class="field-err" id="err-regEmail"></span>
+          </div>
+
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์ <span class="optional-label">(ไม่บังคับ)</span></label>
+            <div class="phone-wrap-modal">
+              <span class="phone-prefix-modal">🇹🇭 +66</span>
+              <input type="tel" id="regPhone" placeholder="8X-XXX-XXXX" maxlength="10" autocomplete="tel"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>รหัสผ่าน <span class="req">*</span></label>
+            <div class="password-wrap">
+              <input type="password" id="regPassword" placeholder="อย่างน้อย 8 ตัวอักษร" autocomplete="new-password"/>
+              <button type="button" class="toggle-password" id="toggleRegPwd">👁</button>
+            </div>
+            <div class="password-strength" id="pwdStrength">
+              <div class="pwd-bars">
+                <div class="pwd-bar-seg" id="pbs1"></div>
+                <div class="pwd-bar-seg" id="pbs2"></div>
+                <div class="pwd-bar-seg" id="pbs3"></div>
+                <div class="pwd-bar-seg" id="pbs4"></div>
+              </div>
+              <span class="pwd-strength-label" id="pwdLabel"></span>
+            </div>
+            <span class="field-err" id="err-regPassword"></span>
+          </div>
+
+          <div class="form-group">
+            <label>ยืนยันรหัสผ่าน <span class="req">*</span></label>
+            <div class="password-wrap">
+              <input type="password" id="regPasswordConfirm" placeholder="พิมพ์รหัสผ่านอีกครั้ง" autocomplete="new-password"/>
+              <button type="button" class="toggle-password" id="toggleRegPwdConf">👁</button>
+            </div>
+            <span class="field-err" id="err-regPasswordConfirm"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label terms-check">
+              <input type="checkbox" id="regTerms"/>
+              <span>ฉันยอมรับ <a href="#" class="text-orange">ข้อกำหนดการใช้งาน</a> และ <a href="#" class="text-orange">นโยบายความเป็นส่วนตัว</a></span>
+            </label>
+            <span class="field-err" id="err-regTerms"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerBtn">
+            🐾 สมัครสมาชิกฟรี
+          </button>
+        </form>
+
+        <p class="login-register-link">
+          มีบัญชีแล้ว? <a href="#" id="goLogin">เข้าสู่ระบบ</a>
+        </p>
+
+      </div><!-- end panelRegister -->
+
+    </div>
+  </div>
+
+  <!-- ===== MY ORDERS MODAL ===== -->
+  <div class="modal-overlay" id="ordersOverlay">
+    <div class="modal orders-modal" id="ordersModal">
+      <div class="orders-modal__header">
+        <h3>📦 คำสั่งซื้อของฉัน</h3>
+        <button class="modal-close" id="ordersModalClose">✕</button>
+      </div>
+
+      <div class="orders-list" id="ordersList">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MOBILE BOTTOM NAV ===== -->
+  <nav class="mobile-nav">
+    <a href="#" class="mobile-nav__item active">
+      <span>🏠</span><small>หน้าแรก</small>
+    </a>
+    <a href="#categories" class="mobile-nav__item">
+      <span>📦</span><small>หมวดหมู่</small>
+    </a>
+    <a href="#" class="mobile-nav__item" id="mobileCart">
+      <span style="position:relative">🛒<span class="cart-badge" style="top:-6px;right:-6px" id="cartCount2">3</span></span>
+      <small>ตะกร้า</small>
+    </a>
+    <a href="#blog" class="mobile-nav__item">
+      <span>📖</span><small>บทความ</small>
+    </a>
+    <a href="#contact" class="mobile-nav__item">
+      <span>👤</span><small>ติดต่อ</small>
+    </a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="app.js"></script>
+  <script src="chat-widget.js"></script>
+  <script src="compare-widget.js"></script>
+</body>
+</html>
