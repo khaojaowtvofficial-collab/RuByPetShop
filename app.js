@@ -181,24 +181,32 @@ function simulateSocialLogin(provider, role = 'user') {
   }, 1200);
 }
 
-googleLoginBtn?.addEventListener('click', () => {
+googleLoginBtn?.addEventListener('click', async () => {
   googleLoginBtn.textContent = '⏳ กำลังเชื่อมต่อ Google...';
   googleLoginBtn.disabled = true;
-  setTimeout(() => {
-    login(MOCK_USERS.user);
-    closeLoginModal();
-    showToast('✅ เข้าสู่ระบบด้วย Google สำเร็จ!');
-  }, 1200);
+  const { error } = await _sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin + '/index.html' }
+  });
+  if (error) {
+    showToast('❌ ไม่สามารถเชื่อมต่อ Google ได้ค่ะ');
+    googleLoginBtn.textContent = 'G  เข้าสู่ระบบด้วย Google';
+    googleLoginBtn.disabled = false;
+  }
 });
 
-facebookLoginBtn?.addEventListener('click', () => {
+facebookLoginBtn?.addEventListener('click', async () => {
   facebookLoginBtn.innerHTML = '⏳ กำลังเชื่อมต่อ Facebook...';
   facebookLoginBtn.disabled = true;
-  setTimeout(() => {
-    login(MOCK_USERS.user);
-    closeLoginModal();
-    showToast('✅ เข้าสู่ระบบด้วย Facebook สำเร็จ!');
-  }, 1200);
+  const { error } = await _sb.auth.signInWithOAuth({
+    provider: 'facebook',
+    options: { redirectTo: window.location.origin + '/index.html' }
+  });
+  if (error) {
+    showToast('❌ ไม่สามารถเชื่อมต่อ Facebook ได้ค่ะ');
+    facebookLoginBtn.innerHTML = 'f  เข้าสู่ระบบด้วย Facebook';
+    facebookLoginBtn.disabled = false;
+  }
 });
 
 /* Email form login — Supabase Auth */
