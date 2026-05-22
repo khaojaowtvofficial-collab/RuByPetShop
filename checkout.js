@@ -547,70 +547,78 @@ function renderConfirmStep() {
   }
 }
 
-// ===== PLACE ORDER =====
+// ===== SEND TO WHATSAPP =====
+// ===== RENDER CONFIRM ITEMS (step 2) =====
+function renderConfirmItems() {
+  const el = document.getElementById('confirmItems');
+  if (!el) return;
+  el.innerHTML = cart.map(i => `
+    <div style="display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0">
+      <img src="${i.img || i.image || ''}" style="width:52px;height:52px;object-fit:cover;border-radius:10px" onerror="this.style.display='none'"/>
+      <div style="flex:1">
+        <div style="font-weight:600;font-size:14px">${i.name}</div>
+        <div style="font-size:13px;color:#888">x${i.qty || 1}</div>
+      </div>
+      <div style="font-weight:700;color:#FF7043">฿${((i.price)*(i.qty||1)).toLocaleString()}</div>
+    </div>
+  `).join('');
+}
+
+// ===== SEND TO WHATSAPP =====
 function placeOrder() {
   const btn = document.getElementById('confirmOrderBtn');
   if (!btn || btn.disabled) return;
 
-  btn.classList.add('loading');
-  btn.textContent = '⏳ กำลังดำเนินการ...';
+  btn.disabled = true;
+  btn.textContent = '⏳ กำลังเปิด WhatsApp...';
 
-  // Place order (async)
-  (async () => {
-    // Generate order ID
-    const orderId = `ORD-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 900) + 100).padStart(3,'0')}${String(Math.floor(Math.random() * 9))}`;
-    const total   = calcTotal();
+  // Build WhatsApp message & redirect
+  (() => {
+    const orderId  = `ORD-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 9000) + 1000)}`;
+    const subtotal = cart.reduce((s, i) => s + (i.price * (i.qty || 1)), 0);
+    const total    = calcTotal();
+
+    // Build message
+    const itemLines = cart.map(i =>
+      `• ${i.name} x${i.qty || 1} — ฿${((i.price) * (i.qty || 1)).toLocaleString()}`
+    ).join('\n');
+
+    const addr = [
+      shippingData.address,
+      shippingData.district,
+      shippingData.province,
+    ].filter(Boolean).join(' ');
+
+    const msg = [
+      `🛍️ คำสั่งซื้อใหม่ — Ruby Pet Shop`,
+      `🔖 เลขที่: ${orderId}`,
+      ``,
+      `📦 รายการสินค้า:`,
+      itemLines,
+      ``,
+      `💰 ยอดสินค้า: ฿${subtotal.toLocaleString()}`,
+      deliveryFee > 0 ? `🚚 ค่าจัดส่ง: ฿${deliveryFee.toLocaleString()}` : `🚚 ส่งฟรี`,
+      couponDiscount > 0 ? `🎫 ส่วนลดคูปอง: -฿${couponDiscount.toLocaleString()}` : null,
+      `💳 ยอดรวม: ฿${total.toLocaleString()}`,
+      ``,
+      `📍 ที่อยู่จัดส่ง:`,
+      `👤 ชื่อ: ${shippingData.name || ''}`,
+      `📞 เบอร์: ${shippingData.phone || ''}`,
+      addr ? `🏠 ที่อยู่: ${addr}` : null,
+      shippingData.note ? `📝 หมายเหตุ: ${shippingData.note}` : null,
+      ``,
+      `กรุณายืนยันออเดอร์และแจ้งช่องทางชำระเงินด้วยนะคะ 🙏`,
+    ].filter(l => l !== null).join('\n');
 
     // Clear cart
     localStorage.removeItem(CART_KEY);
 
-    // Update user points in localStorage
-    try {
-      const user = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
-      if (user) {
-        const earnedPts = Math.floor(total / 100) * 10;
-        user.extraPoints = Math.max(0, (user.extraPoints || 0) - pointsUsed) + earnedPts;
-        if (!Array.isArray(user.orders)) user.orders = [];
-        user.orders.unshift({
-          id: orderId,
-          date: new Date().toLocaleDateString('th-TH', { day:'numeric', month:'short', year:'numeric' }),
-          status: 'pending', total,
-          products: cart.map(i => i.name).join(', '),
-          items: cart.map(i => ({ name: i.name, img: i.img || i.image || '', price: i.price, qty: i.qty || 1 })),
-          workflow: ['pending','paid','preparing','shipped','delivered'],
-        });
-        localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+    // Open WhatsApp
+    const waUrl = `https://wa.me/85620789262​45?text=${encodeURIComponent(msg)}`;
+    // Note: WhatsApp number = +856 20 78926245 (Laos)
+    window.open(waUrl, '_blank');
 
-        /* ── Save to Supabase (fire-and-forget) ── */
-        if (user.id && typeof DB !== 'undefined') {
-          const subtotal = cart.reduce((s, i) => s + (i.price * (i.qty || 1)), 0);
-          DB.saveOrder(user.id, {
-            id:              orderId,
-            status:          'pending',
-            total,
-            subtotal,
-            shipping_fee:    deliveryFee,
-            discount:        couponDiscount,
-            points_used:     pointsUsed,
-            points_earned:   Math.floor(total / 100) * 10,
-            payment_method:  paymentMethod,
-            delivery_name:   deliveryName,
-            shipping_name:   shippingData.name   || '',
-            shipping_phone:  shippingData.phone  || '',
-            shipping_address:`${shippingData.address || ''} ${shippingData.district || ''} ${shippingData.province || ''}`.trim(),
-            shipping_note:   shippingData.note   || '',
-          }, cart.map(i => ({
-            product_id:   String(i.id || ''),
-            product_name: i.name,
-            product_img:  i.img || i.image || '',
-            price:        i.price,
-            qty:          i.qty || 1,
-          }))).catch(err => console.warn('[checkout] Supabase order save failed', err));
-        }
-      }
-    } catch { /* ignore */ }
-
-    // Show success overlay
+    // Show success state
     showSuccess(orderId);
   })();
 }
@@ -800,10 +808,9 @@ function bindEvents() {
       if (!validateShipping()) return;
       collectShippingData();
       renderShippingSummary();
+      renderConfirmItems();
       goToStep(2);
-      initPaymentMethods();
-      initCardFormatting();
-      initPointsSection();
+      renderSummary();
     });
   }
 
@@ -817,26 +824,11 @@ function bindEvents() {
     });
   });
 
-  // ---- Step 2: Go to Step 3 ----
-  const go3Btn = document.getElementById('goToStep3Btn');
-  if (go3Btn) {
-    go3Btn.addEventListener('click', () => {
-      renderConfirmStep();
-      goToStep(3);
-      renderSummary();
-    });
-  }
-
   // ---- Back Buttons ----
   document.querySelectorAll('.co-back-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const target = parseInt(btn.dataset.goto, 10);
       goToStep(target);
-      if (target === 2) {
-        initPaymentMethods();
-        initCardFormatting();
-        initPointsSection();
-      }
     });
   });
 
