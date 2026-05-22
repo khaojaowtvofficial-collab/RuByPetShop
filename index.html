@@ -119,12 +119,14 @@
             <div class="search-section">
               <div class="search-section__label">🔥 ยอดนิยม</div>
               <div class="search-trending">
-                <span class="search-tag" data-query="Royal Canin">Royal Canin</span>
-                <span class="search-tag" data-query="อาหารแมว">อาหารแมว</span>
-                <span class="search-tag" data-query="ของเล่นหมา">ของเล่นหมา</span>
-                <span class="search-tag" data-query="Whiskas">Whiskas</span>
-                <span class="search-tag" data-query="Kong">Kong</span>
-                <span class="search-tag" data-query="ขนมสุนัข">ขนมสุนัข</span>
+                <span class="search-tag" data-query="Royal Canin">🐾 Royal Canin</span>
+                <span class="search-tag" data-query="RTX 4060">💻 RTX 4060</span>
+                <span class="search-tag" data-query="Gundam">🤖 Gundam</span>
+                <span class="search-tag" data-query="Pokemon Card">🃏 Pokemon Card</span>
+                <span class="search-tag" data-query="Keychron">⌨️ Keychron</span>
+                <span class="search-tag" data-query="Whiskas">🐱 Whiskas</span>
+                <span class="search-tag" data-query="Logitech">🖱 Logitech</span>
+                <span class="search-tag" data-query="Figure">🎭 Figure</span>
               </div>
             </div>
             <div class="search-section">
@@ -132,8 +134,10 @@
               <div class="search-categories">
                 <button class="search-cat-chip" data-cat="dog-food">🐶 อาหารหมา</button>
                 <button class="search-cat-chip" data-cat="cat-food">🐱 อาหารแมว</button>
-                <button class="search-cat-chip" data-cat="dog-toy">🦴 ของเล่นหมา</button>
-                <button class="search-cat-chip" data-cat="cat-toy">🧶 ของเล่นแมว</button>
+                <button class="search-cat-chip" data-cat="hardware">⚙️ Hardware</button>
+                <button class="search-cat-chip" data-cat="peripheral">🖱 Peripheral</button>
+                <button class="search-cat-chip" data-cat="figure">🎭 Figure</button>
+                <button class="search-cat-chip" data-cat="card">🃏 Card</button>
               </div>
             </div>
           </div>
@@ -194,8 +198,8 @@
         <div class="hero__blob"></div>
         <div class="hero__img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80"
-            alt="น้องหมาน่ารัก"
+            src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80"
+            alt="Ruby Store — ช้อปทุกอย่างในที่เดียว"
             class="hero__img"
           />
           <!-- Floating Cards -->
@@ -320,19 +324,36 @@
           </div>
 
           <div class="flash-deal">
-            <a href="product.html?id=P006">
-              <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=200&q=80" alt="Whiskas"/>
+            <a href="shop.html?cat=computer">
+              <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=200&q=80" alt="Keychron"/>
             </a>
             <div class="flash-deal__info">
-              <div class="flash-deal__name">Whiskas Pouch 24 ซอง</div>
+              <div class="flash-deal__name">💻 Keychron K2 Pro</div>
               <div class="flash-deal__prices">
-                <span class="flash-deal__new">฿ 199</span>
-                <span class="flash-deal__old">฿ 280</span>
+                <span class="flash-deal__new">฿ 2,490</span>
+                <span class="flash-deal__old">฿ 2,990</span>
               </div>
               <div class="flash-deal__bar-wrap">
-                <div class="flash-deal__bar" style="width:55%"></div>
+                <div class="flash-deal__bar" style="width:65%"></div>
               </div>
-              <div class="flash-deal__sold">เหลือเพียง 22 ชิ้น</div>
+              <div class="flash-deal__sold">เหลือเพียง 8 ชิ้น</div>
+            </div>
+          </div>
+
+          <div class="flash-deal">
+            <a href="shop.html?cat=hobby">
+              <img src="https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?w=200&q=80" alt="Pokemon"/>
+            </a>
+            <div class="flash-deal__info">
+              <div class="flash-deal__name">🃏 Pokemon Booster Box</div>
+              <div class="flash-deal__prices">
+                <span class="flash-deal__new">฿ 3,290</span>
+                <span class="flash-deal__old">฿ 3,990</span>
+              </div>
+              <div class="flash-deal__bar-wrap">
+                <div class="flash-deal__bar" style="width:80%"></div>
+              </div>
+              <div class="flash-deal__sold">เหลือเพียง 5 กล่อง</div>
             </div>
           </div>
 
@@ -416,17 +437,16 @@
         <p class="section__sub">คนซื้อเยอะ น้องชอบแน่นอน</p>
         <div class="product-filters">
           <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
-          <button class="filter-btn" data-filter="dog">หมา</button>
-          <button class="filter-btn" data-filter="cat">แมว</button>
-          <button class="filter-btn" data-filter="food">อาหาร</button>
-          <button class="filter-btn" data-filter="toy">ของเล่น</button>
+          <button class="filter-btn" data-filter="pet">🐾 Pet</button>
+          <button class="filter-btn" data-filter="computer">💻 Computer</button>
+          <button class="filter-btn" data-filter="hobby">🎴 Hobby</button>
         </div>
       </div>
 
       <div class="products__grid" id="productsGrid">
 
         <!-- Product 1 -->
-        <div class="product-card" data-category="dog food"
+        <div class="product-card" data-category="dog food pet"
           data-qv-id="P001" data-qv-name="Royal Canin Adult 15kg อาหารสุนัขพันธุ์ใหญ่"
           data-qv-brand="Royal Canin" data-qv-price="1290" data-qv-original="1590"
           data-qv-img="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=700&q=80"
@@ -457,7 +477,7 @@
         </div>
 
         <!-- Product 2 -->
-        <div class="product-card" data-category="cat food"
+        <div class="product-card" data-category="cat food pet"
           data-qv-id="P002" data-qv-name="Whiskas อาหารแมวรสปลาแซลมอน 1.2kg"
           data-qv-brand="Whiskas" data-qv-price="299" data-qv-original=""
           data-qv-img="https://images.unsplash.com/photo-1548366086-7f1b76106622?w=700&q=80"
@@ -486,7 +506,7 @@
         </div>
 
         <!-- Product 3 -->
-        <div class="product-card" data-category="dog toy"
+        <div class="product-card" data-category="dog toy pet"
           data-qv-id="P003" data-qv-name="Kong Classic ของเล่นยางกรอก ขนาด M"
           data-qv-brand="Kong" data-qv-price="490" data-qv-original="590"
           data-qv-img="https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=700&q=80"
@@ -517,7 +537,7 @@
         </div>
 
         <!-- Product 4 -->
-        <div class="product-card" data-category="cat toy"
+        <div class="product-card" data-category="cat toy pet"
           data-qv-id="P004" data-qv-name="ของเล่นไม้ตกปลาแมวพร้อมขนนก"
           data-qv-brand="PetDreamHouse" data-qv-price="189" data-qv-original=""
           data-qv-img="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=700&q=80"
@@ -545,7 +565,7 @@
         </div>
 
         <!-- Product 5 -->
-        <div class="product-card" data-category="dog food"
+        <div class="product-card" data-category="dog food pet"
           data-qv-id="P005" data-qv-name="Pedigree Dentastix ขนมกัดฟัน 7 ชิ้น"
           data-qv-brand="Pedigree" data-qv-price="149" data-qv-original=""
           data-qv-img="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=700&q=80"
@@ -574,7 +594,7 @@
         </div>
 
         <!-- Product 6 -->
-        <div class="product-card" data-category="cat food"
+        <div class="product-card" data-category="cat food pet"
           data-qv-id="P006" data-qv-name="Sheba อาหารแมวเปียก แพ็ค 12 ถุง"
           data-qv-brand="Sheba" data-qv-price="259" data-qv-original="320"
           data-qv-img="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=700&q=80"
@@ -605,7 +625,7 @@
         </div>
 
         <!-- Product 7 -->
-        <div class="product-card" data-category="dog toy"
+        <div class="product-card" data-category="dog toy pet"
           data-qv-id="P007" data-qv-name="Chuckit! Ultra Ball ลูกบอลเทนนิส 2 ลูก"
           data-qv-brand="Chuckit!" data-qv-price="350" data-qv-original=""
           data-qv-img="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=700&q=80"
@@ -633,7 +653,7 @@
         </div>
 
         <!-- Product 8 -->
-        <div class="product-card" data-category="cat toy"
+        <div class="product-card" data-category="cat toy pet"
           data-qv-id="P008" data-qv-name="CatLife บ้านแมวกระดาษลับเล็บพร้อมลูกบอล"
           data-qv-brand="CatLife" data-qv-price="599" data-qv-original="750"
           data-qv-img="https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=700&q=80"
@@ -663,10 +683,98 @@
           </div>
         </div>
 
+        <!-- Computer 1 -->
+        <div class="product-card" data-category="computer hardware">
+          <div class="product-card__img-wrap">
+            <a href="shop.html?cat=computer"><img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80" alt="RTX 4060 Ti" /></a>
+            <span class="badge badge--hot">ขายดี</span>
+            <button class="btn-wishlist" data-pid="C001" data-name="RTX 4060 Ti 8GB" data-price="15990" data-img="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80" aria-label="บันทึก">♡</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand" style="color:#1976D2">💻 NVIDIA</span>
+            <h3 class="product-card__name"><a href="shop.html?cat=computer" style="color:inherit">GeForce RTX 4060 Ti 8GB GDDR6</a></h3>
+            <div class="product-card__rating"><span class="stars">★★★★★</span><span class="rating-count">(312)</span></div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 15,990</span>
+              <span class="price-original">฿ 18,990</span>
+              <span class="badge badge--sale">-16%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="C001" data-name="RTX 4060 Ti 8GB" data-price="15990" data-img="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Computer 2 -->
+        <div class="product-card" data-category="computer peripheral">
+          <div class="product-card__img-wrap">
+            <a href="shop.html?cat=computer"><img src="https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&q=80" alt="Logitech G Pro X" /></a>
+            <span class="badge badge--hot">ขายดี</span>
+            <button class="btn-wishlist" data-pid="C002" data-name="Logitech G Pro X Superlight 2" data-price="4490" data-img="https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&q=80" aria-label="บันทึก">♡</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand" style="color:#1976D2">💻 Logitech</span>
+            <h3 class="product-card__name"><a href="shop.html?cat=computer" style="color:inherit">G Pro X Superlight 2 Gaming Mouse</a></h3>
+            <div class="product-card__rating"><span class="stars">★★★★★</span><span class="rating-count">(524)</span></div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 4,490</span>
+              <span class="price-original">฿ 5,290</span>
+              <span class="badge badge--sale">-15%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="C002" data-name="Logitech G Pro X Superlight 2" data-price="4490" data-img="https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Hobby 1 -->
+        <div class="product-card" data-category="hobby model">
+          <div class="product-card__img-wrap">
+            <a href="shop.html?cat=hobby"><img src="https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=400&q=80" alt="Gundam" /></a>
+            <span class="badge badge--hot">ขายดี</span>
+            <button class="btn-wishlist" data-pid="H001" data-name="MG Gundam RX-78-2 Ver.3.0" data-price="890" data-img="https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=400&q=80" aria-label="บันทึก">♡</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand" style="color:#7B1FA2">🎴 Bandai</span>
+            <h3 class="product-card__name"><a href="shop.html?cat=hobby" style="color:inherit">MG 1/100 RX-78-2 Gundam Ver.3.0</a></h3>
+            <div class="product-card__rating"><span class="stars">★★★★★</span><span class="rating-count">(445)</span></div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 890</span>
+              <span class="price-original">฿ 1,090</span>
+              <span class="badge badge--sale">-18%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="H001" data-name="MG Gundam RX-78-2 Ver.3.0" data-price="890" data-img="https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
+        <!-- Hobby 2 -->
+        <div class="product-card" data-category="hobby card">
+          <div class="product-card__img-wrap">
+            <a href="shop.html?cat=hobby"><img src="https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?w=400&q=80" alt="Pokemon Card" /></a>
+            <span class="badge badge--hot">ขายดี</span>
+            <button class="btn-wishlist" data-pid="H005" data-name="Pokemon TCG Booster Box" data-price="3990" data-img="https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?w=400&q=80" aria-label="บันทึก">♡</button>
+          </div>
+          <div class="product-card__body">
+            <span class="product-card__brand" style="color:#7B1FA2">🎴 Pokemon</span>
+            <h3 class="product-card__name"><a href="shop.html?cat=hobby" style="color:inherit">Pokemon TCG S&V Booster Box 36 Packs</a></h3>
+            <div class="product-card__rating"><span class="stars">★★★★★</span><span class="rating-count">(567)</span></div>
+            <div class="product-card__price-row">
+              <span class="price">฿ 3,990</span>
+              <span class="price-original">฿ 4,990</span>
+              <span class="badge badge--sale">-20%</span>
+            </div>
+            <button class="btn btn-primary btn-block add-cart" data-id="H005" data-name="Pokemon TCG Booster Box" data-price="3990" data-img="https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?w=400&q=80">
+              🛒 หยิบใส่ตะกร้า
+            </button>
+          </div>
+        </div>
+
       </div>
 
       <div class="section__footer">
-        <a href="#" class="btn btn-outline btn-lg">ดูสินค้าทั้งหมด →</a>
+        <a href="shop.html" class="btn btn-outline btn-lg">ดูสินค้าทั้งหมด →</a>
       </div>
     </div>
   </section>
@@ -698,47 +806,47 @@
 
         <div class="review-card">
           <div class="review-card__header">
-            <div class="reviewer-avatar">🐶</div>
+            <div class="reviewer-avatar">🐾</div>
             <div>
               <strong>คุณมาลี + น้องโกลด์</strong>
               <div class="stars">★★★★★</div>
             </div>
           </div>
           <p class="review-card__text">
-            "น้องโกลด์ชอบ Royal Canin มากเลยค่ะ กินหมดทุกมื้อ ส่งเร็วมาก
-            สั่งตอนเช้าได้ของตอนเย็นเลย แพ็คมาดีไม่บุบเลย จะซื้อซ้ำแน่นอน!"
+            "Royal Canin ดีมากเลยค่ะ น้องโกลด์กินหมดทุกมื้อ ส่งเร็วมาก สั่งตอนเช้าได้ของตอนเย็น
+            แพ็คมาดีไม่บุบเลย Ruby Store เชื่อถือได้ จะซื้อซ้ำแน่นอน! 🐶"
           </p>
           <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=200&q=80" alt="น้องโกลด์" class="review-card__pet-img" />
         </div>
 
         <div class="review-card">
           <div class="review-card__header">
-            <div class="reviewer-avatar">🐱</div>
+            <div class="reviewer-avatar">💻</div>
             <div>
-              <strong>คุณต้น + น้องมะม่วง</strong>
+              <strong>คุณเกม นักสเปค</strong>
               <div class="stars">★★★★★</div>
             </div>
           </div>
           <p class="review-card__text">
-            "ไม้ตกปลาตัวนี้น้องมะม่วงเล่นทุกวันเลยครับ คุ้มมากๆ
-            ราคาถูก คุณภาพดี ร้านนี้ดีทั้งสินค้าและบริการ Line ตอบเร็วมาก"
+            "สั่ง RTX 4060 Ti กับ Keychron K2 พร้อมกัน ของแท้ราคาดีกว่าร้านอื่นมาก
+            แพ็คมาแน่นหนา ไม่มีรอยขูดขีดเลย Admin ตอบ WhatsApp เร็วมาก ไว้ใจได้ครับ! 💻"
           </p>
-          <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=200&q=80" alt="น้องมะม่วง" class="review-card__pet-img" />
+          <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?w=200&q=80" alt="Computer setup" class="review-card__pet-img" />
         </div>
 
         <div class="review-card">
           <div class="review-card__header">
-            <div class="reviewer-avatar">🐕</div>
+            <div class="reviewer-avatar">🎴</div>
             <div>
-              <strong>คุณนิด + น้องลัคกี้</strong>
+              <strong>คุณบอม คอ Gunpla</strong>
               <div class="stars">★★★★★</div>
             </div>
           </div>
           <p class="review-card__text">
-            "สั่งขนม Dentastix ให้น้องลัคกี้ เขากัดทุกวันเลยค่ะ ฟันสะอาดขึ้นเห็นได้ชัด
-            Ruby Pet เชื่อถือได้มาก ซื้อมาหลายครั้งแล้ว ไม่เคยผิดหวัง!"
+            "สั่ง MG Gundam กับ Pokemon Booster Box มาครั้งแรก ของถูกกว่าที่อื่นจริงๆ
+            แพ็คอย่างดีไม่มีบุบเลย Admin แนะนำสินค้าดีมาก Ruby Store เป็น One-Stop Shop จริงๆ 🎴"
           </p>
-          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&q=80" alt="น้องลัคกี้" class="review-card__pet-img" />
+          <img src="https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=200&q=80" alt="Gunpla" class="review-card__pet-img" />
         </div>
 
       </div>
@@ -760,45 +868,45 @@
   <section class="section section--gray" id="blog">
     <div class="container">
       <div class="section__header">
-        <h2 class="section__title">Pet Care Tips 📖</h2>
-        <p class="section__sub">ความรู้ดีๆ เพื่อน้องที่รัก</p>
+        <h2 class="section__title">Tips & Reviews 📖</h2>
+        <p class="section__sub">บทความและรีวิวจากทุก Section — Pet · Computer · Hobby</p>
       </div>
 
       <div class="blog__grid">
 
         <a href="#" class="blog-card">
           <div class="blog-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80" alt="อาหารหมา" />
-            <span class="blog-card__tag">🐶 น้องหมา</span>
+            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80" alt="Pet Care" />
+            <span class="blog-card__tag">🐾 Pet Care</span>
           </div>
           <div class="blog-card__body">
             <h3>อาหารหมา 5 ยี่ห้อที่สัตวแพทย์แนะนำปี 2026</h3>
-            <p>เลือกอาหารหมายังไงให้ถูกหลักโภชนาการ น้องแข็งแรง ขนสวย...</p>
+            <p>เลือกอาหารหมายังไงให้ถูกหลักโภชนาการ น้องแข็งแรง ขนสวย ไม่มีโรค...</p>
+            <span class="blog-card__date">20 พ.ค. 2026</span>
+          </div>
+        </a>
+
+        <a href="#" class="blog-card">
+          <div class="blog-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=500&q=80" alt="GPU Guide" />
+            <span class="blog-card__tag" style="background:#1976D2">💻 PC Guide</span>
+          </div>
+          <div class="blog-card__body">
+            <h3>เลือก GPU ยังไงให้คุ้มค่า? RTX 4060 Ti vs RX 7700 XT</h3>
+            <p>เปรียบเทียบการ์ดจอ 2 ตัวฮิตในปี 2026 ราคาใกล้เคียงแต่ Performance ต่างกันแค่ไหน...</p>
             <span class="blog-card__date">15 พ.ค. 2026</span>
           </div>
         </a>
 
         <a href="#" class="blog-card">
           <div class="blog-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80" alt="แมว" />
-            <span class="blog-card__tag">🐱 น้องแมว</span>
+            <img src="https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=500&q=80" alt="Gunpla Guide" />
+            <span class="blog-card__tag" style="background:#7B1FA2">🎴 Hobby Review</span>
           </div>
           <div class="blog-card__body">
-            <h3>ทำไมแมวถึงไม่กินอาหาร? วิธีแก้ที่ได้ผลจริง</h3>
-            <p>หลายคนเจอปัญหาแมวเบื่ออาหาร มาดูสาเหตุและวิธีจัดการ...</p>
+            <h3>เริ่มต้น Gunpla ยังไงดี? Guide สำหรับมือใหม่ฉบับ 2026</h3>
+            <p>Gunpla เริ่มต้นไม่ยาก! มาดู Grade ที่เหมาะกับมือใหม่ อุปกรณ์ที่ต้องมี และเทคนิคพื้นฐาน...</p>
             <span class="blog-card__date">10 พ.ค. 2026</span>
-          </div>
-        </a>
-
-        <a href="#" class="blog-card">
-          <div class="blog-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=500&q=80" alt="ของเล่น" />
-            <span class="blog-card__tag">🎾 ของเล่น</span>
-          </div>
-          <div class="blog-card__body">
-            <h3>ของเล่นแบบไหนดีที่สุดสำหรับหมาแต่ละสายพันธุ์?</h3>
-            <p>ของเล่นที่ดีช่วยให้น้องออกกำลัง ไม่เบื่อ และไม่ทำลายของในบ้าน...</p>
-            <span class="blog-card__date">5 พ.ค. 2026</span>
           </div>
         </a>
 
@@ -816,10 +924,10 @@
 
       <div class="footer__brand">
         <div class="logo" style="color:white">
-          <span class="logo__icon">🐾</span>
-          <span class="logo__text">Ruby<span style="color:#FF7043"> Pet</span></span>
+          <span class="logo__icon">💎</span>
+          <span class="logo__text">Ruby<span style="color:#FF7043"> Store</span></span>
         </div>
-        <p>ร้านอาหารและของเล่นสัตว์เลี้ยง<br/>คุณภาพดี ราคาเป็นมิตร ส่งเร็ว</p>
+        <p>ร้านค้าออนไลน์ครบวงจร<br/>Pet · Computer · Hobby &amp; Collectibles<br/>ของแท้ ราคาดี ส่งเร็ว</p>
         <div class="footer__socials">
           <a href="#" class="social-btn" aria-label="Facebook">📘</a>
           <a href="#" class="social-btn" aria-label="Instagram">📸</a>
@@ -829,13 +937,23 @@
       </div>
 
       <div class="footer__links">
-        <h4>สินค้า</h4>
+        <h4>🐾 Pet Shop</h4>
         <ul>
-          <li><a href="#bestsellers" class="footer-cat-link" data-filter="dog">อาหารหมา</a></li>
-          <li><a href="#bestsellers" class="footer-cat-link" data-filter="cat">อาหารแมว</a></li>
-          <li><a href="#bestsellers" class="footer-cat-link" data-filter="toy">ของเล่นหมา</a></li>
-          <li><a href="#bestsellers" class="footer-cat-link" data-filter="toy">ของเล่นแมว</a></li>
-          <li><a href="#bestsellers" class="footer-cat-link" data-filter="food">ขนมสัตว์เลี้ยง</a></li>
+          <li><a href="shop.html?cat=pet&sub=dog">อาหารหมา</a></li>
+          <li><a href="shop.html?cat=pet&sub=cat">อาหารแมว</a></li>
+          <li><a href="shop.html?cat=pet&sub=toy">ของเล่นสัตว์</a></li>
+        </ul>
+        <h4 style="margin-top:16px">💻 Computer</h4>
+        <ul>
+          <li><a href="shop.html?cat=computer&sub=hardware">Hardware</a></li>
+          <li><a href="shop.html?cat=computer&sub=peripheral">Peripheral</a></li>
+          <li><a href="shop.html?cat=computer&sub=notebook">Notebook</a></li>
+        </ul>
+        <h4 style="margin-top:16px">🎴 Hobby</h4>
+        <ul>
+          <li><a href="shop.html?cat=hobby&sub=figure">Figure</a></li>
+          <li><a href="shop.html?cat=hobby&sub=model">Model Kit</a></li>
+          <li><a href="shop.html?cat=hobby&sub=card">Trading Card</a></li>
         </ul>
       </div>
 
@@ -867,7 +985,7 @@
 
     <div class="footer__bottom">
       <div class="container">
-        <p>© 2026 Ruby Pet Shop — Made with ❤️ for น้องทุกตัว</p>
+        <p>© 2026 Ruby Store — ช้อปทุกอย่างในที่เดียว 💎</p>
       </div>
     </div>
   </footer>

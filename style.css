@@ -2545,3 +2545,35 @@ mark.hl {
   .nav-mega__panel { min-width: 90vw; flex-direction: column; gap: 12px; padding: 20px; }
   .mega-divider { width: 100%; height: 1px; margin: 4px 0; }
 }
+
+/* ── Mega Menu Mobile (Fix 15) ────────────── */
+@media (max-width: 768px) {
+  /* Inside open mobile nav, mega trigger looks like a normal nav link */
+  .nav__links.open .nav-mega { position: static; width: 100%; }
+  .nav__links.open .nav-mega__trigger {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: var(--text-d);
+    font-weight: 600;
+  }
+  /* Panel: not absolutely positioned — drops inline below trigger */
+  .nav__links.open .nav-mega__panel {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 6px 0 8px;
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .nav__links.open .nav-mega.open .nav-mega__panel { display: flex; }
+  .nav__links.open .nav-mega__panel::before { display: none; }
+  .nav__links.open .mega-divider { width: 100%; height: 1px; margin: 0; }
+}

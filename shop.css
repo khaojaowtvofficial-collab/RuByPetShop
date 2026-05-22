@@ -708,3 +708,31 @@
 @media (max-width: 600px) {
   .shop-maintab { padding: 8px 16px; font-size: 13px; }
 }
+
+/* ── Category Badges on Cards (Fix 13-14) ─── */
+.cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-right: 6px;
+  vertical-align: middle;
+  letter-spacing: .3px;
+}
+.cat-badge--pet      { background: #FFF3F0; color: #E64A19; border: 1px solid #FFCCBC; }
+.cat-badge--computer { background: #E3F2FD; color: #1565C0; border: 1px solid #BBDEFB; }
+.cat-badge--hobby    { background: #F3E5F5; color: #6A1B9A; border: 1px solid #E1BEE7; }
+
+/* Card accent border by category */
+.shop-card[data-maincat="pet"]      { border-top: 3px solid #FF7043; }
+.shop-card[data-maincat="computer"] { border-top: 3px solid #1976D2; }
+.shop-card[data-maincat="hobby"]    { border-top: 3px solid #7B1FA2; }
+
+/* Hide category border when already filtered to single cat */
+.shop-maintab[data-main]:not([data-main="all"]).active ~ * .shop-card[data-maincat] {
+  border-top-color: var(--orange);
+}

@@ -424,17 +424,23 @@ function renderGrid() {
                     : p.badge === 'new'  ? '<span class="badge badge--new">🌟 ใหม่</span>'
                     : p.badge === 'sale' ? '<span class="badge badge--sale">💥 ลด</span>'
                     : '';
+    const MAINCAT_BADGE = {
+      pet:      '<span class="cat-badge cat-badge--pet">🐾 Pet</span>',
+      computer: '<span class="cat-badge cat-badge--computer">💻 Computer</span>',
+      hobby:    '<span class="cat-badge cat-badge--hobby">🎴 Hobby</span>',
+    };
+    const catBadge = state.mainCat === 'all' ? (MAINCAT_BADGE[p.mainCat] || '') : '';
 
     if (state.view === 'list') {
       return `
-      <div class="shop-card" data-id="${p.id}">
+      <div class="shop-card" data-id="${p.id}" data-maincat="${p.mainCat}">
         <div class="shop-card__img-wrap">
           <img src="${p.img}" alt="${p.name}" class="shop-card__img" loading="lazy"/>
           <div class="shop-card__badge">${badgeHtml}</div>
         </div>
         <div class="shop-card__body">
           <div class="shop-card__info">
-            <div class="shop-card__brand">${p.brand}</div>
+            <div class="shop-card__brand">${catBadge}${p.brand}</div>
             <div class="shop-card__name">${p.name}</div>
             <div class="shop-card__rating">
               <span class="shop-card__stars">${stars}</span>
@@ -455,7 +461,7 @@ function renderGrid() {
     }
 
     return `
-    <div class="shop-card" data-id="${p.id}">
+    <div class="shop-card" data-id="${p.id}" data-maincat="${p.mainCat}">
       <div class="shop-card__img-wrap">
         <img src="${p.img}" alt="${p.name}" class="shop-card__img" loading="lazy"/>
         <div class="shop-card__badge">${badgeHtml}</div>
@@ -466,7 +472,7 @@ function renderGrid() {
         ${outOfStock ? '<div class="shop-card__out-overlay">หมดสต็อก</div>' : ''}
       </div>
       <div class="shop-card__body">
-        <div class="shop-card__brand">${p.brand}</div>
+        <div class="shop-card__brand">${catBadge}${p.brand}</div>
         <div class="shop-card__name">${p.name}</div>
         <div class="shop-card__rating">
           <span class="shop-card__stars">${stars}</span>
@@ -855,6 +861,41 @@ function initEvents() {
   const closeSidebar = () => { sidebar.classList.remove('open'); sidebarOverlay.classList.remove('open'); document.body.style.overflow = ''; };
   filterToggle?.addEventListener('click', openSidebar);
   sidebarOverlay.addEventListener('click', closeSidebar);
+
+  /* ── Hamburger + Mega Menu (Fix 15) ──── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  const navbar    = document.getElementById('navbar');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    const spans  = hamburger.querySelectorAll('span');
+    if (isOpen) {
+      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+      spans[1].style.opacity   = '0';
+      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    } else {
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  });
+
+  // Mega-menu: tap trigger on mobile toggles .open class
+  document.querySelectorAll('.nav-mega__trigger').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const mega = btn.closest('.nav-mega');
+      mega.classList.toggle('open');
+      e.stopPropagation();
+    });
+  });
+  // Close mega on outside click
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-mega.open').forEach(m => m.classList.remove('open'));
+  });
+
+  // Navbar scroll shadow
+  window.addEventListener('scroll', () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 40);
+  });
 }
 
 /* =============================================
