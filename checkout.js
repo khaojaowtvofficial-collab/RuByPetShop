@@ -614,7 +614,7 @@ function placeOrder() {
     localStorage.removeItem(CART_KEY);
 
     // Open WhatsApp
-    const waUrl = `https://wa.me/85620789262​45?text=${encodeURIComponent(msg)}`;
+    const waUrl = `https://wa.me/8562078926245?text=${encodeURIComponent(msg)}`;
     // Note: WhatsApp number = +856 20 78926245 (Laos)
     window.open(waUrl, '_blank');
 

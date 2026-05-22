@@ -523,6 +523,22 @@ async function logout() {
   showToast('👋 ออกจากระบบแล้ว');
 }
 
+/* ── Listen to ALL auth state changes (incl. OAuth redirect) ── */
+_sb.auth.onAuthStateChange(async (event, session) => {
+  if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
+    try {
+      const { data: profile } = await DB.getProfile(session.user.id);
+      const user = buildUserFromSupabase(session.user, profile || {});
+      login(user);
+    } catch { /* ignore */ }
+  } else if (event === 'SIGNED_OUT') {
+    currentUser = null;
+    localStorage.removeItem(USER_KEY);
+    if (loginBtn) loginBtn.style.display = '';
+    if (userMenu) userMenu.style.display = 'none';
+  }
+});
+
 /* Restore session on page load — Supabase first, localStorage fallback */
 (async function restoreSession() {
   try {
