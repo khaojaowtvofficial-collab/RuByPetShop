@@ -4,68 +4,61 @@
   <meta charset="UTF-8"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ร้านค้า — Ruby Store</title>
-  <meta name="description" content="ช้อปสินค้าหลากหลาย ทั้ง Pet Shop, Computer & IT, Hobby & Collectibles — Ruby Store ส่งเร็ว ราคาดี"/>
-  <meta property="og:type"        content="website"/>
-  <meta property="og:site_name"   content="Ruby Store"/>
-  <meta property="og:title"       content="ร้านค้า — Ruby Store"/>
-  <meta property="og:description" content="ช้อปสินค้าหลากหลาย ทั้ง Pet Shop, Computer & IT, Hobby & Collectibles"/>
-  <meta property="og:image"       content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80"/>
+  <title>🐾 Pet Shop — Ruby Store</title>
+  <meta name="description" content="ร้านสัตว์เลี้ยง อาหารสุนัข อาหารแมว ของเล่น และอุปกรณ์ครบครัน — Ruby Store ส่งเร็ว ราคาดี"/>
+  <meta name="store-cat" content="pet"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Prompt:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="shop.css"/>
+  <style>
+    /* Pet Store accent override */
+    :root {
+      --store-accent:   var(--store-pet);
+      --store-accent-d: var(--store-pet-d);
+      --store-accent-l: var(--store-pet-l);
+    }
+    .shop-hero { background: linear-gradient(135deg, #FF7043 0%, #FF8A65 60%, #FFB300 100%); }
+    .shop-maintab.active { background: #FF7043; border-color: #FF7043; box-shadow: 0 4px 16px rgba(255,112,67,.3); }
+    .store-back-btn { display: inline-flex; align-items: center; gap: 6px; color: #fff; font-size: 13px; opacity: .85; margin-bottom: 8px; }
+    .store-back-btn:hover { opacity: 1; }
+  </style>
 </head>
 <body>
 
 <!-- ===== NAVBAR ===== -->
-<header class="navbar" id="navbar">
-  <div class="container navbar__inner">
-    <a href="index.html" class="logo">
-      <span class="logo__icon">💎</span>
-      <span class="logo__text">Ruby<span class="logo__accent"> Store</span></span>
-    </a>
-    <nav class="nav__links" id="navLinks">
-      <!-- Mega Menu -->
-      <div class="nav-mega">
-        <button class="nav-mega__trigger">🛍️ ร้านค้า ▾</button>
-        <div class="nav-mega__panel">
-          <div class="mega-col">
-            <a href="shop.html?cat=pet" class="mega-col__title">🐾 Pet Shop</a>
-            <a href="shop.html?cat=pet&sub=dog">อาหารหมา</a>
-            <a href="shop.html?cat=pet&sub=cat">อาหารแมว</a>
-            <a href="shop.html?cat=pet&sub=toy">ของเล่นสัตว์</a>
-          </div>
-          <div class="mega-divider"></div>
-          <div class="mega-col">
-            <a href="shop.html?cat=computer" class="mega-col__title">💻 Computer</a>
-            <a href="shop.html?cat=computer&sub=hardware">Hardware</a>
-            <a href="shop.html?cat=computer&sub=peripheral">Peripheral</a>
-            <a href="shop.html?cat=computer&sub=notebook">Notebook</a>
-          </div>
-          <div class="mega-divider"></div>
-          <div class="mega-col">
-            <a href="shop.html?cat=hobby" class="mega-col__title">🎴 Hobby</a>
-            <a href="shop.html?cat=hobby&sub=figure">Figure</a>
-            <a href="shop.html?cat=hobby&sub=model">Model Kit</a>
-            <a href="shop.html?cat=hobby&sub=card">Trading Card</a>
-          </div>
-        </div>
+<header class="navbar navbar--store" id="navbar">
+  <div class="navbar__top">
+    <div class="container navbar__top-inner">
+      <a href="index.html" class="logo">
+        <span class="logo__icon">💎</span>
+        <span class="logo__text">Ruby<span class="logo__accent"> Store</span></span>
+      </a>
+      <div class="navbar__search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--text-m)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="ค้นหาในร้าน Pet Shop..." class="navbar__search-input" id="shopSearchInput" autocomplete="off"/>
+        <button class="shop-hero__search-clear" id="shopSearchClear" style="display:none">✕</button>
       </div>
-      <a href="index.html#bestsellers">สินค้าขายดี</a>
-      <a href="index.html#blog">Tips & Reviews</a>
-      <a href="index.html#contact">ติดต่อเรา</a>
-    </nav>
-    <div class="navbar__actions">
-      <button class="btn-icon cart-btn" id="cartBtn" aria-label="ตะกร้า">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span class="cart-badge" id="cartCount">0</span>
-      </button>
-      <a href="https://wa.me/8562078926245" target="_blank" rel="noopener" class="btn btn-primary" style="padding:10px 20px;font-size:14px;background:#25D366;border-color:#25D366">📲 WhatsApp</a>
+      <div class="navbar__actions-top">
+        <button class="btn-icon cart-btn" id="cartBtn" aria-label="ตะกร้า">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+        <a href="https://wa.me/8562078926245" target="_blank" rel="noopener" class="btn-whatsapp">📲 WhatsApp</a>
+        <button class="hamburger" id="hamburger" aria-label="เมนู"><span></span><span></span><span></span></button>
+      </div>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="เมนู">
-      <span></span><span></span><span></span>
-    </button>
+  </div>
+  <div class="navbar__nav-row" id="navLinks">
+    <div class="container">
+      <nav class="navbar__nav-links">
+        <a href="index.html" class="nav-link">หน้าแรก</a>
+        <a href="shop.html" class="nav-link">ร้านทั้งหมด</a>
+        <a href="pet-shop.html" class="nav-link nav-link--active">🐾 Pet Shop</a>
+        <a href="computer-shop.html" class="nav-link">💻 Computer</a>
+        <a href="hobby-shop.html" class="nav-link">🎴 Hobby</a>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -73,20 +66,9 @@
 <div class="shop-hero">
   <div class="container shop-hero__inner">
     <div>
-      <h1 class="shop-hero__title">🛍️ Ruby Store — ช้อปทุกอย่างในที่เดียว</h1>
-      <p class="shop-hero__sub">🐾 Pet &nbsp;|&nbsp; 💻 Computer &nbsp;|&nbsp; 🎴 Hobby &amp; Collectibles</p>
-    </div>
-    <!-- Search bar -->
-    <div class="shop-hero__search">
-      <span class="shop-hero__search-icon">🔍</span>
-      <input
-        type="text"
-        id="shopSearchInput"
-        placeholder="ค้นหาสินค้า เช่น Royal Canin..."
-        autocomplete="off"
-        class="shop-hero__search-input"
-      />
-      <button class="shop-hero__search-clear" id="shopSearchClear" style="display:none">✕</button>
+      <a href="index.html" class="store-back-btn">← กลับหน้าหลัก</a>
+      <h1 class="shop-hero__title">🐾 Pet Shop — อาหารและอุปกรณ์สัตว์เลี้ยง</h1>
+      <p class="shop-hero__sub">อาหารหมา · อาหารแมว · ของเล่น · อุปกรณ์ครบครัน — ของแท้ ส่งเร็ว</p>
     </div>
   </div>
 </div>
@@ -95,10 +77,11 @@
 <div class="shop-maintabs">
   <div class="container">
     <div class="shop-maintabs__inner">
-      <button class="shop-maintab active" data-main="all">🏪 ทั้งหมด</button>
-      <button class="shop-maintab" data-main="pet">🐾 Pet Shop</button>
-      <button class="shop-maintab" data-main="computer">💻 Computer & IT</button>
-      <button class="shop-maintab" data-main="hobby">🎴 Hobby & Collectibles</button>
+      <button class="shop-maintab active" data-main="pet">🐾 ทั้งหมด</button>
+      <button class="shop-maintab" data-main="pet" data-sub="dog">🐶 อาหารหมา</button>
+      <button class="shop-maintab" data-main="pet" data-sub="cat">🐱 อาหารแมว</button>
+      <button class="shop-maintab" data-main="pet" data-sub="toy">🎾 ของเล่น</button>
+      <button class="shop-maintab" data-main="pet" data-sub="food">🍖 Snack</button>
     </div>
   </div>
 </div>
@@ -109,7 +92,9 @@
     <nav class="breadcrumb">
       <a href="index.html">หน้าแรก</a>
       <span>›</span>
-      <span id="shopBreadcrumb">ร้านค้า</span>
+      <a href="shop.html">ร้านค้า</a>
+      <span>›</span>
+      <span id="shopBreadcrumb">Pet Shop</span>
     </nav>
   </div>
 </div>
@@ -117,38 +102,28 @@
 <!-- ===== MAIN LAYOUT ===== -->
 <main class="shop-main">
   <div class="container shop-layout">
-
-    <!-- ── SIDEBAR FILTER ─────────────────── -->
     <aside class="shop-sidebar" id="shopSidebar">
       <div class="sidebar-header">
         <span class="sidebar-title">🔧 กรองสินค้า</span>
         <button class="sidebar-reset" id="resetFilters">ล้างทั้งหมด</button>
       </div>
-
-      <!-- Sub-Category (rendered dynamically by JS) -->
       <div class="filter-section">
         <div class="filter-section__label">หมวดหมู่ย่อย</div>
         <div class="filter-cats"><!-- JS renders here --></div>
       </div>
-
-      <!-- Price Range -->
       <div class="filter-section">
         <div class="filter-section__label">ช่วงราคา (฿)</div>
         <div class="price-range-wrap">
           <div class="price-range-display">
-            <span id="priceMin">0</span> — <span id="priceMax">30,000</span>
+            <span id="priceMin">0</span> — <span id="priceMax">5,000</span>
           </div>
-          <input type="range" id="priceSlider" min="0" max="30000" step="100" value="30000" class="shop-range"/>
+          <input type="range" id="priceSlider" min="0" max="5000" step="50" value="5000" class="shop-range"/>
         </div>
       </div>
-
-      <!-- Brand -->
       <div class="filter-section">
         <div class="filter-section__label">แบรนด์</div>
         <div class="filter-checks" id="brandChecks"></div>
       </div>
-
-      <!-- Rating -->
       <div class="filter-section">
         <div class="filter-section__label">คะแนนรีวิว</div>
         <div class="filter-ratings">
@@ -158,8 +133,6 @@
           <button class="filter-rating" data-min="3.5">★ 3.5+</button>
         </div>
       </div>
-
-      <!-- Stock -->
       <div class="filter-section">
         <div class="filter-section__label">ความพร้อมส่ง</div>
         <label class="filter-check-label">
@@ -169,55 +142,40 @@
       </div>
     </aside>
 
-    <!-- ── PRODUCTS AREA ───────────────────── -->
     <div class="shop-products-area">
-
-      <!-- Toolbar -->
       <div class="shop-toolbar">
         <div class="shop-toolbar__left">
           <button class="filter-toggle-btn" id="filterToggleBtn">🔧 กรอง</button>
           <span class="shop-result-count" id="shopResultCount">สินค้าทั้งหมด 0 รายการ</span>
         </div>
         <div class="shop-toolbar__right">
-          <!-- Sort -->
           <select class="shop-sort" id="shopSort">
             <option value="popular">🔥 ขายดีที่สุด</option>
             <option value="rating">⭐ รีวิวดีที่สุด</option>
             <option value="price-asc">💰 ราคา: ต่ำ → สูง</option>
             <option value="price-desc">💰 ราคา: สูง → ต่ำ</option>
             <option value="newest">🌟 ใหม่ล่าสุด</option>
-            <option value="name">🔤 ชื่อ A-Z</option>
           </select>
-          <!-- View toggle -->
           <div class="view-toggle">
             <button class="view-btn active" id="viewGrid" title="Grid view">⊞</button>
             <button class="view-btn" id="viewList" title="List view">☰</button>
           </div>
         </div>
       </div>
-
-      <!-- Active filters chips -->
       <div class="active-filters" id="activeFilters"></div>
-
-      <!-- Grid -->
       <div class="shop-grid" id="shopGrid"></div>
-
-      <!-- Empty state -->
       <div class="shop-empty" id="shopEmpty" style="display:none">
         <div class="shop-empty__icon">🔍</div>
         <h3>ไม่พบสินค้าที่ค้นหา</h3>
         <p>ลองเปลี่ยนคำค้นหาหรือล้างตัวกรอง</p>
         <button class="btn btn-primary" id="emptyReset">ล้างตัวกรอง</button>
       </div>
-
-      <!-- Pagination -->
       <div class="shop-pagination" id="shopPagination"></div>
     </div>
-
   </div>
 </main>
 
-<!-- ===== CART DRAWER ===== -->
+<!-- CART DRAWER -->
 <div class="cart-overlay" id="cartOverlay"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-drawer__header">
@@ -227,20 +185,17 @@
   <div class="cart-drawer__body" id="cartBody"></div>
   <div class="cart-drawer__footer" id="cartFooter"></div>
 </div>
-
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
-<!-- LINE FLOAT -->
 <a href="#" class="line-float" aria-label="Line OA">
   <span>💬</span>
   <span class="line-float__label">Line OA</span>
 </a>
 
+<script>window.STORE_CAT = 'pet'; window.STORE_MAX_PRICE = 5000;</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="shop.js"></script>
 <script src="chat-widget.js"></script>
-<script src="compare-widget.js"></script>
 </body>
 </html>

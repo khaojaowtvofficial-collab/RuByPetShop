@@ -88,11 +88,14 @@ const sidebar      = document.getElementById('sidebar');
 const sidebarToggle= document.getElementById('sidebarToggle');
 
 const PAGE_TITLES = {
-  dashboard: '📊 Dashboard',
-  orders:    '📦 จัดการออเดอร์',
-  products:  '🛍️ จัดการสินค้า',
-  users:     '👥 จัดการผู้ใช้',
-  analytics: '📈 Analytics',
+  dashboard:  '📊 Dashboard',
+  stores:     '🏪 ร้านค้า',
+  orders:     '📦 ออเดอร์',
+  products:   '🛍️ สินค้า',
+  categories: '📂 หมวดหมู่',
+  users:      '👥 ลูกค้า',
+  analytics:  '📈 Analytics',
+  settings:   '⚙️ ตั้งค่า',
 };
 
 function goToPage(pageId) {

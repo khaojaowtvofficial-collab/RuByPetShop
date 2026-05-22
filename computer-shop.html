@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💻 Computer Shop — Ruby Store</title>
+  <meta name="description" content="Hardware, Peripheral, Notebook — Ruby Store อุปกรณ์คอมพิวเตอร์ครบครัน ของแท้ ราคาดี"/>
+  <meta name="store-cat" content="computer"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Prompt:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="shop.css"/>
+  <style>
+    .shop-hero { background: linear-gradient(135deg, #1565C0 0%, #1976D2 60%, #1E88E5 100%); }
+    .shop-maintab.active { background: #1976D2; border-color: #1976D2; box-shadow: 0 4px 16px rgba(25,118,210,.3); }
+    .store-back-btn { display: inline-flex; align-items: center; gap: 6px; color: #fff; font-size: 13px; opacity: .85; margin-bottom: 8px; }
+    .store-back-btn:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<header class="navbar navbar--store" id="navbar">
+  <div class="navbar__top">
+    <div class="container navbar__top-inner">
+      <a href="index.html" class="logo">
+        <span class="logo__icon">💎</span>
+        <span class="logo__text">Ruby<span class="logo__accent"> Store</span></span>
+      </a>
+      <div class="navbar__search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;color:var(--text-m)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="ค้นหา Hardware, GPU, Mouse..." class="navbar__search-input" id="shopSearchInput" autocomplete="off"/>
+        <button class="shop-hero__search-clear" id="shopSearchClear" style="display:none">✕</button>
+      </div>
+      <div class="navbar__actions-top">
+        <button class="btn-icon cart-btn" id="cartBtn" aria-label="ตะกร้า">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+        <a href="https://wa.me/8562078926245" target="_blank" rel="noopener" class="btn-whatsapp">📲 WhatsApp</a>
+        <button class="hamburger" id="hamburger" aria-label="เมนู"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+  <div class="navbar__nav-row" id="navLinks">
+    <div class="container">
+      <nav class="navbar__nav-links">
+        <a href="index.html" class="nav-link">หน้าแรก</a>
+        <a href="shop.html" class="nav-link">ร้านทั้งหมด</a>
+        <a href="pet-shop.html" class="nav-link">🐾 Pet Shop</a>
+        <a href="computer-shop.html" class="nav-link nav-link--active">💻 Computer</a>
+        <a href="hobby-shop.html" class="nav-link">🎴 Hobby</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="shop-hero">
+  <div class="container shop-hero__inner">
+    <div>
+      <a href="index.html" class="store-back-btn">← กลับหน้าหลัก</a>
+      <h1 class="shop-hero__title">💻 Computer Shop — Hardware & IT</h1>
+      <p class="shop-hero__sub">GPU · CPU · Keyboard · Mouse · Notebook — ของแท้ ราคาดี ส่งเร็ว</p>
+    </div>
+  </div>
+</div>
+
+<div class="shop-maintabs">
+  <div class="container">
+    <div class="shop-maintabs__inner">
+      <button class="shop-maintab active" data-main="computer">💻 ทั้งหมด</button>
+      <button class="shop-maintab" data-main="computer" data-sub="hardware">⚙️ Hardware</button>
+      <button class="shop-maintab" data-main="computer" data-sub="peripheral">🖱 Peripheral</button>
+      <button class="shop-maintab" data-main="computer" data-sub="notebook">💻 Notebook</button>
+    </div>
+  </div>
+</div>
+
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">หน้าแรก</a><span>›</span>
+      <a href="shop.html">ร้านค้า</a><span>›</span>
+      <span id="shopBreadcrumb">Computer Shop</span>
+    </nav>
+  </div>
+</div>
+
+<main class="shop-main">
+  <div class="container shop-layout">
+    <aside class="shop-sidebar" id="shopSidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">🔧 กรองสินค้า</span>
+        <button class="sidebar-reset" id="resetFilters">ล้างทั้งหมด</button>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section__label">หมวดหมู่ย่อย</div>
+        <div class="filter-cats"></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section__label">ช่วงราคา (฿)</div>
+        <div class="price-range-wrap">
+          <div class="price-range-display"><span id="priceMin">0</span> — <span id="priceMax">30,000</span></div>
+          <input type="range" id="priceSlider" min="0" max="30000" step="500" value="30000" class="shop-range"/>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section__label">แบรนด์</div>
+        <div class="filter-checks" id="brandChecks"></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section__label">คะแนนรีวิว</div>
+        <div class="filter-ratings">
+          <button class="filter-rating active" data-min="0">ทั้งหมด</button>
+          <button class="filter-rating" data-min="4.5">★ 4.5+</button>
+          <button class="filter-rating" data-min="4.0">★ 4.0+</button>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section__label">ความพร้อมส่ง</div>
+        <label class="filter-check-label">
+          <input type="checkbox" id="inStockOnly"/>
+          <span>พร้อมส่งเท่านั้น</span>
+        </label>
+      </div>
+    </aside>
+    <div class="shop-products-area">
+      <div class="shop-toolbar">
+        <div class="shop-toolbar__left">
+          <button class="filter-toggle-btn" id="filterToggleBtn">🔧 กรอง</button>
+          <span class="shop-result-count" id="shopResultCount">สินค้าทั้งหมด 0 รายการ</span>
+        </div>
+        <div class="shop-toolbar__right">
+          <select class="shop-sort" id="shopSort">
+            <option value="popular">🔥 ขายดีที่สุด</option>
+            <option value="rating">⭐ รีวิวดีที่สุด</option>
+            <option value="price-asc">💰 ราคา: ต่ำ → สูง</option>
+            <option value="price-desc">💰 ราคา: สูง → ต่ำ</option>
+            <option value="newest">🌟 ใหม่ล่าสุด</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewGrid">⊞</button>
+            <button class="view-btn" id="viewList">☰</button>
+          </div>
+        </div>
+      </div>
+      <div class="active-filters" id="activeFilters"></div>
+      <div class="shop-grid" id="shopGrid"></div>
+      <div class="shop-empty" id="shopEmpty" style="display:none">
+        <div class="shop-empty__icon">🔍</div>
+        <h3>ไม่พบสินค้าที่ค้นหา</h3>
+        <p>ลองเปลี่ยนคำค้นหาหรือล้างตัวกรอง</p>
+        <button class="btn btn-primary" id="emptyReset">ล้างตัวกรอง</button>
+      </div>
+      <div class="shop-pagination" id="shopPagination"></div>
+    </div>
+  </div>
+</main>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer__header"><h3>🛒 ตะกร้าสินค้า</h3><button class="cart-close" id="cartClose">✕</button></div>
+  <div class="cart-drawer__body" id="cartBody"></div>
+  <div class="cart-drawer__footer" id="cartFooter"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>window.STORE_CAT = 'computer'; window.STORE_MAX_PRICE = 30000;</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="shop.js"></script>
+<script src="chat-widget.js"></script>
+</body>
+</html>

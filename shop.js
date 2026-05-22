@@ -683,17 +683,19 @@ function initEvents() {
     refresh();
   });
 
-  /* Main category tabs */
+  /* Main category tabs (works for both shop.html tabs and store-page sub-tabs) */
   document.querySelectorAll('.shop-maintab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.shop-maintab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       state.mainCat = btn.dataset.main;
-      state.cat = 'all';
+      // Store pages use data-sub for sub-category tabs
+      state.cat = btn.dataset.sub || 'all';
       state.page = 1;
       renderSubCatFilter();
       // Update price slider max based on main cat
-      const maxP = state.mainCat === 'computer' ? 30000 : state.mainCat === 'pet' ? 5000 : 10000;
+      const maxP = window.STORE_MAX_PRICE ||
+        (state.mainCat === 'computer' ? 30000 : state.mainCat === 'pet' ? 5000 : 10000);
       const sl = document.getElementById('priceSlider');
       if (sl) { sl.max = maxP; sl.value = maxP; }
       state.maxPrice = maxP;
@@ -951,6 +953,27 @@ function readUrlParams() {
    INIT
 ============================================= */
 (function init() {
+  // Support individual store pages (window.STORE_CAT set by inline script)
+  if (window.STORE_CAT && ['pet','computer','hobby'].includes(window.STORE_CAT)) {
+    state.mainCat = window.STORE_CAT;
+    // Adjust price slider max if provided
+    if (window.STORE_MAX_PRICE) {
+      state.maxPrice = window.STORE_MAX_PRICE;
+      const slider = document.getElementById('priceSlider');
+      if (slider) { slider.max = window.STORE_MAX_PRICE; slider.value = window.STORE_MAX_PRICE; }
+      const priceMaxEl = document.getElementById('priceMax');
+      if (priceMaxEl) priceMaxEl.textContent = window.STORE_MAX_PRICE.toLocaleString();
+    }
+    // Highlight the correct main tab
+    document.querySelectorAll('.shop-maintab').forEach(b => {
+      b.classList.toggle('active', b.dataset.main === window.STORE_CAT && !b.dataset.sub);
+    });
+    // Hide the "ทั้งหมด" main tab bar if store page has its own sub-tabs
+    // (the store pages define their own tabs — hide the generic ones)
+    const allTab = document.querySelector('.shop-maintab[data-main="all"]');
+    if (allTab) allTab.closest('.shop-maintabs')?.style.setProperty('display','none');
+  }
+
   readUrlParams();
   renderSubCatFilter();
   renderBrandChecks();
