@@ -4,18 +4,18 @@
   <meta charset="UTF-8"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>สินค้า — Ruby Pet Shop</title>
-  <meta name="description" content="Ruby Pet Shop ร้านอาหารและของเล่นหมาแมวคุณภาพดี ส่งเร็ว ราคาถูก"/>
+  <title>สินค้า — Ruby Store</title>
+  <meta name="description" content="Ruby Store ร้านอาหารและของเล่นหมาแมวคุณภาพดี ส่งเร็ว ราคาถูก"/>
   <!-- Open Graph injected dynamically by product.js -->
   <meta property="og:type"        content="product" id="ogType"/>
-  <meta property="og:site_name"   content="Ruby Pet Shop"/>
+  <meta property="og:site_name"   content="Ruby Store"/>
   <meta property="og:url"         content="" id="ogUrl"/>
-  <meta property="og:title"       content="สินค้า — Ruby Pet Shop" id="ogTitle"/>
-  <meta property="og:description" content="Ruby Pet Shop ร้านอาหารและของเล่นหมาแมวคุณภาพดี" id="ogDesc"/>
+  <meta property="og:title"       content="สินค้า — Ruby Store" id="ogTitle"/>
+  <meta property="og:description" content="Ruby Store ร้านอาหารและของเล่นหมาแมวคุณภาพดี" id="ogDesc"/>
   <meta property="og:image"       content="" id="ogImage"/>
   <meta name="twitter:card"        content="summary_large_image"/>
-  <meta name="twitter:title"       content="สินค้า — Ruby Pet Shop" id="twTitle"/>
-  <meta name="twitter:description" content="Ruby Pet Shop ร้านอาหารและของเล่นหมาแมวคุณภาพดี" id="twDesc"/>
+  <meta name="twitter:title"       content="สินค้า — Ruby Store" id="twTitle"/>
+  <meta name="twitter:description" content="Ruby Store ร้านอาหารและของเล่นหมาแมวคุณภาพดี" id="twDesc"/>
   <meta name="twitter:image"       content="" id="twImage"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -28,11 +28,36 @@
   <header class="navbar" id="navbar">
     <div class="container navbar__inner">
       <a href="index.html" class="logo">
-        <span class="logo__icon">🐾</span>
-        <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+        <span class="logo__icon">💎</span>
+        <span class="logo__text">Ruby<span class="logo__accent"> Store</span></span>
       </a>
       <nav class="nav__links">
-        <a href="shop.html">🛍️ ร้านค้า</a>
+              <!-- Mega Menu -->
+      <div class="nav-mega">
+        <button class="nav-mega__trigger">🛍️ ร้านค้า ▾</button>
+        <div class="nav-mega__panel">
+          <div class="mega-col">
+            <a href="shop.html?cat=pet" class="mega-col__title">🐾 Pet Shop</a>
+            <a href="shop.html?cat=pet&sub=dog">อาหารหมา</a>
+            <a href="shop.html?cat=pet&sub=cat">อาหารแมว</a>
+            <a href="shop.html?cat=pet&sub=toy">ของเล่นสัตว์</a>
+          </div>
+          <div class="mega-divider"></div>
+          <div class="mega-col">
+            <a href="shop.html?cat=computer" class="mega-col__title">💻 Computer</a>
+            <a href="shop.html?cat=computer&sub=hardware">Hardware</a>
+            <a href="shop.html?cat=computer&sub=peripheral">Peripheral</a>
+            <a href="shop.html?cat=computer&sub=notebook">Notebook</a>
+          </div>
+          <div class="mega-divider"></div>
+          <div class="mega-col">
+            <a href="shop.html?cat=hobby" class="mega-col__title">🎴 Hobby</a>
+            <a href="shop.html?cat=hobby&sub=figure">Figure</a>
+            <a href="shop.html?cat=hobby&sub=model">Model Kit</a>
+            <a href="shop.html?cat=hobby&sub=card">Trading Card</a>
+          </div>
+        </div>
+      </div>
         <a href="index.html#categories">หมวดหมู่</a>
         <a href="index.html#bestsellers">สินค้าขายดี</a>
         <a href="index.html#blog">Pet Care Tips</a>

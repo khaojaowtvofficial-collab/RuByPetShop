@@ -1,138 +1,208 @@
 /* ===================================================
-   Ruby Pet Shop — Shop / Catalog Page JS
+   Ruby Store — Shop / Catalog Page JS
 =================================================== */
 
 /* =============================================
-   PRODUCT DATABASE (same as product.js)
+   PRODUCT DATABASE
 ============================================= */
 const PRODUCTS_DB = [
+
+  /* ─── 🐾 PET SHOP ─────────────────────── */
   {
-    id: 'P001',
+    id: 'P001', mainCat: 'pet',
     name: 'Royal Canin Adult 15kg อาหารสุนัขพันธุ์ใหญ่',
-    brand: 'Royal Canin',
-    category: 'dog-food',
-    tags: ['dog', 'food'],
-    price: 1290,
-    originalPrice: 1590,
-    badge: 'hot',
-    rating: 4.9,
-    reviewCount: 248,
-    sold: 1240,
-    stock: 45,
-    img: 'https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=500&q=80',
-    isNew: false,
+    brand: 'Royal Canin', category: 'dog-food', tags: ['pet','dog','food'],
+    price: 1290, originalPrice: 1590, badge: 'hot',
+    rating: 4.9, reviewCount: 248, sold: 1240, stock: 45,
+    img: 'https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=500&q=80', isNew: false,
   },
   {
-    id: 'P002',
+    id: 'P002', mainCat: 'pet',
     name: 'Whiskas อาหารแมวรสปลาแซลมอน 1.2kg',
-    brand: 'Whiskas',
-    category: 'cat-food',
-    tags: ['cat', 'food'],
-    price: 299,
-    originalPrice: 0,
-    badge: 'new',
-    rating: 4.8,
-    reviewCount: 187,
-    sold: 890,
-    stock: 88,
-    img: 'https://images.unsplash.com/photo-1548366086-7f1b76106622?w=500&q=80',
-    isNew: true,
+    brand: 'Whiskas', category: 'cat-food', tags: ['pet','cat','food'],
+    price: 299, originalPrice: 0, badge: 'new',
+    rating: 4.8, reviewCount: 187, sold: 890, stock: 88,
+    img: 'https://images.unsplash.com/photo-1548366086-7f1b76106622?w=500&q=80', isNew: true,
   },
   {
-    id: 'P003',
+    id: 'P003', mainCat: 'pet',
     name: 'Kong Classic ของเล่นยางกรอก ขนาด M',
-    brand: 'Kong',
-    category: 'dog-toy',
-    tags: ['dog', 'toy'],
-    price: 490,
-    originalPrice: 590,
-    badge: 'hot',
-    rating: 4.7,
-    reviewCount: 92,
-    sold: 460,
-    stock: 32,
-    img: 'https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=500&q=80',
-    isNew: false,
+    brand: 'Kong', category: 'dog-toy', tags: ['pet','dog','toy'],
+    price: 490, originalPrice: 590, badge: 'hot',
+    rating: 4.7, reviewCount: 92, sold: 460, stock: 32,
+    img: 'https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=500&q=80', isNew: false,
   },
   {
-    id: 'P004',
+    id: 'P004', mainCat: 'pet',
     name: 'ของเล่นไม้ตกปลาแมวพร้อมขนนก',
-    brand: 'PetDreamHouse',
-    category: 'cat-toy',
-    tags: ['cat', 'toy'],
-    price: 189,
-    originalPrice: 0,
-    badge: '',
-    rating: 4.9,
-    reviewCount: 321,
-    sold: 1600,
-    stock: 150,
-    img: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&q=80',
-    isNew: false,
+    brand: 'PetDreamHouse', category: 'cat-toy', tags: ['pet','cat','toy'],
+    price: 189, originalPrice: 0, badge: '',
+    rating: 4.9, reviewCount: 321, sold: 1600, stock: 150,
+    img: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&q=80', isNew: false,
   },
   {
-    id: 'P005',
+    id: 'P005', mainCat: 'pet',
     name: 'Pedigree Dentastix ขนมกัดฟัน 7 ชิ้น',
-    brand: 'Pedigree',
-    category: 'dog-food',
-    tags: ['dog', 'food'],
-    price: 149,
-    originalPrice: 0,
-    badge: 'new',
-    rating: 4.5,
-    reviewCount: 156,
-    sold: 780,
-    stock: 200,
-    img: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=500&q=80',
-    isNew: true,
+    brand: 'Pedigree', category: 'dog-food', tags: ['pet','dog','food'],
+    price: 149, originalPrice: 0, badge: 'new',
+    rating: 4.5, reviewCount: 156, sold: 780, stock: 200,
+    img: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=500&q=80', isNew: true,
   },
   {
-    id: 'P006',
+    id: 'P006', mainCat: 'pet',
     name: 'Sheba อาหารแมวเปียก แพ็ค 12 ถุง',
-    brand: 'Sheba',
-    category: 'cat-food',
-    tags: ['cat', 'food'],
-    price: 259,
-    originalPrice: 320,
-    badge: 'hot',
-    rating: 4.9,
-    reviewCount: 409,
-    sold: 2000,
-    stock: 63,
-    img: 'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=500&q=80',
-    isNew: false,
+    brand: 'Sheba', category: 'cat-food', tags: ['pet','cat','food'],
+    price: 259, originalPrice: 320, badge: 'hot',
+    rating: 4.9, reviewCount: 409, sold: 2000, stock: 63,
+    img: 'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=500&q=80', isNew: false,
   },
   {
-    id: 'P007',
+    id: 'P007', mainCat: 'pet',
     name: 'Chuckit! Ultra Ball ลูกบอลเทนนิส 2 ลูก',
-    brand: 'Chuckit!',
-    category: 'dog-toy',
-    tags: ['dog', 'toy'],
-    price: 350,
-    originalPrice: 0,
-    badge: '',
-    rating: 4.6,
-    reviewCount: 74,
-    sold: 370,
-    stock: 8,
-    img: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=500&q=80',
-    isNew: false,
+    brand: 'Chuckit!', category: 'dog-toy', tags: ['pet','dog','toy'],
+    price: 350, originalPrice: 0, badge: '',
+    rating: 4.6, reviewCount: 74, sold: 370, stock: 8,
+    img: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=500&q=80', isNew: false,
   },
   {
-    id: 'P008',
+    id: 'P008', mainCat: 'pet',
     name: 'CatLife บ้านแมวกระดาษลับเล็บพร้อมลูกบอล',
-    brand: 'CatLife',
-    category: 'cat-toy',
-    tags: ['cat', 'toy'],
-    price: 599,
-    originalPrice: 750,
-    badge: 'new',
-    rating: 4.9,
-    reviewCount: 203,
-    sold: 1015,
-    stock: 0,
-    img: 'https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=500&q=80',
-    isNew: true,
+    brand: 'CatLife', category: 'cat-toy', tags: ['pet','cat','toy'],
+    price: 599, originalPrice: 750, badge: 'new',
+    rating: 4.9, reviewCount: 203, sold: 1015, stock: 0,
+    img: 'https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=500&q=80', isNew: true,
+  },
+
+  /* ─── 💻 COMPUTER & IT ────────────────── */
+  {
+    id: 'C001', mainCat: 'computer',
+    name: 'NVIDIA GeForce RTX 4060 Ti 8GB GDDR6',
+    brand: 'NVIDIA', category: 'hardware', tags: ['computer','hardware'],
+    price: 15990, originalPrice: 18990, badge: 'hot',
+    rating: 4.9, reviewCount: 312, sold: 890, stock: 12,
+    img: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'C002', mainCat: 'computer',
+    name: 'Logitech G Pro X Superlight 2 Gaming Mouse',
+    brand: 'Logitech', category: 'peripheral', tags: ['computer','peripheral'],
+    price: 4490, originalPrice: 5290, badge: 'hot',
+    rating: 4.8, reviewCount: 524, sold: 1340, stock: 38,
+    img: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'C003', mainCat: 'computer',
+    name: 'Keychron K2 Pro Mechanical Keyboard QMK',
+    brand: 'Keychron', category: 'peripheral', tags: ['computer','peripheral'],
+    price: 2990, originalPrice: 0, badge: 'new',
+    rating: 4.7, reviewCount: 287, sold: 670, stock: 55,
+    img: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&q=80', isNew: true,
+  },
+  {
+    id: 'C004', mainCat: 'computer',
+    name: 'ASUS ROG Strix 27" 165Hz IPS Monitor',
+    brand: 'ASUS', category: 'hardware', tags: ['computer','hardware'],
+    price: 9990, originalPrice: 12990, badge: 'hot',
+    rating: 4.8, reviewCount: 198, sold: 445, stock: 20,
+    img: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'C005', mainCat: 'computer',
+    name: 'Samsung 870 EVO 1TB SATA SSD',
+    brand: 'Samsung', category: 'hardware', tags: ['computer','hardware'],
+    price: 3290, originalPrice: 3990, badge: '',
+    rating: 4.9, reviewCount: 631, sold: 1820, stock: 88,
+    img: 'https://images.unsplash.com/photo-1617802690658-1173a812650d?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'C006', mainCat: 'computer',
+    name: 'Corsair Vengeance DDR5 16GB 5600MHz RAM',
+    brand: 'Corsair', category: 'hardware', tags: ['computer','hardware'],
+    price: 2890, originalPrice: 0, badge: 'new',
+    rating: 4.7, reviewCount: 143, sold: 390, stock: 45,
+    img: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=500&q=80', isNew: true,
+  },
+  {
+    id: 'C007', mainCat: 'computer',
+    name: 'Lenovo IdeaPad Slim 5 15" Intel i5 16GB',
+    brand: 'Lenovo', category: 'notebook', tags: ['computer','notebook'],
+    price: 22900, originalPrice: 26900, badge: 'hot',
+    rating: 4.6, reviewCount: 89, sold: 210, stock: 8,
+    img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'C008', mainCat: 'computer',
+    name: 'Razer BlackShark V2 X Gaming Headset 7.1',
+    brand: 'Razer', category: 'peripheral', tags: ['computer','peripheral'],
+    price: 3490, originalPrice: 4290, badge: '',
+    rating: 4.5, reviewCount: 376, sold: 920, stock: 30,
+    img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80', isNew: false,
+  },
+
+  /* ─── 🎴 HOBBY & COLLECTIBLES ─────────── */
+  {
+    id: 'H001', mainCat: 'hobby',
+    name: 'MG 1/100 RX-78-2 Gundam Ver.3.0',
+    brand: 'Bandai', category: 'model', tags: ['hobby','model'],
+    price: 890, originalPrice: 1090, badge: 'hot',
+    rating: 4.9, reviewCount: 445, sold: 1200, stock: 60,
+    img: 'https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'H002', mainCat: 'hobby',
+    name: 'RG 1/144 Wing Gundam Zero EW',
+    brand: 'Bandai', category: 'model', tags: ['hobby','model'],
+    price: 1290, originalPrice: 0, badge: 'new',
+    rating: 4.8, reviewCount: 231, sold: 560, stock: 35,
+    img: 'https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=500&q=80', isNew: true,
+  },
+  {
+    id: 'H003', mainCat: 'hobby',
+    name: 'Nendoroid Rem Re:Zero #663',
+    brand: 'Good Smile', category: 'figure', tags: ['hobby','figure'],
+    price: 1890, originalPrice: 2290, badge: 'hot',
+    rating: 4.9, reviewCount: 318, sold: 780, stock: 15,
+    img: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'H004', mainCat: 'hobby',
+    name: 'One Piece DXF Roronoa Zoro Statue 20cm',
+    brand: 'Banpresto', category: 'figure', tags: ['hobby','figure'],
+    price: 2490, originalPrice: 2990, badge: '',
+    rating: 4.7, reviewCount: 124, sold: 330, stock: 22,
+    img: 'https://images.unsplash.com/photo-1633204227-3e0bb1e09ae1?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'H005', mainCat: 'hobby',
+    name: 'Pokemon TCG Scarlet & Violet Booster Box 36 Packs',
+    brand: 'Pokemon', category: 'card', tags: ['hobby','card'],
+    price: 3990, originalPrice: 4990, badge: 'hot',
+    rating: 4.8, reviewCount: 567, sold: 1450, stock: 18,
+    img: 'https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'H006', mainCat: 'hobby',
+    name: 'One Piece Card Game Booster Pack OP-09',
+    brand: 'Bandai', category: 'card', tags: ['hobby','card'],
+    price: 490, originalPrice: 0, badge: 'new',
+    rating: 4.6, reviewCount: 89, sold: 2100, stock: 200,
+    img: 'https://images.unsplash.com/photo-1612404819070-b90cbba0a3d5?w=500&q=80', isNew: true,
+  },
+  {
+    id: 'H007', mainCat: 'hobby',
+    name: 'Hot Wheels Premium Car Culture 5-Pack Set',
+    brand: 'Hot Wheels', category: 'toy', tags: ['hobby','toy'],
+    price: 1290, originalPrice: 1590, badge: '',
+    rating: 4.7, reviewCount: 203, sold: 670, stock: 42,
+    img: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=500&q=80', isNew: false,
+  },
+  {
+    id: 'H008', mainCat: 'hobby',
+    name: 'LEGO Creator 3-in-1 Exotic Parrot 31136',
+    brand: 'LEGO', category: 'toy', tags: ['hobby','toy'],
+    price: 1490, originalPrice: 0, badge: 'new',
+    rating: 4.8, reviewCount: 156, sold: 420, stock: 25,
+    img: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=500&q=80', isNew: true,
   },
 ];
 
@@ -141,15 +211,53 @@ const PRODUCTS_DB = [
 ============================================= */
 const state = {
   search:    '',
-  cat:       'all',      // all | dog | cat | food | toy
-  maxPrice:  2000,
-  brands:    [],         // selected brands (empty = all)
+  mainCat:   'all',      // all | pet | computer | hobby
+  cat:       'all',      // sub-category
+  maxPrice:  30000,
+  brands:    [],
   minRating: 0,
   inStock:   false,
   sort:      'popular',
-  view:      'grid',     // grid | list
+  view:      'grid',
   page:      1,
-  perPage:   6,
+  perPage:   8,
+};
+
+/* Sub-category definitions per main category */
+const SUB_CATS = {
+  all:      [
+    { key:'all',        label:'🏪 ทั้งหมด' },
+    { key:'dog',        label:'🐶 น้องหมา' },
+    { key:'cat',        label:'🐱 น้องแมว' },
+    { key:'food',       label:'🍖 อาหาร' },
+    { key:'toy',        label:'🎾 ของเล่น' },
+    { key:'hardware',   label:'⚙️ Hardware' },
+    { key:'peripheral', label:'🖱 Peripheral' },
+    { key:'notebook',   label:'💻 Notebook' },
+    { key:'figure',     label:'🎭 Figure' },
+    { key:'model',      label:'🤖 Model Kit' },
+    { key:'card',       label:'🃏 Card' },
+  ],
+  pet:      [
+    { key:'all',  label:'🐾 ทั้งหมด' },
+    { key:'dog',  label:'🐶 น้องหมา' },
+    { key:'cat',  label:'🐱 น้องแมว' },
+    { key:'food', label:'🍖 อาหาร' },
+    { key:'toy',  label:'🎾 ของเล่น' },
+  ],
+  computer: [
+    { key:'all',        label:'💻 ทั้งหมด' },
+    { key:'hardware',   label:'⚙️ Hardware' },
+    { key:'peripheral', label:'🖱 Peripheral' },
+    { key:'notebook',   label:'💻 Notebook' },
+  ],
+  hobby:    [
+    { key:'all',    label:'🎴 ทั้งหมด' },
+    { key:'figure', label:'🎭 Figure' },
+    { key:'model',  label:'🤖 Model Kit' },
+    { key:'card',   label:'🃏 Card' },
+    { key:'toy',    label:'🚗 Toy' },
+  ],
 };
 
 const BRANDS = [...new Set(PRODUCTS_DB.map(p => p.brand))].sort();
@@ -231,7 +339,12 @@ function getFiltered() {
     );
   }
 
-  // Category
+  // Main category (pet / computer / hobby)
+  if (state.mainCat !== 'all') {
+    list = list.filter(p => p.mainCat === state.mainCat);
+  }
+
+  // Sub-category
   if (state.cat !== 'all') {
     list = list.filter(p => p.tags.includes(state.cat));
   }
@@ -396,7 +509,11 @@ function renderPagination(total) {
 /* =============================================
    ACTIVE FILTER CHIPS
 ============================================= */
-const CAT_LABELS = { all:'ทั้งหมด', dog:'น้องหมา', cat:'น้องแมว', food:'อาหาร', toy:'ของเล่น' };
+const CAT_LABELS = {
+  all:'ทั้งหมด', dog:'น้องหมา', cat:'น้องแมว', food:'อาหาร', toy:'ของเล่น',
+  hardware:'Hardware', peripheral:'Peripheral', notebook:'Notebook',
+  figure:'Figure', model:'Model Kit', card:'Card',
+};
 
 function renderActiveFilters() {
   const el = document.getElementById('activeFilters');
@@ -421,17 +538,40 @@ function renderActiveFilters() {
    RENDER CATEGORY COUNTS
 ============================================= */
 function renderCounts() {
-  const all = PRODUCTS_DB.length;
-  const dog  = PRODUCTS_DB.filter(p => p.tags.includes('dog')).length;
-  const cat  = PRODUCTS_DB.filter(p => p.tags.includes('cat')).length;
-  const food = PRODUCTS_DB.filter(p => p.tags.includes('food')).length;
-  const toy  = PRODUCTS_DB.filter(p => p.tags.includes('toy')).length;
+  const scope = state.mainCat === 'all'
+    ? PRODUCTS_DB
+    : PRODUCTS_DB.filter(p => p.mainCat === state.mainCat);
   const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
-  set('cat-count-all', all);
-  set('cat-count-dog', dog);
-  set('cat-count-cat', cat);
-  set('cat-count-food', food);
-  set('cat-count-toy', toy);
+  set('cat-count-all', scope.length);
+  SUB_CATS[state.mainCat]?.forEach(s => {
+    if (s.key !== 'all') {
+      set(`cat-count-${s.key}`, scope.filter(p => p.tags.includes(s.key)).length);
+    }
+  });
+}
+
+/* =============================================
+   RENDER SUB-CATEGORY FILTER PILLS
+============================================= */
+function renderSubCatFilter() {
+  const el = document.querySelector('.filter-cats');
+  if (!el) return;
+  const cats = SUB_CATS[state.mainCat] || SUB_CATS.all;
+  el.innerHTML = cats.map(c => `
+    <button class="filter-cat ${state.cat === c.key ? 'active' : ''}" data-cat="${c.key}">
+      ${c.label} <span id="cat-count-${c.key}" class="filter-cat__count"></span>
+    </button>`).join('');
+  // Re-bind events
+  el.querySelectorAll('.filter-cat').forEach(btn => {
+    btn.addEventListener('click', () => {
+      el.querySelectorAll('.filter-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.cat = btn.dataset.cat;
+      state.page = 1;
+      refresh();
+    });
+  });
+  renderCounts();
 }
 
 /* =============================================
@@ -537,16 +677,27 @@ function initEvents() {
     refresh();
   });
 
-  /* Category pills */
-  document.querySelectorAll('.filter-cat').forEach(btn => {
+  /* Main category tabs */
+  document.querySelectorAll('.shop-maintab').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-cat').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.shop-maintab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      state.cat = btn.dataset.cat;
+      state.mainCat = btn.dataset.main;
+      state.cat = 'all';
       state.page = 1;
+      renderSubCatFilter();
+      // Update price slider max based on main cat
+      const maxP = state.mainCat === 'computer' ? 30000 : state.mainCat === 'pet' ? 5000 : 10000;
+      const sl = document.getElementById('priceSlider');
+      if (sl) { sl.max = maxP; sl.value = maxP; }
+      state.maxPrice = maxP;
+      const pmEl = document.getElementById('priceMax');
+      if (pmEl) pmEl.textContent = maxP.toLocaleString();
       refresh();
     });
   });
+
+  /* Sub-category pills (initial render handled by renderSubCatFilter) */
 
   /* Price slider */
   const slider = document.getElementById('priceSlider');
@@ -599,14 +750,15 @@ function initEvents() {
 
   /* Reset filters */
   const resetAll = () => {
-    state.search = ''; state.cat = 'all'; state.maxPrice = 2000;
+    state.search = ''; state.mainCat = 'all'; state.cat = 'all'; state.maxPrice = 30000;
     state.brands = []; state.minRating = 0; state.inStock = false;
     state.page = 1;
-    document.querySelectorAll('.filter-cat').forEach((b,i) => b.classList.toggle('active', i===0));
+    document.querySelectorAll('.shop-maintab').forEach((b,i) => b.classList.toggle('active', i===0));
     document.querySelectorAll('.filter-rating').forEach((b,i) => b.classList.toggle('active', i===0));
     const sl = document.getElementById('priceSlider');
-    if (sl) sl.value = 2000;
-    if (priceMaxEl) priceMaxEl.textContent = '2,000';
+    if (sl) { sl.max = 30000; sl.value = 30000; }
+    if (priceMaxEl) priceMaxEl.textContent = '30,000';
+    renderSubCatFilter();
     const si = document.getElementById('shopSearchInput');
     if (si) si.value = '';
     if (searchClear) searchClear.style.display = 'none';
@@ -724,14 +876,21 @@ function showToast(msg) {
 function readUrlParams() {
   const params = new URLSearchParams(window.location.search);
   const cat    = params.get('cat');
+  const sub    = params.get('sub');
   const search = params.get('search') || params.get('q');
   const sort   = params.get('sort');
 
-  if (cat && ['dog','cat','food','toy','all'].includes(cat)) {
-    state.cat = cat;
-    document.querySelectorAll('.filter-cat').forEach(b => {
-      b.classList.toggle('active', b.dataset.cat === cat);
+  // Main category
+  if (cat && ['pet','computer','hobby','all'].includes(cat)) {
+    state.mainCat = cat;
+    document.querySelectorAll('.shop-maintab').forEach(b => {
+      b.classList.toggle('active', b.dataset.main === cat);
     });
+  }
+
+  // Sub-category
+  if (sub) {
+    state.cat = sub;
   }
   if (search) {
     state.search = search;
@@ -751,9 +910,9 @@ function readUrlParams() {
    INIT
 ============================================= */
 (function init() {
-  renderCounts();
-  renderBrandChecks();
   readUrlParams();
+  renderSubCatFilter();
+  renderBrandChecks();
   updateCartCount();
   refresh();
   initEvents();

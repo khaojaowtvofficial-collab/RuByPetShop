@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruby Pet Shop — อาหารและของเล่นสำหรับน้องหมาแมว</title>
-  <meta name="description" content="Ruby Pet Shop ร้านอาหารและของเล่นหมาแมวคุณภาพดี ส่งเร็ว ราคาถูก" />
+  <title>Ruby Store — ช้อปทุกอย่างในที่เดียว</title>
+  <meta name="description" content="Ruby Store ร้านค้าออนไลน์ครบวงจร Pet Shop, Computer & IT, Hobby & Collectibles ส่งเร็ว ราคาดี" />
   <!-- Open Graph / Social -->
   <meta property="og:type"        content="website" />
-  <meta property="og:site_name"   content="Ruby Pet Shop" />
-  <meta property="og:url"         content="https://rubypetshop.com/" />
-  <meta property="og:title"       content="Ruby Pet Shop — อาหารและของเล่นสำหรับน้องหมาแมว" />
-  <meta property="og:description" content="คัดสรรอาหารคุณภาพ ของเล่นปลอดภัย ส่งเร็วถึงบ้าน ราคาเป็นมิตร ตรวจสอบได้ทุกชิ้น 🐶🐱" />
+  <meta property="og:site_name"   content="Ruby Store" />
+  <meta property="og:url"         content="https://ru-by-pet-shop.vercel.app/" />
+  <meta property="og:title"       content="Ruby Store — ช้อปทุกอย่างในที่เดียว" />
+  <meta property="og:description" content="🐾 Pet Shop | 💻 Computer & IT | 🎴 Hobby & Collectibles — ส่งเร็ว ราคาดี ของแท้ 100%" />
   <meta property="og:image"       content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80" />
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Ruby Pet Shop — อาหารและของเล่นสำหรับน้องหมาแมว" />
-  <meta name="twitter:description" content="คัดสรรอาหารคุณภาพ ของเล่นปลอดภัย ส่งเร็วถึงบ้าน ราคาเป็นมิตร 🐶🐱" />
+  <meta name="twitter:title"       content="Ruby Store — ช้อปทุกอย่างในที่เดียว" />
+  <meta name="twitter:description" content="🐾 Pet Shop | 💻 Computer & IT | 🎴 Hobby & Collectibles" />
   <meta name="twitter:image"       content="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,16 +27,41 @@
   <header class="navbar" id="navbar">
     <div class="container navbar__inner">
 
-      <a href="#" class="logo">
-        <span class="logo__icon">🐾</span>
-        <span class="logo__text">Ruby<span class="logo__accent"> Pet</span></span>
+      <a href="index.html" class="logo">
+        <span class="logo__icon">💎</span>
+        <span class="logo__text">Ruby<span class="logo__accent"> Store</span></span>
       </a>
 
       <nav class="nav__links" id="navLinks">
-        <a href="shop.html">🛍️ ร้านค้า</a>
+        <!-- Mega Menu -->
+        <div class="nav-mega">
+          <button class="nav-mega__trigger">🛍️ ร้านค้า ▾</button>
+          <div class="nav-mega__panel">
+            <div class="mega-col">
+              <a href="shop.html?cat=pet" class="mega-col__title">🐾 Pet Shop</a>
+              <a href="shop.html?cat=pet&sub=dog">อาหารหมา</a>
+              <a href="shop.html?cat=pet&sub=cat">อาหารแมว</a>
+              <a href="shop.html?cat=pet&sub=toy">ของเล่นสัตว์</a>
+            </div>
+            <div class="mega-divider"></div>
+            <div class="mega-col">
+              <a href="shop.html?cat=computer" class="mega-col__title">💻 Computer</a>
+              <a href="shop.html?cat=computer&sub=hardware">Hardware</a>
+              <a href="shop.html?cat=computer&sub=peripheral">Peripheral</a>
+              <a href="shop.html?cat=computer&sub=notebook">Notebook</a>
+            </div>
+            <div class="mega-divider"></div>
+            <div class="mega-col">
+              <a href="shop.html?cat=hobby" class="mega-col__title">🎴 Hobby</a>
+              <a href="shop.html?cat=hobby&sub=figure">Figure</a>
+              <a href="shop.html?cat=hobby&sub=model">Model Kit</a>
+              <a href="shop.html?cat=hobby&sub=card">Trading Card</a>
+            </div>
+          </div>
+        </div>
         <a href="#categories">หมวดหมู่</a>
         <a href="#bestsellers">สินค้าขายดี</a>
-        <a href="#blog">Pet Care Tips</a>
+        <a href="#blog">Tips & Reviews</a>
         <a href="#contact">ติดต่อเรา</a>
       </nav>
 
@@ -130,32 +155,32 @@
     <div class="container hero__inner">
 
       <div class="hero__content">
-        <span class="hero__tag">🐾 ร้านสัตว์เลี้ยงที่รักน้องเหมือนคุณ</span>
+        <span class="hero__tag">💎 ร้านค้าออนไลน์ครบวงจร ช้อปทุกอย่างในที่เดียว</span>
         <h1 class="hero__title">
-          อาหารดี ของเล่นโดน<br/>
-          <span class="text-orange">เพื่อเพื่อนซน</span>ที่รัก
+          Pet · Computer · Hobby<br/>
+          <span class="text-orange">ครบจบที่ Ruby</span> Store
         </h1>
         <p class="hero__desc">
-          คัดสรรอาหารคุณภาพ ของเล่นปลอดภัย ส่งเร็วถึงบ้าน<br/>
-          เพราะน้องสมควรได้ดีที่สุด 🐶🐱
+          🐾 อาหารสัตว์เลี้ยง &nbsp;·&nbsp; 💻 อุปกรณ์คอมพิวเตอร์ &nbsp;·&nbsp; 🎴 Figure & Card<br/>
+          สินค้าของแท้ ส่งเร็ว ราคาดี สั่งง่ายผ่าน WhatsApp
         </p>
         <div class="hero__ctas">
-          <a href="#bestsellers" class="btn btn-primary btn-lg">
-            ช้อปเลย &nbsp;→
+          <a href="#categories" class="btn btn-primary btn-lg">
+            เลือก Section →
           </a>
-          <a href="#categories" class="btn btn-outline btn-lg">
-            ดูหมวดหมู่
+          <a href="shop.html" class="btn btn-outline btn-lg">
+            ดูสินค้าทั้งหมด
           </a>
         </div>
         <div class="hero__stats">
           <div class="stat">
-            <strong>12,000+</strong>
+            <strong>15,000+</strong>
             <span>ลูกค้าที่รัก</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <strong>500+</strong>
-            <span>สินค้าคัดสรร</span>
+            <strong>3 หมวด</strong>
+            <span>สินค้าหลัก</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
@@ -316,57 +341,66 @@
     </div>
   </section>
 
-  <!-- ===== CATEGORIES ===== -->
-  <section class="section" id="categories">
+  <!-- ===== CATEGORY HUB ===== -->
+  <section class="section cat-hub-section" id="categories">
     <div class="container">
       <div class="section__header">
-        <h2 class="section__title">เลือกช้อปตามหมวดหมู่</h2>
-        <p class="section__sub">ครบทุกอย่างสำหรับน้อง ในที่เดียว</p>
+        <h2 class="section__title">เลือก Section ที่สนใจ</h2>
+        <p class="section__sub">ครบทุกหมวด ช้อปสะดวก ส่งเร็ว ของแท้ 100%</p>
       </div>
 
-      <div class="categories__grid">
+      <div class="cat-hub-grid">
 
-        <a href="#bestsellers" class="cat-card cat-card--dog footer-cat-link" data-filter="dog">
-          <div class="cat-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=400&q=80" alt="หมา" />
-          </div>
-          <div class="cat-card__body">
-            <span class="cat-card__emoji">🐶</span>
-            <h3>น้องหมา</h3>
-            <p>128 สินค้า</p>
+        <!-- PET SHOP -->
+        <a href="shop.html?cat=pet" class="cat-hub-card cat-hub-card--pet">
+          <div class="cat-hub-card__bg" style="background-image:url('https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=800&q=80')"></div>
+          <div class="cat-hub-card__overlay"></div>
+          <div class="cat-hub-card__content">
+            <div class="cat-hub-card__icon">🐾</div>
+            <h3 class="cat-hub-card__title">Pet Shop</h3>
+            <p class="cat-hub-card__desc">อาหาร ของเล่น และอุปกรณ์สัตว์เลี้ยง</p>
+            <div class="cat-hub-card__sub-cats">
+              <span>🐶 หมา</span>
+              <span>🐱 แมว</span>
+              <span>🍖 อาหาร</span>
+              <span>🎾 ของเล่น</span>
+            </div>
+            <span class="cat-hub-card__cta">ช้อปเลย →</span>
           </div>
         </a>
 
-        <a href="#bestsellers" class="cat-card cat-card--cat footer-cat-link" data-filter="cat">
-          <div class="cat-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&q=80" alt="แมว" />
-          </div>
-          <div class="cat-card__body">
-            <span class="cat-card__emoji">🐱</span>
-            <h3>น้องแมว</h3>
-            <p>96 สินค้า</p>
-          </div>
-        </a>
-
-        <a href="#bestsellers" class="cat-card cat-card--food footer-cat-link" data-filter="food">
-          <div class="cat-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&q=80" alt="อาหาร" />
-          </div>
-          <div class="cat-card__body">
-            <span class="cat-card__emoji">🍖</span>
-            <h3>อาหาร & ขนม</h3>
-            <p>215 สินค้า</p>
+        <!-- COMPUTER & IT -->
+        <a href="shop.html?cat=computer" class="cat-hub-card cat-hub-card--computer">
+          <div class="cat-hub-card__bg" style="background-image:url('https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800&q=80')"></div>
+          <div class="cat-hub-card__overlay"></div>
+          <div class="cat-hub-card__content">
+            <div class="cat-hub-card__icon">💻</div>
+            <h3 class="cat-hub-card__title">Computer & IT</h3>
+            <p class="cat-hub-card__desc">Hardware, Peripheral และ Notebook</p>
+            <div class="cat-hub-card__sub-cats">
+              <span>⚙️ Hardware</span>
+              <span>🖱 Peripheral</span>
+              <span>💻 Notebook</span>
+            </div>
+            <span class="cat-hub-card__cta">ช้อปเลย →</span>
           </div>
         </a>
 
-        <a href="#bestsellers" class="cat-card cat-card--toy footer-cat-link" data-filter="toy">
-          <div class="cat-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&q=80" alt="ของเล่น" />
-          </div>
-          <div class="cat-card__body">
-            <span class="cat-card__emoji">🎾</span>
-            <h3>ของเล่น</h3>
-            <p>89 สินค้า</p>
+        <!-- HOBBY & COLLECTIBLES -->
+        <a href="shop.html?cat=hobby" class="cat-hub-card cat-hub-card--hobby">
+          <div class="cat-hub-card__bg" style="background-image:url('https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=800&q=80')"></div>
+          <div class="cat-hub-card__overlay"></div>
+          <div class="cat-hub-card__content">
+            <div class="cat-hub-card__icon">🎴</div>
+            <h3 class="cat-hub-card__title">Hobby & Collectibles</h3>
+            <p class="cat-hub-card__desc">Figure, Model Kit และ Trading Card</p>
+            <div class="cat-hub-card__sub-cats">
+              <span>🎭 Figure</span>
+              <span>🤖 Model</span>
+              <span>🃏 Card</span>
+              <span>🚗 Toy</span>
+            </div>
+            <span class="cat-hub-card__cta">ช้อปเลย →</span>
           </div>
         </a>
 

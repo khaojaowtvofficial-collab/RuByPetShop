@@ -661,3 +661,50 @@
 @media (max-width: 400px) {
   .shop-grid { grid-template-columns: 1fr; }
 }
+
+/* =============================================
+   MAIN CATEGORY TABS
+============================================= */
+.shop-maintabs {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 64px; z-index: 90;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.shop-maintabs__inner {
+  display: flex; gap: 4px; padding: 10px 0; overflow-x: auto;
+  scrollbar-width: none;
+}
+.shop-maintabs__inner::-webkit-scrollbar { display: none; }
+
+.shop-maintab {
+  padding: 10px 22px;
+  border: 2px solid transparent;
+  border-radius: 40px;
+  background: none;
+  font-size: 14px; font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text-m);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+  flex-shrink: 0;
+}
+.shop-maintab:hover {
+  background: var(--bg-soft);
+  color: var(--orange);
+}
+.shop-maintab.active {
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+  box-shadow: 0 4px 16px rgba(255,111,0,.3);
+}
+/* Per-tab accent colors */
+.shop-maintab[data-main="pet"].active    { background: #FF7043; border-color: #FF7043; }
+.shop-maintab[data-main="computer"].active { background: #1976D2; border-color: #1976D2; box-shadow: 0 4px 16px rgba(25,118,210,.3); }
+.shop-maintab[data-main="hobby"].active  { background: #7B1FA2; border-color: #7B1FA2; box-shadow: 0 4px 16px rgba(123,31,162,.3); }
+
+@media (max-width: 600px) {
+  .shop-maintab { padding: 8px 16px; font-size: 13px; }
+}
