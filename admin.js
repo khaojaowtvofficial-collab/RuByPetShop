@@ -3,24 +3,35 @@
 =================================================== */
 
 /* =============================================
-   ADMIN AUTH GUARD
+   ADMIN AUTH GUARD — Secret URL Key
+   Access: admin.html?key=RubyAdmin2026
 ============================================= */
 (function adminAuthGuard() {
-  try {
-    const user = JSON.parse(localStorage.getItem('ruby_user') || 'null');
-    if (!user || user.role !== 'admin') {
-      document.body.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:'Sarabun',sans-serif;background:#FFF8F0;gap:16px">
-          <div style="font-size:64px">⛔</div>
-          <h2 style="color:#FF7043;margin:0">ไม่มีสิทธิ์เข้าถึงหน้านี้</h2>
-          <p style="color:#666;margin:0">กรุณาเข้าสู่ระบบด้วยบัญชี Admin</p>
-          <a href="index.html" style="background:#FF7043;color:#fff;padding:12px 28px;border-radius:12px;text-decoration:none;font-weight:700;margin-top:8px">← กลับหน้าร้าน</a>
-        </div>`;
-      return;
-    }
-  } catch {
-    window.location.replace('index.html');
+  const ADMIN_KEY = 'RubyAdmin2026';
+  const params    = new URLSearchParams(window.location.search);
+  const key       = params.get('key');
+
+  if (key === ADMIN_KEY) {
+    // Save key in sessionStorage so page refreshes still work
+    sessionStorage.setItem('ruby_admin_key', ADMIN_KEY);
+    return; // ✅ Access granted
   }
+
+  // Also allow if key already saved in sessionStorage (page refresh)
+  if (sessionStorage.getItem('ruby_admin_key') === ADMIN_KEY) {
+    return; // ✅ Already authenticated this session
+  }
+
+  // ❌ Access denied
+  document.body.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;
+                height:100vh;font-family:'Sarabun',sans-serif;background:#FFF8F0;gap:16px;text-align:center;padding:24px">
+      <div style="font-size:64px">🔒</div>
+      <h2 style="color:#FF7043;margin:0">หน้านี้สำหรับ Admin เท่านั้น</h2>
+      <p style="color:#666;margin:0">ต้องใช้ลิงก์พิเศษเพื่อเข้าถึง Dashboard</p>
+      <a href="index.html" style="background:#FF7043;color:#fff;padding:12px 28px;
+         border-radius:12px;text-decoration:none;font-weight:700;margin-top:8px">← กลับหน้าร้าน</a>
+    </div>`;
 })();
 
 /* =============================================
